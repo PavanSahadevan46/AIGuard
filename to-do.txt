@@ -1,0 +1,4 @@
+Make cards re-usable by using stuff like card.title ,card.description etc
+stick all questions in a json file where appropriate
+identify appropriate way to route between pages with logic (react-router-dom / expressjs)? 
+Look into prop handling to reuse question components 

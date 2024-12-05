@@ -1,24 +1,23 @@
 [
     {
-        "questionId": 1,
-        "img": "",
-        "title": "temp1",
-        "description": "card1text"
+        "id": 1,
+        "question":"Has the patient been prescribed any exogenous glucocorticoids at any dose and any of the following?",
+        "options": ["Atazanavir","Darunavir","Fosamprenavir","Ritonavir (+/- lopinavir)","Saquinavir","Tipranavir","Atazanavir","Darunavir","Fosamprenavir","Ritonavir (+/- lopinavir)","Saquinavir","Tipranavir","Clarithromycin—long term courses only"]
         
     },
     {
-        "questionId": 2,
-        "img": "",
-        "title": "temp2",
-        "description": "card2text"
+        "id": 2,
+        "question":"Is the patient currently taking any glucocorticoids, or has done in the last 12 months?",
+        "options": ["Yes","No"]
         
     },
     {
-        "questionId": 3,
-        "img": "",
-        "title": "temp3",
-        "description": "card3text"
+        "id": 3,
+        "question":"Is the patient taking oral steroids intermittently?",
+        "options": ["Yes","No"]
         
     }
+
+
 
 ]

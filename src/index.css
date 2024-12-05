@@ -3,6 +3,15 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   font-size:15px;
   margin:0;
+  padding: 0;
+}
+html,body,#root {
+  height: 100%;
+}
+#root{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -10,7 +19,7 @@ body{
   display: block;
   margin:0;
   width: 100%;
-  margin-bottom: 10%;
+
   
 }
 
@@ -48,3 +57,27 @@ body{
   display: block;
   margin: auto;
 }
+
+.card-actions{
+  margin-top:10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button{
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.footer{
+  background-color: darkgrey; 
+  display: block;
+  margin:0;
+  width: 100%;
+  margin-bottom: 10%;
+}
+

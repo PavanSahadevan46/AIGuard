@@ -1,6 +1,6 @@
 import Header from "./components/Header.jsx"
 import Card from "./components/Card.jsx"
-import logo from "./assets/temp.png";
+import tempImg from "./assets/temp1.png";
 import questions from "./questions.json"
 import CardList from "./components/CardList.jsx";
 function App() {
@@ -9,8 +9,12 @@ function App() {
   return (
     <>
       <Header />
-      <Card/>
-      <CardList cardContent={questionsArr.filter((q => q.questionId === 3))} />
+      <Card className ="startingCard"
+        img={tempImg}
+        title={"AIGuard"}
+        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. "}
+      />
+      {/* <CardList cardContent={questionsArr.filter((q => q.questionId === 3))} /> */}
     </>
   )
 }

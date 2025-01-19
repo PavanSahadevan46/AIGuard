@@ -10,13 +10,6 @@ import { BrowserRouter, Routes, Route ,useNavigate} from "react-router-dom";
 function Start() {
 
     const navigate = useNavigate()
-    
-    function handleYesclick(){
-        navigate("/q1")
-    }
-    function handleNoclick(){
-        alert("Please cease use of this application!")
-    }
     return (
         <>
             <Header />
@@ -30,8 +23,8 @@ function Start() {
                     </>
                     }
             >
-                <Button btnText="Yes" onClick={handleYesclick} />
-                <Button btnText="No" onClick={handleNoclick}/>
+                <Button btnText="Yes" onClick={() => navigate("/q1")} />
+                <Button btnText="No" onClick={() => alert("Please cease use of this application!")}/>
             </Card>
             <Footer />
         </>

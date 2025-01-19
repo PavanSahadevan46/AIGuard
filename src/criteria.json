@@ -1,0 +1,132 @@
+{
+    "Questions": [
+        {
+            "id": 1,
+            "question": "Has the patient been prescribed any exogenous glucocorticoids at any dose and any of the following?",
+            "options": [
+                "Atazanavir",
+                "Darunavir",
+                "Fosamprenavir",
+                "Ritonavir (+/- lopinavir)",
+                "Saquinavir",
+                "Tipranavir",
+                "Clarithromycin—long term courses only"
+            ]
+        },
+        {
+            "id": 2,
+            "question": "Is the patient currently taking any glucocorticoids, or has done in the last 12 months?"
+        },
+        {
+            "id": 3,
+            "question": "Is the patient taking oral steroids intermittently?"
+        },
+        {
+            "id": 4,
+            "question": "Are the inhalers being used with any other form of of glucocortocid treatment?"
+        },
+        {
+            "id": 5,
+            "question": "Is the patient using high dose steroids for nasal polyps for more than 4 weeks?"
+        },
+        {
+            "id": 6,
+            "question": "Is the patient applying at least 200g a week of potent or very potent topical glucocorticoids?"
+        },
+        {
+            "id": 7,
+            "question": "Is the patient taking significant amounts of other forms of glucocorticoid?"
+        },
+        {
+            "id": 8,
+            "question": "Is the patient using any of the following at more than 30g per month: - Budesonide enema or rectal foam - Prednisolone rectal solution or suppositories ?"
+        }
+    ],
+    "oralRoute": [
+        {
+            "id": 1,
+            "glucocorticoid": "Beclometasone",
+            "continuousValue": 625,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 5mg"
+        },
+        {
+            "id": 2,
+            "glucocorticoid": "Betamethasone",
+            "continuousValue": 750,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 6mg"
+        },
+        {
+            "id": 3,
+            "glucocorticoid": "Budesonide",
+            "continuousValue": 1.5,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 12mg"
+        },
+        {
+            "id": 4,
+            "glucocorticoid": "Deflazacort",
+            "continuousValue": 6,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 48mg"
+        },
+        {
+            "id": 5,
+            "glucocorticoid": "Dexamethasone",
+            "continuousValue": 0.5,
+            "intermittentDuration": [
+                "≥ 3 courses within last 12 months of at least 7 days of ≥ 4mg",
+                "Course for severe COVID of > 10 days"
+            ]
+        },
+        {
+            "id": 6,
+            "glucocorticoid": "Hydrocortisone",
+            "continuousValue": 15,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 120mg"
+        },
+        {
+            "id": 7,
+            "glucocorticoid": "Methylprednisolone",
+            "continuousValue": 4,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 32mg"
+        },
+        {
+            "id": 8,
+            "glucocorticoid": "Prednisolone",
+            "continuousValue": 5,
+            "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥40mg"
+        }
+    ],
+    "injectionRoute": [
+        {
+            "id": 1,
+            "glucocorticoid": "Dexamethasone",
+            "options": [
+                "Taken as an antiemetic in oncology regimens, and for 12 months after stopping when future cycles are anticipated?",
+                "Taken as  prolonged courses (>10 days) for the treatment of severe Covid-19?"
+            ]
+        },
+        {
+            "id": 2,
+            "glucocorticoid":"Hydrocortisone",
+            "options":[
+                "With any other glucocorticoid by any other route?",
+                "Hydrocortisone: 3 or more injections within the last 12 months?"
+            ]
+        },
+        {
+            "id":3,
+            "glucocorticoid":"Methylprednisolone",
+            "options":[
+                "With any other glucocorticoid by any other route?",
+                "Methylprednsolone Injection: 3 or more injections within last 12 months?"
+            ]
+        },
+        {
+            "id":4,
+            "glucocorticoid":"Triamcinolone",
+            "options":[
+                "With any other glucocorticoid by any other route?",
+                "Trimacinolone Injection: 3 or more injections within last 12 months?"
+            ]
+        }
+    ]
+}

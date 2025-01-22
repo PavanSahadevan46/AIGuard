@@ -42,6 +42,19 @@
             "question": "Is the patient using any of the following at more than 30g per month: - Budesonide enema or rectal foam - Prednisolone rectal solution or suppositories ?"
         }
     ],
+    "routeOptions": [
+        {
+            "routes": [
+                "Oral",
+                "Injection",
+                "Inhaled",
+                "Nasal",
+                "Topical",
+                "Rectal",
+                "Eye"
+            ]
+        }
+    ],
     "oralRoute": [
         {
             "id": 1,
@@ -106,24 +119,24 @@
         },
         {
             "id": 2,
-            "glucocorticoid":"Hydrocortisone",
-            "options":[
+            "glucocorticoid": "Hydrocortisone",
+            "options": [
                 "With any other glucocorticoid by any other route?",
                 "Hydrocortisone: 3 or more injections within the last 12 months?"
             ]
         },
         {
-            "id":3,
-            "glucocorticoid":"Methylprednisolone",
-            "options":[
+            "id": 3,
+            "glucocorticoid": "Methylprednisolone",
+            "options": [
                 "With any other glucocorticoid by any other route?",
                 "Methylprednsolone Injection: 3 or more injections within last 12 months?"
             ]
         },
         {
-            "id":4,
-            "glucocorticoid":"Triamcinolone",
-            "options":[
+            "id": 4,
+            "glucocorticoid": "Triamcinolone",
+            "options": [
                 "With any other glucocorticoid by any other route?",
                 "Trimacinolone Injection: 3 or more injections within last 12 months?"
             ]

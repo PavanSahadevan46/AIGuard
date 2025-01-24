@@ -9,6 +9,7 @@ import NoPage from "./pages/NoPage.jsx";
 import SEC from "./pages/SEC.jsx";
 import NoSEC from "./pages/NoSEC.jsx";
 import SteroidRoutes from "./pages/SteroidRoutes.jsx"
+import Oral from "./pages/Oral.jsx";
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
           <Route path="/sec" element={<SEC />} />
           <Route path="/nosec" element={<NoSEC />} />
           <Route path="/routes" element={<SteroidRoutes />} />
+          <Route path="/routes/oral" element={<Oral />} />
+
           <Route path="*" element={<NoPage/>} />
         </Routes>
       </BrowserRouter>

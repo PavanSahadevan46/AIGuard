@@ -4,7 +4,7 @@ function SteroidRoute({title}){
     const nav = useNavigate();
     return(
         <div onClick={() => 
-            nav(`${title}`)
+            nav(`${title.toLowerCase()}`)
         }>
             {title}
         </div>

@@ -19,17 +19,21 @@ function SteroidRoutes() {
         <>
             <Header />
             <h1>{currentQuestion}</h1>
-            <Button
-                btnText="Yes"
-                onClick={() => {
-                    setCurrentQuestion("Please enter the glucocorticoids taken in order of the routes in the order shown");
-                    setShowRoutes(true);
-                }}
-            />
-            {showRoutes &&< RouteContainer /> } 
-            
-            <Button btnText="No" onClick={() => nav("/nosec")} />
+            {showRoutes ? (// check if user selected yes to question 2 and hide buttons and render routes else render yes no buttons
+                <RouteContainer />  
+            ) : (
+                <>
+                    <Button
+                        btnText="Yes"
+                        onClick={() => {
+                            setCurrentQuestion("Please enter the glucocorticoids taken in order of the routes in the order shown");
+                            setShowRoutes(true);
+                        }}
+                    />
+                    <Button btnText="No" onClick={() => nav("/nosec")} />
+                </>
 
+            )}
             <Footer />
         </>
     )

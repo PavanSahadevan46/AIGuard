@@ -12,7 +12,14 @@ function Oral() {
     const [showContinious, setShowContinious] = useState(false);
     const [showIntermittent, setShowIntermittent] = useState(false);
 
+    const [dosageValue, setShowDosageValue] = useState('');
+
     const oralData = criteria.oralRoute;
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+    }
 
     return (
         <>
@@ -20,12 +27,23 @@ function Oral() {
             <h1>{currentQuestion}</h1>
             {showContinious ? (
                 <div>
-                    {oralData.map((oral) =>
-                    <div key={oral.id}>
-                    <h1>{oral.glucocorticoid}</h1>
-                    <h1>{oral.continuousValue}</h1>
-                    </div>
-                )}
+                    <form>
+                        <fieldset>
+                            {oralData.map((oral) =>
+                                <div key={oral.id}>
+                                    <label>{oral.glucocorticoid}</label>
+                                    <input type="float"
+                                        value={dosageValue}
+                                        onChange={(e) =>
+                                            setShowDosageValue(e.target.value)
+                                        }
+                                        placeholder="Enter daily dose" />
+                                </div>
+                            )}
+                            <Button type="submit" btnText="Submit" />
+                        </fieldset>
+                    </form>
+                    <p>{dosageValue}</p>
                 </div>
             ) :
                 showIntermittent ? (

@@ -12,7 +12,7 @@ function Oral() {
     const [showContinious, setShowContinious] = useState(false);
     const [showIntermittent, setShowIntermittent] = useState(false);
 
-    const [dosageValue, setShowDosageValue] = useState('');
+    const [dosageValue, setShowDosageValue] = useState({});
 
     const oralData = criteria.oralRoute;
 
@@ -27,15 +27,19 @@ function Oral() {
             <h1>{currentQuestion}</h1>
             {showContinious ? (
                 <div>
-                    <form>
+                    <form onSubmit={submitHandler}>
                         <fieldset>
                             {oralData.map((oral) =>
                                 <div key={oral.id}>
                                     <label>{oral.glucocorticoid}</label>
                                     <input type="float"
-                                        value={dosageValue}
+                                        name = {oral.id}
+                                        value={dosageValue[oral.id] ?? ''}
                                         onChange={(e) =>
-                                            setShowDosageValue(e.target.value)
+                                            setShowDosageValue((prevState =>({
+                                                ...prevState,
+                                                [e.target.name]: e.target.value,
+                                            })))
                                         }
                                         placeholder="Enter daily dose" />
                                 </div>
@@ -43,7 +47,6 @@ function Oral() {
                             <Button type="submit" btnText="Submit" />
                         </fieldset>
                     </form>
-                    <p>{dosageValue}</p>
                 </div>
             ) :
                 showIntermittent ? (
@@ -58,6 +61,7 @@ function Oral() {
                         />
                         <Button btnText="No" onClick={() => {
                             setShowContinious(true);
+                            setCurrentQuestion("Please enter the dosage below");
                         }}
                         />
                     </>

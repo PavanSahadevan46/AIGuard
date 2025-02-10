@@ -12,7 +12,7 @@ function Oral() {
     const [showContinious, setShowContinious] = useState(false);
     const [showIntermittent, setShowIntermittent] = useState(false);
 
-    const [dosageValue, setShowDosageValue] = useState({});
+    const [dosageValue, setDosageValue] = useState({}); 
 
     const oralData = criteria.oralRoute;
 
@@ -36,7 +36,7 @@ function Oral() {
                                         name = {oral.id}
                                         value={dosageValue[oral.id] ?? ''}
                                         onChange={(e) =>
-                                            setShowDosageValue((prevState =>({
+                                            setDosageValue((prevState =>({
                                                 ...prevState,
                                                 [e.target.name]: e.target.value,
                                             })))

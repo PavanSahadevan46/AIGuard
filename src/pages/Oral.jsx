@@ -4,7 +4,7 @@ import criteria from "../criteria.json";
 import Button from "../components/Button";
 import { useState } from "react";
 import Form from "../components/Form";
-
+import { Navigate } from "react-router-dom";
 
 function Oral() {
     const questionData = criteria.Questions.find((q) => q.id === 3);
@@ -15,11 +15,33 @@ function Oral() {
     const [dosageValue, setDosageValue] = useState({}); 
 
     const oralData = criteria.oralRoute;
+    const continuousValues = Object.values(oralData.map(item => item.continuousValue));
+
 
     const submitHandler = (e) => {
         e.preventDefault();
+        let results = (Object.values((dosageValue)));
+        const mathCalc = () =>{
+            var c = [];
+            for( var i = 0; i < results.length; i++ ){
+                c.push(results[i]/ continuousValues[i])
+            }
+            // console.log(c);
 
-    }
+            const total = c.reduce((accumulator, element) => accumulator + element );
+            console.log(total)
+            if (Math.max(total) > 1){
+                console.log("greater than 1")
+            }else(
+                console.log("less than 1")
+            )
+        }
+        mathCalc();
+        // console.log(continuousValues)
+        // const temp = dosageValue[1] / continuousValues[0];
+        // console.log(temp)    
+        
+    }   
 
     return (
         <>
@@ -32,7 +54,8 @@ function Oral() {
                             {oralData.map((oral) =>
                                 <div key={oral.id}>
                                     <label>{oral.glucocorticoid}</label>
-                                    <input type="float"
+                                    {/* <label>{oral.continuousValue}</label> */}
+                                    <input type="number"
                                         name = {oral.id}
                                         value={dosageValue[oral.id] ?? ''}
                                         onChange={(e) =>

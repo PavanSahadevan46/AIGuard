@@ -4,7 +4,8 @@ import criteria from "../criteria.json";
 import Button from "../components/Button";
 import { useState } from "react";
 import Form from "../components/Form";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function Oral() {
     const questionData = criteria.Questions.find((q) => q.id === 3);
@@ -16,6 +17,8 @@ function Oral() {
 
     const oralData = criteria.oralRoute;
     const continuousValues = Object.values(oralData.map(item => item.continuousValue));
+
+    const nav = useNavigate()
 
 
     const submitHandler = (e) => {
@@ -30,19 +33,19 @@ function Oral() {
 
             const total = c.reduce((accumulator, element) => accumulator + element );
             console.log(total)
-            if (Math.max(total) > 1){
+            if (total > 1){
                 console.log("greater than 1")
-            }else(
+                nav("/sec")
+            }else{
                 console.log("less than 1")
-            )
+                nav("/routes")
+            }
         }
         mathCalc();
-        // console.log(continuousValues)
-        // const temp = dosageValue[1] / continuousValues[0];
-        // console.log(temp)    
-        
     }   
-
+       // console.log(continuousValues)
+        // const temp = dosageValue[1] / continuousValues[0];
+        // console.log(temp)   
     return (
         <>
             <Header />

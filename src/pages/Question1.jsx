@@ -9,15 +9,17 @@ function Question1() {
     return (
         <>
             <Header />
-            <div className="container">
-                <h2>{questionData.question}</h2>
-                <ul>
+            <div className="container mx-auto px-4 py-8">
+                <h2 className ="text-xl font-semibold mb-4">{questionData.question}</h2>
+                <ul className = "list-disc list-inside space-y-2">
                     {questionData.options.map((option, index) => (
                         <li key={index}>{option}</li>
                     ))}
                 </ul>
-                <Button btnText="Yes" onClick={ ()=> nav("/sec")} /> 
-                <Button btnText="No" onClick={ ()=> nav("/routes")}/>
+                <div className= "mt-6 flex space-x-4">
+                    <Button btnText="Yes" onClick={ ()=> nav("/sec")} /> 
+                    <Button btnText="No" onClick={ ()=> nav("/routes")}/>
+                </div>
             </div>
             <Footer />
         </>

@@ -13,7 +13,7 @@ function Oral() {
     const [showContinious, setShowContinious] = useState(false);
     const [showIntermittent, setShowIntermittent] = useState(false);
 
-    const [dosageValue, setDosageValue] = useState({}); 
+    const [dosageValue, setDosageValue] = useState({});
 
     const oralData = criteria.oralRoute;
     const continuousValues = Object.values(oralData.map(item => item.continuousValue));
@@ -24,61 +24,75 @@ function Oral() {
     const submitHandler = (e) => {
         e.preventDefault();
         let results = (Object.values((dosageValue)));
-        const mathCalc = () =>{
+        const mathCalc = () => {
             var c = [];
-            for( var i = 0; i < results.length; i++ ){
-                c.push(results[i]/ continuousValues[i])
+            for (var i = 0; i < results.length; i++) {
+                c.push(results[i] / continuousValues[i])
             }
             // console.log(c);
 
-            const total = c.reduce((accumulator, element) => accumulator + element );
+            const total = c.reduce((accumulator, element) => accumulator + element);
             console.log(total)
-            if (total > 1){
+            if (total > 1) {
                 console.log("greater than 1")
                 nav("/sec")
-            }else{
+            } else {
                 console.log("less than 1")
                 nav("/routes")
             }
         }
         mathCalc();
-    }   
-       // console.log(continuousValues)
-        // const temp = dosageValue[1] / continuousValues[0];
-        // console.log(temp)   
+    }
+    // console.log(continuousValues)
+    // const temp = dosageValue[1] / continuousValues[0];
+    // console.log(temp)   
     return (
         <>
             <Header />
-            <h1>{currentQuestion}</h1>
+            <h1 className="text-xl font-semibold mb-4 text-center">{currentQuestion}</h1>
             {showContinious ? (
                 <div>
-                    <form onSubmit={submitHandler}>
+                    <form className="max-w-md mx-auto p-4 bg-white rounded-md shadow"
+                        onSubmit={submitHandler}>
                         <fieldset>
                             {oralData.map((oral) =>
-                                <div key={oral.id}>
-                                    <label>{oral.glucocorticoid}</label>
+                                <div
+                                    key={oral.id}
+                                    className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                                    <label
+                                        className="mb-1 sm:mb-0 font-semibold text-black-700 w-full sm:w-1/3"
+                                    >{oral.glucocorticoid}</label>
                                     {/* <label>{oral.continuousValue}</label> */}
                                     <input type="number"
-                                        name = {oral.id}
+                                        name={oral.id}
                                         value={dosageValue[oral.id] ?? ''}
                                         onChange={(e) =>
-                                            setDosageValue((prevState =>({
+                                            setDosageValue((prevState => ({
                                                 ...prevState,
                                                 [e.target.name]: e.target.value,
                                             })))
                                         }
-                                        placeholder="Enter daily dose" />
+                                        placeholder="Enter daily dose"
+                                        className="
+                                        w-full sm:w-2/3
+                                        p-2
+                                        border border-gray-300 
+                                        rounded 
+                                        focus:outline-none 
+                                        focus:ring-2 
+                                        focus:ring-blue-500"/>
                                 </div>
                             )}
-                            <Button type="submit" btnText="Submit" />
+                            <div className= "pt-4"><Button type="submit" btnText="Submit" /></div>
+                            
                         </fieldset>
                     </form>
                 </div>
             ) :
                 showIntermittent ? (
-                    <h1>Intermittent</h1>
+                    <h1 className="text-xl font-semibold mb-4 text-center">Intermittent</h1>
                 ) : (
-                    <>
+                    <div className="mt-6 flex space-x-4 justify-center">
                         <Button
                             btnText="Yes"
                             onClick={() => {
@@ -90,7 +104,7 @@ function Oral() {
                             setCurrentQuestion("Please enter the dosage below");
                         }}
                         />
-                    </>
+                    </div>
                 )}
             <Footer />
         </>

@@ -14,11 +14,12 @@ function SteroidRoutes() {
     return (
         <>
             <Header />
-            <h1>{currentQuestion}</h1>
+            <h1 className = "text-xl font-semibold mb-4 text-center">{currentQuestion}</h1>
             {showRoutes ? (// if user selected yes to question 2, hide buttons and render routes else render buttons
                 <RouteContainer />  
             ) : (
-                <>
+                
+                <div className= "mt-6 flex space-x-4 justify-center">
                     <Button
                         btnText="Yes"
                         onClick={() => {
@@ -27,7 +28,7 @@ function SteroidRoutes() {
                         }}
                     />
                     <Button btnText="No" onClick={() => nav("/nosec")} />
-                </>
+                </div>
 
             )}
             <Footer />

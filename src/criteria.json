@@ -60,30 +60,35 @@
             "id": 1,
             "glucocorticoid": "Beclometasone",
             "continuousValue": 625,
+            "measurementUnit": "micrograms",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 5mg"
         },
         {
             "id": 2,
             "glucocorticoid": "Betamethasone",
             "continuousValue": 750,
+            "measurementUnit": "micrograms",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 6mg"
         },
         {
             "id": 3,
             "glucocorticoid": "Budesonide",
             "continuousValue": 1.5,
+            "measurementUnit": "mg",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 12mg"
         },
         {
             "id": 4,
             "glucocorticoid": "Deflazacort",
             "continuousValue": 6,
+            "measurementUnit": "mg",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 48mg"
         },
         {
             "id": 5,
             "glucocorticoid": "Dexamethasone",
             "continuousValue": 0.5,
+            "measurementUnit": "mg",
             "intermittentDuration": [
                 "≥ 3 courses within last 12 months of at least 7 days of ≥ 4mg",
                 "Course for severe COVID of > 10 days"
@@ -93,18 +98,21 @@
             "id": 6,
             "glucocorticoid": "Hydrocortisone",
             "continuousValue": 15,
+            "measurementUnit": "mg",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 120mg"
         },
         {
             "id": 7,
             "glucocorticoid": "Methylprednisolone",
             "continuousValue": 4,
+            "measurementUnit": "mg",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥ 32mg"
         },
         {
             "id": 8,
             "glucocorticoid": "Prednisolone",
             "continuousValue": 5,
+            "measurementUnit": "mg",
             "intermittentDuration": "≥ 3 courses within last 12 months of at least 7 days of ≥40mg"
         }
     ],

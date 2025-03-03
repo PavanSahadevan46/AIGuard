@@ -27,10 +27,48 @@ function Oral() {
       intermittent: {},
     },
   });
+  const calculateIntermittent = (formdata) => {
+    const intResults =  Object.values(formdata.intermittent).map(Number);
+    const total = intResults.reduce((acc,elem) =>{
+      return acc + elem;
+    },0)
+    console.log(intResults);
+    return total;
+   
+  };
+
+  const calculateContinuous = (formdata) => {
+    const contResults = Object.values(formdata.continuous);
+    const continuousValues = oralData.map((item) => item.continuousValue);
+
+    const total = contResults.reduce((acc, value, i) => {
+      return acc + value / continuousValues[i];
+    }, 0);
+
+    return total;
+  };
 
   const onSubmit = (formdata) => {
-    const contResults = Object.values(formdata.continuous);
-    console.log(contResults);
+    if (showContinuous) {
+      const contTotal = calculateContinuous(formdata);
+      if (contTotal >= 1) {
+        console.log(contTotal + " over 1");
+        nav("/sec");
+      } else {
+        console.log(contTotal + "over 1");
+        nav("/routes");
+      }
+    }else if(showIntermittent){
+      console.log("intermittent ")
+      const intTotal = calculateIntermittent(formdata);
+      if(intTotal > 3 ){
+        console.log(intTotal + " over 3 courses");
+        nav("/sec");
+      }else{
+        console.log("under 3 courses");
+        nav("/routes");
+      }
+    }
   };
 
   return (
@@ -68,40 +106,54 @@ function Oral() {
             {oralData.map((oral) => {
               if (showContinuous) {
                 return (
-                  <>
-                    <div key={oral.id} className="table-row py-1">
-                      <label className="p-1 table-cell pr-4 align-middle whitespace-nowrap">
-                        {oral.glucocorticoid}
-                      </label>
+                  <div key={oral.id} className="table-row py-1">
+                    <label className="p-1 table-cell pr-4 align-middle whitespace-nowrap">
+                      {oral.glucocorticoid}
+                    </label>
 
-                      <input
-                        type="number"
-                        step="0.01"
-                        placeholder={
-                          "Total daily dose: " + oral.measurementUnit
-                        }
-                        className="table-cell px-2 py-3 border  border-gray-300 rounded align-middle"
-                        {...register(`continuous.${oral.id}`, {
-                          valueAsNumber: true,
-                          required: true,
-                        })}
-                      />
-                      {errors.continuous && errors.continuous[oral.id] && (
-                        <span className="text-red-500 text-sm">Required</span>
-                      )}
-                    </div>
-                  </>
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder={"Total daily dose: " + oral.measurementUnit}
+                      className="table-cell px-2 py-3 border  border-gray-300 rounded align-middle"
+                      {...register(`continuous.${oral.id}`, {
+                        valueAsNumber: true,
+                        required: true,
+                      })}
+                    />
+                    {errors.continuous && errors.continuous[oral.id] && (
+                      <span className="text-red-500 text-sm">Required</span>
+                    )}
+                  </div>
                 );
               } else if (showIntermittent) {
                 return (
-                  <>
-                    <div
-                      key={oral.id}
-                      className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2"
-                    />
-                    <label>{oral.glucocorticoid}</label>
-                    <h1>intermittent</h1>
-                  </>
+                  <div
+                    key={oral.id}
+                    className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2"
+                  >
+                    <label className="p-1 table-cell pr-4 align-middle whitespace-nowrap">
+                      {oral.glucocorticoid}
+                    </label>
+                    <select
+                      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      defaultValue=""
+                      {...register(`intermittent.${oral.id}`, {
+                        required: true,
+                      })}
+                    >
+                      <option value="" disabled>
+                        Select a course duration
+                      </option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    {errors.intermittent && errors.intermittent[oral.id] && (
+                      <span className="text-red-500 text-sm">Required</span>
+                    )}
+                  </div>
                 );
               } else {
                 <></>;

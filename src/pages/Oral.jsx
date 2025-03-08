@@ -29,14 +29,6 @@ function Oral() {
       intermittent: {},
     },
   });
-  const calculateIntermittent = (formdata) => {
-    const intResults = Object.values(formdata.intermittent).map(Number);
-    const total = intResults.reduce((acc, elem) => {
-      return acc + elem;
-    }, 0);
-    console.log(intResults);
-    return total;
-  };
 
   const calculateContinuous = (formdata) => {
     const contResults = Object.values(formdata.continuous);
@@ -59,139 +51,139 @@ function Oral() {
         console.log(contTotal + "over 1");
         nav("/routes");
       }
-    } else if (showIntermittent) {
-      console.log("intermittent ");
-      const intTotal = calculateIntermittent(formdata);
-      if (intTotal > 3) {
-        console.log(intTotal + " over 3 courses");
-        nav("/sec");
-      } else {
-        console.log("under 3 courses");
-        nav("/routes");
-      }
     }
   };
 
   return (
     <>
-      <Header />
-      <h1 className="text-xl font-semibold mb-4 text-center">
-        {currentQuestion}
-      </h1>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <h1 className="text-xl font-semibold mb-4 text-center">
+          {currentQuestion}
+        </h1>
 
-      {!showContinuous && !showIntermittent && !showDexamethasone ? (
-        //if no route is chosen show buttons
-        <div className="mt-6 flex space-x-4 justify-center">
-          <Button
-            btnText="Yes"
-            onClick={() => {
-              setShowIntermittent(true);
-              setCurrentQuestion(
-                "Has the patient had 3 or more courses in total of any of the following for at least seven days within the past 12 months?"
-              );
-              reset();
-            }}
-          />
-          <Button
-            btnText="No"
-            onClick={() => {
-              setShowContinuous(true);
-              setCurrentQuestion(
-                "Please enter the daily dosage below"
-              );
-              reset();
-            }}
-          />
-        </div>
-      ) : showContinuous ? (
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 table border-separate border-spacing-3"
-        >
-          {oralData.map((oral) => (
-            <div key={oral.id} className="table-row py-1">
-              <label className="p-1 table-cell pr-4 align-middle whitespace-nowrap">
-                {oral.glucocorticoid}
-              </label>
-              <input
-                type="number"
-                step="0.01"
-                placeholder={"Total daily dose: " + oral.measurementUnit}
-                className="table-cell px-2 py-3 border border-gray-300 rounded align-middle"
-                {...register(`continuous.${oral.id}`, {
-                  valueAsNumber: true,
-                  required: true,
-                })}
-              />
-              {errors.continuous && errors.continuous[oral.id] && (
-                <span className="text-red-500 text-sm">Required</span>
-              )}
-            </div>
-          ))}
-          <div className="pt-4 text-center">
-            <Button type="submit" btnText="Submit" />
-          </div>
-        </form>
-      ) : showIntermittent ? (
-        <div>
-          <ul className="list-disc list-inside space-y-2">
-            {oralData.map((oral, index) => (
-              <li key={index}>
-                {oral.glucocorticoid} {oral.intermittentDosage}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 flex space-x-4 justify-center">
+        {!showContinuous && !showIntermittent && !showDexamethasone ? (
+          //if no route is chosen show buttons
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               btnText="Yes"
               onClick={() => {
-                console.log("needs sec from intermittent");
-                nav("/sec");
+                setShowIntermittent(true);
+                setCurrentQuestion(
+                  "Has the patient had 3 or more courses in total of any of the following for at least seven days within the past 12 months?"
+                );
+                reset();
               }}
             />
             <Button
               btnText="No"
               onClick={() => {
-                setShowIntermittent(false);
-                setShowDexamethasone(true);
-                setCurrentQuestion(
-                  "Has the patient had (or is due to have) intermittent courses of dexamethasone for  either of the following?"
-                );
-              }}
-            />
-          </div>
-        </div>
-      ) : showDexamethasone && dexOptions ? (
-        <div>
-          <ul className="list-disc list-inside space-y-2">
-            {dexOptions.subOptions.map((oral, index) => (
-              <li key={index}>{oral}</li>
-            ))}
-          </ul>
-          <div className="mt-6 flex space-x-4 justify-center">
-            <Button
-              btnText="Yes"
-              onClick={() => {
-                nav("/sec");
-              }}
-            />
-            <Button
-              btnText="No"
-              onClick={() => {
-                setShowDexamethasone(false);
-                setCurrentQuestion(
-                  "Continuous: Please enter the daily dosage below"
-                );
                 setShowContinuous(true);
+                setCurrentQuestion("Please enter the daily dosage below");
+                reset();
               }}
             />
           </div>
-        </div>
-      ) : (
-        <></>
-      )}
+        ) : showContinuous ? (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full"
+          >
+            <div className="space-y-4">
+              {oralData.map((oral) => (
+                <div
+                  key={oral.id}
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center"
+                >
+                  <label className="font-medium text-gray-700 sm:col-span-1">
+                    {oral.glucocorticoid}
+                  </label>
+                  <div className="sm:col-span-2">
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder={"Total daily dose: " + oral.measurementUnit}
+                      className="w-full px-3 py-2 border border-gray-300 rounded"
+                      {...register(`continuous.${oral.id}`, {
+                        valueAsNumber: true,
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  {errors.continuous && errors.continuous[oral.id] && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
+                </div>
+              ))}
+            </div>
 
-      <Footer />
+            <div className="pt-6 text-center">
+              <Button type="submit" btnText="Submit" />
+            </div>
+          </form>
+        ) : showIntermittent ? (
+          <div className="w-full px-3 py-2 border border-gray-300 rounded">
+            <ul className="list-disc list-inside space-y-2 mb-6">
+              {oralData.map((oral, index) => (
+                <li key={index} className="text-gray-700">
+                  {oral.glucocorticoid} {oral.intermittentDosage}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                btnText="Yes"
+                onClick={() => {
+                  console.log("needs sec from intermittent");
+                  nav("/sec");
+                }}
+              />
+              <Button
+                btnText="No"
+                onClick={() => {
+                  setShowIntermittent(false);
+                  setShowDexamethasone(true);
+                  setCurrentQuestion(
+                    "Has the patient had (or is due to have) intermittent courses of dexamethasone for  either of the following?"
+                  );
+                }}
+              />
+            </div>
+          </div>
+        ) : showDexamethasone && dexOptions ? (
+          <div className="max-w-md mx-auto">
+            <ul className="list-disc list-inside space-y-2 mb-6">
+              {dexOptions.subOptions.map((oral, index) => (
+                <li key={index} className="text-gray-700">
+                  {oral}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                btnText="Yes"
+                onClick={() => {
+                  nav("/sec");
+                }}
+              />
+              <Button
+                btnText="No"
+                onClick={() => {
+                  setShowDexamethasone(false);
+                  setCurrentQuestion(
+                    "Please enter the daily dosage below"
+                  );
+                  setShowContinuous(true);
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        <Footer />
+      </div>
     </>
   );
 }

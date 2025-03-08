@@ -15,6 +15,7 @@ function Oral() {
   const [showIntermittent, setShowIntermittent] = useState(false);
   const [showContinuous, setShowContinuous] = useState(false);
   const [showDexamethasone, setShowDexamethasone] = useState(false);
+  const [showContCheck, setShowContCheck] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(questionData.question);
 
   //react hook form
@@ -62,7 +63,7 @@ function Oral() {
           {currentQuestion}
         </h1>
 
-        {!showContinuous && !showIntermittent && !showDexamethasone ? (
+        {!showContinuous && !showIntermittent && !showDexamethasone && !showContCheck ? (
           //if no route is chosen show buttons
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -122,8 +123,8 @@ function Oral() {
             </div>
           </form>
         ) : showIntermittent ? (
-          <div className="w-full px-3 py-2 border border-gray-300 rounded">
-            <ul className="list-disc list-inside space-y-2 mb-6">
+          <div className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full">
+            <ul className="list-disc pl-6 space-y-2 mb-6">
               {oralData.map((oral, index) => (
                 <li key={index} className="text-gray-700">
                   {oral.glucocorticoid} {oral.intermittentDosage}
@@ -151,8 +152,8 @@ function Oral() {
             </div>
           </div>
         ) : showDexamethasone && dexOptions ? (
-          <div className="max-w-md mx-auto">
-            <ul className="list-disc list-inside space-y-2 mb-6">
+          <div className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full">
+            <ul className="list-disc pl-6 space-y-2 mb-6">
               {dexOptions.subOptions.map((oral, index) => (
                 <li key={index} className="text-gray-700">
                   {oral}
@@ -171,16 +172,35 @@ function Oral() {
                 onClick={() => {
                   setShowDexamethasone(false);
                   setCurrentQuestion(
-                    "Please enter the daily dosage below"
+                    "Has the patient had at least one continuous course (at least 4 weeks) of oral steroids in the past year?"
                   );
-                  setShowContinuous(true);
+                  setShowContCheck(true);
                 }}
               />
             </div>
           </div>
-        ) : (
+        ) : showContCheck ? (
+          <div className="max-w-md mx-auto p-4 bg-white rounded-md  mt-4 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                btnText="Yes"
+                onClick={() => {
+                  setShowContCheck(false);
+                  setShowContinuous(true);
+                }}
+              />
+              <Button
+                btnText="No"
+                onClick={() => {
+                  nav("/routes")
+                }}
+              />
+            </div>
+          </div>
+        ):(
           <></>
         )}
+        
 
         <Footer />
       </div>

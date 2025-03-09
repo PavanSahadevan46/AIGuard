@@ -1,3 +1,7 @@
+/* 
+    reduant component delete in future
+*/
+
 import { useNavigate } from "react-router-dom";
 
 function SteroidRoute({title}){

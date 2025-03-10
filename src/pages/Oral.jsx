@@ -5,12 +5,15 @@ import Header from "../components/Header";
 import Footer from "../components/footer";
 import criteria from "../criteria.json";
 import Button from "../components/Button";
+import { useRouteCompletion } from "../components/RouteCompletionContext";
+
 
 function Oral() {
   const nav = useNavigate();
   const questionData = criteria.Questions.find((q) => q.id === 3);
   const oralData = criteria.oralRoute;
   const dexOptions = oralData.find((q) => q.id === 5);
+  const { markRouteDone } = useRouteCompletion();
 
   const [showIntermittent, setShowIntermittent] = useState(false);
   const [showContinuous, setShowContinuous] = useState(false);
@@ -49,8 +52,9 @@ function Oral() {
         console.log(contTotal + " over 1");
         nav("/sec");
       } else {
-        console.log(contTotal + "over 1");
+        console.log(contTotal + " under 1");
         nav("/routes");
+        markRouteDone("Oral");
       }
     }
   };

@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/footer";
 import criteria from "../criteria.json"
 import Button from "../components/Button";
-import { BrowserRouter, Routes, Route ,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 function Question1() {
     const nav = useNavigate();
     var questionData = criteria.Questions.find((q) => q.id === 1);

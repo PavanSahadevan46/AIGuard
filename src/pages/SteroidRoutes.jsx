@@ -2,15 +2,29 @@ import Header from "../components/Header";
 import criteria from "../criteria.json";
 import Button from "../components/Button";
 import Footer from "../components/footer";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import RouteContainer from "../components/RouteContainer";
+import { useRouteCompletion } from "../components/RouteCompletionContext";
 
 function SteroidRoutes() {
     const questionData = criteria.Questions.find((q) => q.id === 2);
     const [currentQuestion, setCurrentQuestion] = useState(questionData.question);
     const nav = useNavigate();
     const [showRoutes, setShowRoutes] = useState(false);
+    const{
+        hasVisitedRoutePage,
+        setHasVisitedRoutePage
+    } = useRouteCompletion();
+
+    useEffect(() => {
+        if(hasVisitedRoutePage){
+            setCurrentQuestion("Please enter the glucocorticoids taken in order of the routes in the order shown");
+            setShowRoutes(true);
+        }
+    },[hasVisitedRoutePage]);
+
+
     return (
         <>
             <Header />
@@ -25,6 +39,7 @@ function SteroidRoutes() {
                         onClick={() => {
                             setCurrentQuestion("Please enter the glucocorticoids taken in order of the routes in the order shown");
                             setShowRoutes(true);
+                            setHasVisitedRoutePage(true);
                         }}
                     />
                     <Button btnText="No" onClick={() => nav("/nosec")} />

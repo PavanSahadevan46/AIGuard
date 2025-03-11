@@ -22,23 +22,27 @@
             "question": "Is the patient taking oral steroids intermittently or has done so in the last year?"
         },
         {
-            "id": 4,
-            "question": "Are the inhalers being used with any other form of of glucocortocid treatment?"
+            "id":4,
+            "question": "Is the patient using any injection steroids of any kind?"
         },
         {
             "id": 5,
-            "question": "Is the patient using high dose steroids for nasal polyps for more than 4 weeks?"
+            "question": "Are the inhalers being used with any other form of of glucocortocid treatment?"
         },
         {
             "id": 6,
-            "question": "Is the patient applying at least 200g a week of potent or very potent topical glucocorticoids?"
+            "question": "Is the patient using high dose steroids for nasal polyps for more than 4 weeks?"
         },
         {
             "id": 7,
-            "question": "Is the patient taking significant amounts of other forms of glucocorticoid?"
+            "question": "Is the patient applying at least 200g a week of potent or very potent topical glucocorticoids?"
         },
         {
             "id": 8,
+            "question": "Is the patient taking significant amounts of other forms of glucocorticoid?"
+        },
+        {
+            "id": 9,
             "question": "Is the patient using any of the following at more than 30g per month: - Budesonide enema or rectal foam - Prednisolone rectal solution or suppositories ?"
         }
     ],
@@ -121,34 +125,26 @@
         {
             "id": 1,
             "glucocorticoid": "Dexamethasone",
-            "options": [
-                "Taken as an antiemetic in oncology regimens, and for 12 months after stopping when future cycles are anticipated?",
-                "Taken as  prolonged courses (>10 days) for the treatment of severe Covid-19?"
-            ]
+            "question1": "Taken as an antiemetic in oncology regimens, and for 12 months after stopping when future cycles are anticipated?",
+            "question2": "Taken as  prolonged courses (>10 days) for the treatment of severe Covid-19?"         
         },
         {
             "id": 2,
             "glucocorticoid": "Hydrocortisone",
-            "options": [
-                "With any other glucocorticoid by any other route?",
-                "Hydrocortisone: 3 or more injections within the last 12 months?"
-            ]
+            "question1":"With any other glucocorticoid by any other route?",
+            "question2":"Hydrocortisone: 3 or more injections within the last 12 months?"
         },
         {
             "id": 3,
             "glucocorticoid": "Methylprednisolone",
-            "options": [
-                "With any other glucocorticoid by any other route?",
-                "Methylprednsolone Injection: 3 or more injections within last 12 months?"
-            ]
+            "question1":"With any other glucocorticoid by any other route?",
+            "question2":"Methylprednsolone Injection: 3 or more injections within last 12 months?"
         },
         {
             "id": 4,
             "glucocorticoid": "Triamcinolone",
-            "options": [
-                "With any other glucocorticoid by any other route?",
-                "Trimacinolone Injection: 3 or more injections within last 12 months?"
-            ]
+            "question1":"With any other glucocorticoid by any other route?",
+            "question2":"Trimacinolone Injection: 3 or more injections within last 12 months?"
         }
     ]
 }

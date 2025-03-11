@@ -48,25 +48,42 @@ function Injection() {
           />
         </div>
       ) : isUsingInjection ? (
-        <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)}
+            className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full"
+          >
             <div>
               {injData.map((inj) => (
                 <div
                   key={inj.id}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center"
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center p-3"
                 >
                   <label className="font-medium text-gray-700 sm:col-span-1">
                     {inj.glucocorticoid}
                   </label>
-                  <label className="font-medium text-gray-700 sm:col-span-1 p-5">
+                  <label className="font-medium text-gray-700 sm:col-span-1">
                     {inj.question1}
                   </label>
-                  <input
-                    type="radio"
-                    {...register(`inj_${inj.id}`)}
-                    value="Yes"
-                  ></input>
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center space-x-1">
+                      <input
+                        type="radio"
+                        {...register(`inj_${inj.id}`)}
+                        value="Yes"
+                        className="mr-1"
+                      />
+                      <span>Yes</span>
+                    </label>
+                    <label className="flex items-center space-x-1">
+                      <input
+                        type="radio"
+                        {...register(`inj_${inj.id}`)}
+                        value="No"
+                        className="mr-1"
+                      />
+                      <span>No</span>
+                    </label>
+                  </div>
                 </div>
               ))}
             </div>

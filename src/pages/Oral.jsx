@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/footer";
 import criteria from "../criteria.json";
 import Button from "../components/Button";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
-
 
 function Oral() {
   const nav = useNavigate();
@@ -61,15 +60,18 @@ function Oral() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-        <Header />
+      <Header />
+      <div className="flex flex-col min-h-auto bg-white">
         <h1 className="text-xl font-semibold mb-4 text-center">
           {currentQuestion}
         </h1>
 
-        {!showContinuous && !showIntermittent && !showDexamethasone && !showContCheck ? (
+        {!showContinuous &&
+        !showIntermittent &&
+        !showDexamethasone &&
+        !showContCheck ? (
           //if no route is chosen show buttons
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-4 flex flex-col sm:flex-row justify-center gap-8 w-2xl p-6 mx-auto">
             <Button
               btnText="Yes"
               onClick={() => {
@@ -196,15 +198,14 @@ function Oral() {
               <Button
                 btnText="No"
                 onClick={() => {
-                  nav("/routes")
+                  nav("/routes");
                 }}
               />
             </div>
           </div>
-        ):(
+        ) : (
           <></>
         )}
-        
 
         <Footer />
       </div>

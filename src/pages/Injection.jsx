@@ -4,13 +4,16 @@ import criteria from "../criteria.json";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRouteCompletion } from "../components/RouteCompletionContext";
+
 function Injection() {
   const injData = criteria.injectionRoute;
   const questionData = criteria.Questions.find((q) => q.id === 4);
   const nav = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(questionData.question);
   const [isUsingInjection, setShowIsUsingInjection] = useState(false);
+  const { markRouteDone } = useRouteCompletion();
 
   const {
     register,
@@ -21,68 +24,126 @@ function Injection() {
 
   function onSubmit(formdata) {
     console.log(formdata);
-  }
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <h1 className="text-xl font-semibold mb-4 text-center">
-        {currentQuestion}
-      </h1>
+    let needSec = false;
+    injData.forEach((inj) => {
+      const q1Answer = formdata[`inj_${inj.id}_question1`];
+      const q2Answer = formdata[`inj_${inj.id}_question2`];
 
-      {!isUsingInjection ? (
-        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            btnText="Yes"
-            onClick={() => {
-              setCurrentQuestion(
-                "Please select the glucocorticoid and answer the questions accordingly"
-              );
-              setShowIsUsingInjection(true);
-            }}
-          />
-          <Button
-            btnText="No"
-            onClick={() => {
-              nav("/routes");
-            }}
-          />
-        </div>
-      ) : isUsingInjection ? (
-        <div className="space-y-4">
-          <form onSubmit={handleSubmit(onSubmit)}
-            className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full"
+      if (q1Answer === "Yes") {
+        console.log("q1 yes");
+        needSec = true;
+      } else if (q1Answer === "No") {
+        console.log("q1 no");
+      }
+
+      if (q2Answer === "Yes") {
+        console.log("q2 yes");
+        needSec = true;
+      } else if (q2Answer === "No") {
+        console.log("q2 no");
+      }
+    });
+
+    if (needSec) {
+      console.log("need sec");
+      nav("/sec");
+    } else {
+      console.log("no sec needed");
+      nav("/routes");
+      markRouteDone("Injection");
+    }
+  }
+
+  return (
+    <div className="flex flex-col bg-white">
+      <Header />
+      <div className="flex-1 w-full max-w-3xl mx-auto px-4 py-6">
+        <h1 className="text-xl font-semibold mb-4 text-center">
+          {currentQuestion}
+        </h1>
+
+        {!isUsingInjection ? (
+          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+            <Button
+              btnText="Yes"
+              onClick={() => {
+                setCurrentQuestion(
+                  "Please select the glucocorticoid and answer the questions accordingly"
+                );
+                setShowIsUsingInjection(true);
+              }}
+            />
+            <Button
+              btnText="No"
+              onClick={() => {
+                nav("/routes");
+              }}
+            />
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mx-auto p-4 bg-white rounded-md shadow mt-4"
           >
-            <div>
+            <div className="space-y-6">
               {injData.map((inj) => (
-                <div
-                  key={inj.id}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center p-3"
-                >
-                  <label className="font-medium text-gray-700 sm:col-span-1">
-                    {inj.glucocorticoid}
-                  </label>
-                  <label className="font-medium text-gray-700 sm:col-span-1">
-                    {inj.question1}
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <label className="flex items-center space-x-1">
-                      <input
-                        type="radio"
-                        {...register(`inj_${inj.id}`)}
-                        value="Yes"
-                        className="mr-1"
-                      />
-                      <span>Yes</span>
-                    </label>
-                    <label className="flex items-center space-x-1">
-                      <input
-                        type="radio"
-                        {...register(`inj_${inj.id}`)}
-                        value="No"
-                        className="mr-1"
-                      />
-                      <span>No</span>
-                    </label>
+                <div key={inj.id} className="pb-4 border-b border-gray-200">
+                  <div className="mb-3">
+                    <h3 className="font-medium  text-center rounded text-gray-800 text-lg">
+                      {inj.glucocorticoid}
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-medium text-gray-700 block mb-2">
+                        {inj.question1}
+                      </label>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            {...register(`inj_${inj.id}_question1`)}
+                            value="Yes"
+                            className="mr-2"
+                          />
+                          <span>Yes</span>
+                        </label>
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            {...register(`inj_${inj.id}_question1`)}
+                            value="No"
+                            className="mr-2"
+                          />
+                          <span>No</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="font-medium text-gray-700 block mb-2">
+                        {inj.question2}
+                      </label>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            {...register(`inj_${inj.id}_question2`)}
+                            value="Yes"
+                            className="mr-2"
+                          />
+                          <span>Yes</span>
+                        </label>
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            {...register(`inj_${inj.id}_question2`)}
+                            value="No"
+                            className="mr-2"
+                          />
+                          <span>No</span>
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -91,11 +152,8 @@ function Injection() {
               <Button type="submit" btnText="Submit" />
             </div>
           </form>
-        </div>
-      ) : (
-        <></>
-      )}
-
+        )}
+      </div>
       <Footer />
     </div>
   );

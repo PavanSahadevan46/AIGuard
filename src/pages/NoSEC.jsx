@@ -1,9 +1,16 @@
 import Header from "../components/Header";
+import Footer from "../components/footer";
 
 function NoSEC(){
 
     return(
-        <h1> This patient does not need an SEC</h1>
+        <>
+        <Header />
+        <div className="flex flex-col min-h-auto bg-white">
+          <h1 className="text-xl font-semibold text-center mb-4"> This patient does not need an SEC</h1>
+        </div>
+        <Footer />
+      </>
     )
 
 }

@@ -146,5 +146,63 @@
             "question1":"With any other glucocorticoid by any other route?",
             "question2":"Trimacinolone Injection: 3 or more injections within last 12 months?"
         }
+    ],
+    "inhaledRoute":[
+        {
+            "id" : 1,
+            "glucocorticoid": "Beclometasone",
+            "branded_names": ["Non-Propietary","Clenil®","Easihaler®","Soprobec®"],
+            "withOtherTreatementVal": 800,
+            "withoutOtherTreatementVal": 1000,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 2,
+            "glucocorticoid": "Beclometasone-ExtraFine",
+            "branded_names": ["Qvar®","Kelhale®","Fostair®"],
+            "withOtherTreatementVal": 400,
+            "withoutOtherGCTreatementVal": 500,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 3,
+            "glucocorticoid": "Budesonide",
+            "branded_names": [""],
+            "withOtherTreatementVal": 800,
+            "withoutOtherTreatementVal": 1000,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 4,
+            "glucocorticoid": "Ciclesonide",
+            "branded_names": [""],
+            "withOtherTreatementVal": 320,
+            "withoutOtherGCTreatementVal": 480,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 5,
+            "glucocorticoid": "Fluticasone-propionate",
+            "branded_names": [""],
+            "withOtherTreatementVal": 400,
+            "withoutOtherGCTreatementVal": 500,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 6,
+            "glucocorticoid": "Fluticasone-furoate",
+            "branded_names": ["Trelegy®","Revlar®"],
+            "withOtherTreatementVal": 100,
+            "withoutOtherGCTreatementVal": 200,
+            "measurementUnit" : "micrograms"
+        },
+        {
+            "id" : 7,
+            "glucocorticoid": "Mometasone-furoate",
+            "branded_names": [""],
+            "withOtherTreatementVal": 400,
+            "withoutOtherGCTreatementVal": 800,
+            "measurementUnit" : "micrograms"
+        }
     ]
 }

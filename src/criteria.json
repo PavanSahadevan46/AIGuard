@@ -27,6 +27,7 @@
         },
         {
             "id": 5,
+            "routeCheck" : "Is the patient using any inhalers of any kind?",
             "question": "Are the inhalers being used with any other form of of glucocortocid treatment?"
         },
         {

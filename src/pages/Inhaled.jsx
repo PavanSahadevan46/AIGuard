@@ -12,6 +12,7 @@ function Inhaled() {
   const routeCheck = questionData.routeCheck;
   const inhaledData = criteria.inhaledRoute;
   const [step, setStep] = useState("routeCheck");
+  const { markRouteDone } = useRouteCompletion();
 
   const {
     register,
@@ -23,20 +24,67 @@ function Inhaled() {
 
   const nav = useNavigate();
 
+  const calculateWithOtherTreatment = (formdata) => {
+    const results = Object.values(formdata.inhaled);
+    const withOtherTreatmentVal = inhaledData.map(
+      (item) => item.withOtherTreatmentVal
+    );
+
+    const withTotal = results.reduce((acc, value, i) => {
+      return acc + value / withOtherTreatmentVal[i];
+    }, 0);
+
+    console.log(withTotal);
+
+    return withTotal;
+  };
+  const calculateWithOutOtherTreatment = (formdata) => {
+    const results = Object.values(formdata.inhaled);
+    const withOutOtherTreatmentVal = inhaledData.map(
+      (item) => item.withoutOtherTreatmentVal
+    );
+
+    const withoutTotal = results.reduce((acc, value, i) => {
+      return acc + value / withOutOtherTreatmentVal[i];
+    }, 0);
+    console.log(withoutTotal);
+    return withoutTotal;
+  };
+
   const onSubmit = (formdata) => {
+    console.log(formdata);
+    let total;
     if (step === "usingInhalersWithOtherGC") {
-      console.log("with other GC", formdata);
-      
+      console.log("with other GC");
+      total = calculateWithOtherTreatment(formdata);
+      if (total >= 1) {
+        console.log("Over 1 " + "total: " +  total);
+        nav("/sec");
+      } else {
+        console.log("Below 1 " + "total: "+ total);
+        nav("/routes");
+        markRouteDone("Inhaled");
+      }
     } else if (step === "usingInhalersWithoutOtherGC") {
-      console.log("without other GC", formdata);
-      
+      console.log("without other GC");
+      total = calculateWithOutOtherTreatment(formdata);
+      if (total >= 1) {
+        console.log("Over 1 "+ "total: "+ + total);
+        nav("/sec");
+      } else {
+        console.log("Below 1 " + "total: "+ total);
+        nav("/routes");
+        markRouteDone("Inhaled");
+      }
     }
   };
 
   const formContent = (
     <>
       <div className="text-center">
-        <h1 className="text-xl font-semibold mb-4 text-center">Please enter the daily dose below</h1>
+        <h1 className="text-xl font-semibold mb-4 text-center">
+          Please enter the daily dose below
+        </h1>
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -44,17 +92,19 @@ function Inhaled() {
       >
         <div className="space-y-4">
           {inhaledData.map((inh) => (
-            <div
-              key={inh.id}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center"
-            >
-              <label className="font-medium text-gray-700 sm:col-span-1">
-                {inh.glucocorticoid}
-              </label>
-              <label className="font-medium text-gray-700 sm:col-span-1">
-                {inh.branded_names}
-              </label>
-              <div className="sm:col-span-2">
+            <div key={inh.id} className="grid grid-cols-1 gap-2">
+              <div className="mb-2">
+                <label className="font-medium text-gray-700 block">
+                  {inh.glucocorticoid}
+                </label>
+                {inh.branded_names &&
+                  inh.branded_names.toString().trim() !== "" && (
+                    <span className="text-sm text-gray-600 block font-bold">
+                      Common brand names: {inh.branded_names.join(", ")}
+                    </span>
+                  )}
+              </div>
+              <div>
                 <input
                   type="number"
                   step="0.01"
@@ -106,7 +156,7 @@ function Inhaled() {
             />
             <Button
               btnText="No"
-              onClick={() => setStep("UsingInhalersWithoutOtherGC")}
+              onClick={() => setStep("usingInhalersWithoutOtherGC")}
             />
           </div>
         </div>
@@ -130,10 +180,3 @@ function Inhaled() {
 }
 
 export default Inhaled;
-// <ul className="list-disc list-inside space-y-2 mb-6 ">
-//   {inhaledData.map((inhaled, index) => (
-//     <li key={index} className="text-gray-700">
-//       {inhaled.glucocorticoid}
-//     </li>
-//   ))}
-// </ul>

@@ -153,56 +153,56 @@
             "id" : 1,
             "glucocorticoid": "Beclometasone",
             "branded_names": ["Non-Propietary","Clenil®","Easihaler®","Soprobec®"],
-            "withOtherTreatementVal": 800,
-            "withoutOtherTreatementVal": 1000,
+            "withOtherTreatmentVal": 800,
+            "withoutOtherTreatmentVal": 1000,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 2,
             "glucocorticoid": "Beclometasone-ExtraFine",
             "branded_names": ["Qvar®","Kelhale®","Fostair®"],
-            "withOtherTreatementVal": 400,
-            "withoutOtherGCTreatementVal": 500,
+            "withOtherTreatmentVal": 400,
+            "withoutOtherTreatmentVal": 500,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 3,
             "glucocorticoid": "Budesonide",
             "branded_names": [""],
-            "withOtherTreatementVal": 800,
-            "withoutOtherTreatementVal": 1000,
+            "withOtherTreatmentVal": 800,
+            "withoutOtherTreatmentVal": 1000,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 4,
             "glucocorticoid": "Ciclesonide",
             "branded_names": [""],
-            "withOtherTreatementVal": 320,
-            "withoutOtherGCTreatementVal": 480,
+            "withOtherTreatmentVal": 320,
+            "withoutOtherTreatmentVal": 480,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 5,
             "glucocorticoid": "Fluticasone-propionate",
             "branded_names": [""],
-            "withOtherTreatementVal": 400,
-            "withoutOtherGCTreatementVal": 500,
+            "withOtherTreatmentVal": 400,
+            "withoutOtherTreatmentVal": 500,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 6,
             "glucocorticoid": "Fluticasone-furoate",
             "branded_names": ["Trelegy®","Revlar®"],
-            "withOtherTreatementVal": 100,
-            "withoutOtherGCTreatementVal": 200,
+            "withOtherTreatmentVal": 100,
+            "withoutOtherTreatmentVal": 200,
             "measurementUnit" : "micrograms"
         },
         {
             "id" : 7,
             "glucocorticoid": "Mometasone-furoate",
             "branded_names": [""],
-            "withOtherTreatementVal": 400,
-            "withoutOtherGCTreatementVal": 800,
+            "withOtherTreatmentVal": 400,
+            "withoutOtherTreatmentVal": 800,
             "measurementUnit" : "micrograms"
         }
     ]

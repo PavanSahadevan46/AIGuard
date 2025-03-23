@@ -152,7 +152,7 @@
         {
             "id" : 1,
             "glucocorticoid": "Beclometasone",
-            "branded_names": ["Non-Propietary","Clenil®","Easihaler®","Soprobec®"],
+            "branded_names": ["Clenil®","Easihaler®","Soprobec®"],
             "withOtherTreatmentVal": 800,
             "withoutOtherTreatmentVal": 1000,
             "measurementUnit" : "micrograms"
@@ -160,7 +160,7 @@
         {
             "id" : 2,
             "glucocorticoid": "Beclometasone-ExtraFine",
-            "branded_names": ["Qvar®","Kelhale®","Fostair®"],
+            "branded_names": ["Qvar®","Kelhale®", "Fostair®", "Luforbec®", "Trimbow®"],
             "withOtherTreatmentVal": 400,
             "withoutOtherTreatmentVal": 500,
             "measurementUnit" : "micrograms"
@@ -168,7 +168,7 @@
         {
             "id" : 3,
             "glucocorticoid": "Budesonide",
-            "branded_names": [""],
+            "branded_names": ["Pulmicort®", "Budelin®", "Symbicort®", "Fobumix®", "Spiromax®", "WockAir®", "Trixeo®"],
             "withOtherTreatmentVal": 800,
             "withoutOtherTreatmentVal": 1000,
             "measurementUnit" : "micrograms"
@@ -176,7 +176,7 @@
         {
             "id" : 4,
             "glucocorticoid": "Ciclesonide",
-            "branded_names": [""],
+            "branded_names": ["Alvesco®"],
             "withOtherTreatmentVal": 320,
             "withoutOtherTreatmentVal": 480,
             "measurementUnit" : "micrograms"
@@ -184,7 +184,8 @@
         {
             "id" : 5,
             "glucocorticoid": "Fluticasone-propionate",
-            "branded_names": [""],
+            "branded_names": ["Flixotide®", "Flutiform®", "Avenor®", "Combisal®", "Seretide®", "AirFluSal®", 
+            "Afloflute®", "Avenor®", "Sereflo®", "Sirdupla®", "Campona®", "Fixkoh®", "Fusacomb®", "Stalpex®"],
             "withOtherTreatmentVal": 400,
             "withoutOtherTreatmentVal": 500,
             "measurementUnit" : "micrograms"
@@ -200,7 +201,7 @@
         {
             "id" : 7,
             "glucocorticoid": "Mometasone-furoate",
-            "branded_names": [""],
+            "branded_names": ["Atectura®", "Asmanex®", "Enerzair®", "Ryaltris®"],
             "withOtherTreatmentVal": 400,
             "withoutOtherTreatmentVal": 800,
             "measurementUnit" : "micrograms"

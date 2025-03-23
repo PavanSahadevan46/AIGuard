@@ -16,7 +16,7 @@ function RouteContainer() {
         return (
           <Link
             key={index}
-            className="block mx-auto px-2 py-3 font-bold text-center mb-3 align-middle border-1 rounded"
+            className="block mx-auto px-2 py-3 font-bold text-center mb-3 align-middle border-2 border-stone-800 rounded"
             to={`${route.toLowerCase()}`}
           >
             {route}

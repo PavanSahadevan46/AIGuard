@@ -9,12 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
-
+import { ChevronDown, ChevronLeft, Ghost } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/footer";
 import criteria from "../criteria.json";
-import Button from "../components/Button";
+import { Button } from "@/components/ui/button";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
 
@@ -34,6 +33,8 @@ function Inhaled() {
 
   const nav = useNavigate();
 
+  const { dailyDosageVal } = useOralDosageVal();
+
   const calculateWithOtherTreatment = (formdata) => {
     const results = Object.values(formdata.inhaled);
     const withOtherTreatmentVal = inhaledData.map(
@@ -41,10 +42,11 @@ function Inhaled() {
     );
 
     const withTotal = results.reduce((acc, value, i) => {
-      return acc + value / withOtherTreatmentVal[i];
+      return acc + value / withOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
 
     console.log(withTotal);
+    console.log("value from context: " + dailyDosageVal);
 
     return withTotal;
   };
@@ -56,7 +58,7 @@ function Inhaled() {
     );
 
     const withoutTotal = results.reduce((acc, value, i) => {
-      return acc + value / withOutOtherTreatmentVal[i];
+      return acc + value / withOutOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
     console.log(withoutTotal);
     return withoutTotal;
@@ -69,10 +71,10 @@ function Inhaled() {
       console.log("with other GC");
       total = calculateWithOtherTreatment(formdata);
       if (total >= 1) {
-        console.log("Over 1 " + "total: " + total);
+        console.log("Over 1 " + "total dosage: " + total);
         nav("/sec");
       } else {
-        console.log("Below 1 " + "total: " + total);
+        console.log("Below 1 " + "total dosage: " + total);
         nav("/routes");
         markRouteDone("Inhaled");
       }
@@ -80,30 +82,36 @@ function Inhaled() {
       console.log("without other GC");
       total = calculateWithOutOtherTreatment(formdata);
       if (total >= 1) {
-        console.log("Over 1 " + "total: " + +total);
+        console.log("Over 1 " + "total dosage: " + +total);
         nav("/sec");
       } else {
-        console.log("Below 1 " + "total: " + total);
+        console.log("Below 1 " + "total dosage: " + total);
         nav("/routes");
         markRouteDone("Inhaled");
       }
     }
   };
 
+  let content;
+  let questionTitle;
+
   const formContent = (
     <>
-      {/* TODO add button functionality look at bookmarks for medium site if need be
-      Additionally consider implementing breadcrumb trail that is an UL and 
-      uses the step state to add to the list
-    */}
-      <div className="w-5 h-5">
-        <Button btnText="Go Back"
-          onClick= {()=>
-            nav(-1)
-          }
-        />
+      <div className="flex flex-auto items-center">
+        <Button
+          variant="Ghost"
+          onClick={() => {
+            setStep("otherGCCheck");
+          }}
+        >
+          <ChevronLeft className="" />
+          Go Back
+        </Button>
       </div>
-      <div className="mx-auto max-w-4xl px-4 float-left">
+      <h1 className="text-xl font-semibold mb-4 text-center">
+        Please enter the daily dose below
+      </h1>
+      <div className="mx-auto max-w-4xl px-4 ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-5 w-full"
@@ -149,11 +157,13 @@ function Inhaled() {
                   <input
                     type="number"
                     step="0.01"
+                    defaultValue=""
                     placeholder={"Total daily dose: " + inh.measurementUnit}
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                     {...register(`inhaled.${inh.id}`, {
-                      valueAsNumber: true,
-                      required: true,
+                      setValueAs: (value) =>{
+                      return value === "" ? 0 : Number(value);
+                    },
                     })}
                   />
                 </div>
@@ -162,45 +172,89 @@ function Inhaled() {
           </div>
 
           <div className="pt-6 text-center">
-            <Button type="submit" btnText="Submit" />
+            <Button className="btn-cta" type="submit">
+              Submit
+            </Button>
           </div>
         </form>
       </div>
     </>
   );
 
-  let content;
-  let questionTitle;
-
   switch (step) {
     case "routeCheck":
       questionTitle = questionData.routeCheck;
       content = (
-        <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
-          <Button btnText="Yes" onClick={() => setStep("otherGCCheck")} />
-          <Button btnText="No" onClick={() => nav("/routes")} />
-        </div>
+        <>
+          <div className="flex flex-auto items-center">
+            <Button
+              variant="Ghost"
+              onClick={() => {
+                nav("/routes");
+              }}
+            >
+              <ChevronLeft className="w-5 h-5 mr-2" />
+              Go Back
+            </Button>
+          </div>
+          <h1 className="text-xl font-semibold mb-4 text-center">
+            {questionTitle}
+          </h1>
+          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => setStep("otherGCCheck")}
+            >
+              Yes
+            </Button>
+
+            <Button className="btn-secondary" onClick={() => nav("/routes")}>
+              No
+            </Button>
+          </div>
+        </>
       );
       break;
     case "otherGCCheck":
       questionTitle =
-        "Are the inhalers being used with any other form of glucocortocid treatment?";
+        "Are the inhalers being used with any other form of glucocorticoid treatment?";
+
       content = (
-        <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
-          <Button
-            btnText="Yes"
-            onClick={() => setStep("usingInhalersWithOtherGC")}
-          />
-          <Button
-            btnText="No"
-            onClick={() => setStep("usingInhalersWithoutOtherGC")}
-          />
-        </div>
+        <>
+          <div className="flex flex-auto items-center">
+            <Button
+              variant="Ghost"
+              onClick={() => {
+                setStep("routeCheck");
+              }}
+            >
+              <ChevronLeft className="w-5 h-5 mr-2" />
+              Go Back
+            </Button>
+          </div>
+          <h1 className="text-xl font-semibold mb-4 text-center">
+            {questionTitle}
+          </h1>
+
+          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => setStep("usingInhalersWithOtherGC")}
+            >
+              Yes
+            </Button>
+            <Button
+              className="btn-secondary"
+              onClick={() => setStep("usingInhalersWithoutOtherGC")}
+            >
+              No
+            </Button>
+          </div>
+        </>
       );
       break;
     case "usingInhalersWithOtherGC":
     case "usingInhalersWithoutOtherGC":
-      questionTitle = "Please enter the daily dose below";
       content = formContent;
       break;
     default:
@@ -209,14 +263,9 @@ function Inhaled() {
   }
 
   return (
-    <div className="flex flex-col bg-white">
+    <div className="grid grid-cols-1 bg-white">
       <Header />
-      <div className="flex-1 w-full max-w-3xl mx-auto px-4 py-6">
-        <h1 className="text-xl font-semibold mb-4 text-center">
-          {questionTitle}
-        </h1>
-        {content}
-      </div>
+      <div className="flex-1 w-full max-w-3xl mx-auto px-4 py-6">{content}</div>
       <Footer />
     </div>
   );

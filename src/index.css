@@ -162,6 +162,52 @@ input::-webkit-inner-spin-button {
 
   @theme{
     --color-sapphire: #005eb8;
+    --color-emerald: #007f3b;
   }
 
+}
+.btn-primary{
+  @apply
+  bg-neutral-200
+  hover:bg-gray-100
+  text-gray-700
+  border
+  rounded-md 
+  px-23 
+  py-4
+  focus:outline-none 
+  focus:ring-2 
+  focus:ring-offset-2 
+  focus:ring-blue-500;
+}
+
+.btn-secondary{
+  @apply
+  bg-neutral-200
+  border
+  border-gray-300
+  hover:bg-gray-100
+  text-gray-700
+  rounded-md
+  px-23
+  py-4
+  focus:outline-none
+  focus:ring-2
+  focus:ring-offset-2
+  focus:ring-blue-500;
+}
+
+.btn-cta{
+  @apply
+  bg-emerald-600 
+  hover:bg-emerald-700 
+  text-white 
+  border
+  rounded-md 
+  px-23 
+  py-4
+  focus:outline-none 
+  focus:ring-2 
+  focus:ring-offset-2 
+  focus:ring-emerald-500;
 }

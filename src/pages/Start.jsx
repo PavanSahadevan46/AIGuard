@@ -1,6 +1,6 @@
 import Button from "../components/Button.jsx";
-import Header from "../components/Header.jsx";
-import Footer from "../components/footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Card from "../components/Card.jsx";
 import tempImg from "../assets/temp1.png";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";

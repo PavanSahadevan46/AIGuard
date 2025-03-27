@@ -1,6 +1,6 @@
 import { ChevronLeft } from "lucide-react";
 import Header from "../components/Header";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";

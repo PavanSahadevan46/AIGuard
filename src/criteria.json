@@ -249,7 +249,7 @@
       "concentration": "0.05% and higher",
       "potency": "Potent",
       "names": ["Dalonev", "Diprosone", "Dovobet", "Enstilar"],
-      "combinations": [
+      "including": [
         "clotrimazole (Lotriderm)",
         "salicylic acid (Diprosalic)"
       ]
@@ -266,7 +266,7 @@
         "Betnovate",
         "Bettamousse"
       ],
-      "combinations": [
+      "including": [
         "clioquinol",
         "fusidic acid (Fucibet, Xemacort)",
         "neomycin"
@@ -278,7 +278,7 @@
       "concentration": "0.05% and higher",
       "potency": "Very potent",
       "names": ["Clarelux", "ClobaDerm", "Dermovate", "Etrivex"],
-      "combinations": ["neomycin", "nystatin"]
+      "including": ["neomycin", "nystatin"]
     },
     {
       "id": 5,
@@ -307,7 +307,7 @@
       "concentration": "0.025%",
       "potency": "Potent",
       "names": ["Synalar"],
-      "combinations": ["clioquinol (Synalar C)"]
+      "including": ["clioquinol (Synalar C)"]
     },
     {
       "id": 9,

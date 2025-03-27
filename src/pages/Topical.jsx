@@ -1,6 +1,6 @@
 import { ChevronLeft } from "lucide-react";
 import Header from "../components/Header";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +48,7 @@ function Topical() {
               <TableHead>Concentration</TableHead>
               <TableHead>Potency</TableHead>
               <TableHead>Names</TableHead>
-              <TableHead>Combinations</TableHead>
+              <TableHead>Including</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -61,7 +61,7 @@ function Topical() {
                   {route.names ? route.names.join(", ") : "N/A"}
                 </TableCell>
                 <TableCell>
-                  {route.combinations ? route.combinations.join(", ") : "N/A"}
+                  {route.including ? route.including.join(", ") : "N/A"}
                 </TableCell>
               </TableRow>
             ))}
@@ -75,7 +75,7 @@ function Topical() {
     case "initialQuestion":
       content = (
         <>
-          <div className="flex flex-auto items-center">
+          <div className="flex flex-auto">
             <Button
               variant="Ghost"
               onClick={() => {
@@ -86,11 +86,11 @@ function Topical() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          {/* {potencyInfo} */} {/* need to see if needed at all */}
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+          {potencyInfo}  {/* need to see if needed at all */}
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button className="btn-primary" onClick={() => nav("/sec")}>
               Yes
             </Button>
@@ -121,10 +121,10 @@ function Topical() {
             </Button>
           </div>
 
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button className="btn-primary" onClick={() => nav("/sec")}>
               Yes
             </Button>

@@ -40,10 +40,10 @@ function SteroidRoutes() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="mt-4 flex flex-col sm:flex-row justify-center gap-8 w-2xl p-6 mx-auto">
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
               onClick={() => {
@@ -82,7 +82,7 @@ function SteroidRoutes() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
           <RouteContainer />

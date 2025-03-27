@@ -108,24 +108,24 @@ function Inhaled() {
           Go Back
         </Button>
       </div>
-      <h1 className="text-xl font-semibold mb-4 text-center">
+      <h1 className="text-2xl font-semibold mb-4 text-left">
         Please enter the daily dose below
       </h1>
       <div className="mx-auto max-w-4xl px-4 ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-5 w-full"
+          className="max-w-md mx-auto p-4 bg-white rounded-md float-left mt-5 w-full "
         >
           <div className="space-y-4">
             {inhaledData.map((inh) => (
-              <div key={inh.id} className="grid grid-cols-1 gap-3">
+              <div key={inh.id} className="grid grid-cols-1 gap-3 ">
                 <fieldset className="mb-2">
-                  <label className="font-medium text-gray-700 block">
+                  <label className="font-medium text-left rounded text-gray-800 text-xl border-gray-600 border-b-1">
                     {inh.glucocorticoid}
                   </label>
                 </fieldset>
                 {inh.branded_names && inh.branded_names.length > 0 ? (
-                  <div className="text-sm text-gray-600 font-bold">
+                  <div className="text-base text-gray-600 font-bold">
                     <span>Common brand names: </span>
                     <span>{inh.branded_names.slice(0, 3).join(", ")}</span>
                     {inh.branded_names.length > 3 && (
@@ -161,9 +161,9 @@ function Inhaled() {
                     placeholder={"Total daily dose: " + inh.measurementUnit}
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                     {...register(`inhaled.${inh.id}`, {
-                      setValueAs: (value) =>{
-                      return value === "" ? 0 : Number(value);
-                    },
+                      setValueAs: (value) => {
+                        return value === "" ? 0 : Number(value);
+                      },
                     })}
                   />
                 </div>
@@ -197,10 +197,10 @@ function Inhaled() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
               onClick={() => setStep("otherGCCheck")}
@@ -236,16 +236,22 @@ function Inhaled() {
             {questionTitle}
           </h1>
 
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
-              onClick={() => setStep("usingInhalersWithOtherGC")}
+              onClick={() => {
+                reset();
+                setStep("usingInhalersWithOtherGC");
+              }}
             >
               Yes
             </Button>
             <Button
               className="btn-secondary"
-              onClick={() => setStep("usingInhalersWithoutOtherGC")}
+              onClick={() => {
+                reset();
+                setStep("usingInhalersWithoutOtherGC");
+              }}
             >
               No
             </Button>

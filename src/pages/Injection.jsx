@@ -60,28 +60,28 @@ function Injection() {
           Go Back
         </Button>
       </div>
-      <h1 className="text-xl font-semibold mb-4 text-center">
+      <h1 className="text-2xl font-semibold mb-4 text-left">
         Please select all that apply
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mx-auto p-4 bg-white rounded-md shadow mt-4"
+        className="mx-auto p-4 bg-white rounded-md  mt-4"
       >
         <div className="space-y-6">
           {injData.map((inj) => (
             <div key={inj.id} className="pb-4 border-b border-gray-200">
               <div className="mb-3">
-                <h3 className="font-medium text-center rounded text-gray-800 text-lg">
+                <h3 className="font-medium text-left rounded text-gray-800 text-xl">
                   {inj.glucocorticoid}
                 </h3>
               </div>
               <div className="space-y-5">
-                <div className="flex items-center gap-x-8 space-y-1">
+                <div className="flex items-center gap-x-8 space-y-2">
                   <input
                     type="checkbox"
                     {...register(`inj_${inj.id}_question1`)}
                   />
-                  <label className="font-medium text-gray-700">
+                  <label className="font-medium p-0.5 text-base text-gray-700">
                     {inj.question1}
                   </label>
                 </div>
@@ -90,7 +90,7 @@ function Injection() {
                     type="checkbox"
                     {...register(`inj_${inj.id}_question2`)}
                   />
-                  <label className="font-medium text-gray-700">
+                  <label className="font-medium p-0.5 text-base text-gray-700">
                     {inj.question2}
                   </label>
                 </div>
@@ -123,10 +123,10 @@ function Injection() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
               onClick={() => {

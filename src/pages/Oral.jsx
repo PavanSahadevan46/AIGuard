@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
 
+import React from "react";
+
 function Oral() {
   const nav = useNavigate();
   const questionData = criteria.Questions.find((q) => q.id === 3);
@@ -68,41 +70,40 @@ function Oral() {
           Go Back
         </Button>
       </div>
-      <h1 className="text-xl font-semibold mb-4 text-center">
+      <h1 className="text-2xl font-semibold mb-4 text-left">
         Continuous: Please enter the daily dosage below
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-md mx-auto p-4 bg-white rounded-md shadow mt-4 w-full"
+        className="max-w-xl mx-auto p-6 float-left"
       >
-        <div className="space-y-4">
-          {oralData.map((oral) => (
-            <div
-              key={oral.id}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center"
-            >
-              <label className="font-medium text-gray-700 sm:col-span-1">
-                {oral.glucocorticoid}
-              </label>
-              <div className="sm:col-span-2">
-                <input
-                  type="number"
-                  step="0.01"
-                  placeholder={"Total daily dose: " + oral.measurementUnit}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                  {...register(`continuous.${oral.id}`, {
-                    setValueAs: (value) => {
-                      return value === "" ? 0 : Number(value);
-                    },
-                  })}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
+        {oralData.map((oral) => (
+          <div
+            key={oral.id}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center border-b pt-2 pb-2"
+          >
+            <label className="text-gray-800 text-xl tracking-wide">
+              {oral.glucocorticoid}
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              placeholder={`Total daily dose: ${oral.measurementUnit}`}
+              className="w-full px-5 py-3 border-2 border-gray-200 rounded-lg 
+                   focus:outline-none focus:ring-3 focus:ring-blue-400 
+                   focus:border-transparent transition-all duration-300 
+                   hover:border-blue-300 text-gray-700 placeholder-gray-500"
+              {...register(`continuous.${oral.id}`, {
+                setValueAs: (value) => (value === "" ? 0 : Number(value)),
+              })}
+            />
+          </div>
+        ))}
         <div className="pt-6 text-center">
-          <Button className="btn-cta" type="submit">
+          <Button
+            className="btn-cta px-8 py-3 text-xl transition-all rounded-none duration-300 mt-4"
+            type="submit"
+          >
             Submit
           </Button>
         </div>
@@ -126,29 +127,27 @@ function Oral() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md mt-4 w-full">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="btn-primary"
-                onClick={() => {
-                  setStep("intermittentCheck");
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => {
-                  reset();
-                  setStep("continuousDosage");
-                }}
-              >
-                No
-              </Button>
-            </div>
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                setStep("intermittentCheck");
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              className="btn-secondary"
+              onClick={() => {
+                reset();
+                setStep("continuousDosage");
+              }}
+            >
+              No
+            </Button>
           </div>
         </>
       );
@@ -170,38 +169,36 @@ function Oral() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md border mt-4 w-full">
-            <ul className="list-disc pl-6 space-y-2 mb-6">
+          <div className="mx-auto p-4 bg-white w-full">
+            <ul className="list-disc list-inside space-y-2 mb-6">
               {oralData.map((oral, index) => (
-                <li key={index} className="text-gray-700">
+                <li key={index} className="text-gray-800 p-0.5 text-xl">
                   {oral.glucocorticoid} {oral.intermittentDosage}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md mt-4 w-full">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="btn-primary"
-                onClick={() => {
-                  console.log("needs sec from intermittent");
-                  nav("/sec");
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => {
-                  setStep("dexamethasoneCheck");
-                }}
-              >
-                No
-              </Button>
-            </div>
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                console.log("needs sec from intermittent");
+                nav("/sec");
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              className="btn-secondary"
+              onClick={() => {
+                setStep("dexamethasoneCheck");
+              }}
+            >
+              No
+            </Button>
           </div>
         </>
       );
@@ -223,38 +220,36 @@ function Oral() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md border mt-4 w-full">
-            <ul className="list-disc pl-6 space-y-2 mb-6">
+          <div className="mx-auto p-4 bg-white w-full">
+            <ul className="list-disc list-inside space-y-2 mb-6">
               {dexOptions.subOptions.map((oral, index) => (
-                <li key={index} className="text-gray-800">
+                <li key={index} className="text-gray-800 p-0.5 text-xl">
                   {oral}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md mt-4 w-full">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="btn-primary"
-                onClick={() => {
-                  nav("/sec");
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => {
-                  setStep("continuousCheck");
-                  console.log(dailyDosageVal);
-                }}
-              >
-                No
-              </Button>
-            </div>
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                nav("/sec");
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              className="btn-secondary"
+              onClick={() => {
+                setStep("continuousCheck");
+                console.log(dailyDosageVal);
+              }}
+            >
+              No
+            </Button>
           </div>
         </>
       );
@@ -276,29 +271,27 @@ function Oral() {
               Go Back
             </Button>
           </div>
-          <h1 className="text-xl font-semibold mb-4 p-4 text-wrap">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          <div className="max-w-md mx-auto p-4 bg-white rounded-md mt-4 w-full">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="btn-primary"
-                onClick={() => {
-                  reset();
-                  setStep("continuousDosage");
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => {
-                  nav("/routes");
-                }}
-              >
-                No
-              </Button>
-            </div>
+          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                reset();
+                setStep("continuousDosage");
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              className="btn-secondary"
+              onClick={() => {
+                nav("/routes");
+              }}
+            >
+              No
+            </Button>
           </div>
         </>
       );

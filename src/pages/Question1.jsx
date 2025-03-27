@@ -22,18 +22,19 @@ function Question1() {
             Go Back
           </Button>
         </div>
-        <div className="flex flex-col min-h-auto bg-white p-4 rounded-md  items-center">
-          <h2 className="text-xl font-semibold text-center mb-4">
+        <div className="flex flex-col min-h-auto bg-white p-4 rounded-md">
+          <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionData.question}
-          </h2>
-          <ul className="list-disc list-inside space-y-2 mb-6 ">
+          </h1>
+          <ul className="list-disc list-inside space-y-2 mb-6">
             {questionData.options.map((option, index) => (
-              <li key={index} className="text-gray-700">
+              <li key={index} className="text-gray-800 p-0.5 text-xl">
                 {option}
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex flex-col sm:flex-row gap-4">
+        </div>
+        <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button className="btn-primary" onClick={() => nav("/sec")}>
               Yes
             </Button>
@@ -41,7 +42,6 @@ function Question1() {
               No
             </Button>
           </div>
-        </div>
       </>
     );
   }

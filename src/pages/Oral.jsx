@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
+import { useUserAnswers } from "@/components/UserAnswerContext";
+
 
 import React from "react";
 
@@ -18,6 +20,7 @@ function Oral() {
   const dexOptions = oralData.find((q) => q.id === 5);
   const { markRouteDone } = useRouteCompletion();
   const { dailyDosageVal, setDailyDosageVal } = useOralDosageVal();
+  const { setAnswers } = useUserAnswers();
 
   const [step, setStep] = useState("initialQuestion");
 
@@ -42,10 +45,17 @@ function Oral() {
     if (step === "continuousDosage") {
       const contTotal = calculateContinuous(formdata);
       setDailyDosageVal(contTotal);
+      setAnswers(prev => ({
+        ...prev,
+        continuousCheck: {
+          dailyDosageVal: contTotal,
+        },
+      }));
+
       console.log(dailyDosageVal);
       if (contTotal >= 1) {
         console.log(contTotal + " over 1");
-        nav("/sec");
+        nav("/end");
       } else {
         console.log(contTotal + " under 1");
         nav("/routes");
@@ -186,7 +196,15 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 console.log("needs sec from intermittent");
-                nav("/sec");
+                setAnswers(prev => ({
+                  ...prev,
+                  intermittentCheck: {
+                    question: questionTitle,
+                    answer: 'Yes',
+                  },
+                }));
+                nav("/end");
+
               }}
             >
               Yes
@@ -236,7 +254,14 @@ function Oral() {
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/sec");
+                setAnswers(prev => ({
+                  ...prev,
+                  intermittentCheck: {
+                    question: questionTitle,
+                    answer: 'Yes',
+                  },
+                }));
+                nav("/end");
               }}
             >
               Yes

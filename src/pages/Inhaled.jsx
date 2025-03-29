@@ -16,12 +16,15 @@ import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
+import { useUserAnswers } from "@/components/UserAnswerContext";
+
 
 function Inhaled() {
   const questionData = criteria.Questions.find((q) => q.id === 5);
   const inhaledData = criteria.inhaledRoute;
   const [step, setStep] = useState("routeCheck");
   const { markRouteDone } = useRouteCompletion();
+  const { setAnswers } = useUserAnswers();
 
   const {
     register,
@@ -45,7 +48,7 @@ function Inhaled() {
       return acc + value / withOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
 
-    console.log(withTotal);
+    // console.log(withTotal);
     console.log("value from context: " + dailyDosageVal);
 
     return withTotal;
@@ -60,32 +63,33 @@ function Inhaled() {
     const withoutTotal = results.reduce((acc, value, i) => {
       return acc + value / withOutOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
-    console.log(withoutTotal);
+    // console.log(withoutTotal);
     return withoutTotal;
   };
 
   const onSubmit = (formdata) => {
-    console.log(formdata);
+    // console.log(formdata);
     let total;
-    if (step === "usingInhalersWithOtherGC") {
-      console.log("with other GC");
-      total = calculateWithOtherTreatment(formdata);
+
+    if (step === "usingInhalersWithOtherGC" || step === "usingInhalersWithoutOtherGC") {
+      const hasOtherGC = step === "usingInhalersWithOtherGC";
+      total = hasOtherGC ? calculateWithOtherTreatment(formdata) : calculateWithOutOtherTreatment(formdata);
+           
+      console.log(hasOtherGC ? "with other GC" : "without other GC");
+      console.log(`${total >= 1 ? "Over" : "Below"} 1 ,` + "total dosage:" + total);
+      
+      setAnswers(prev => ({
+        ...prev,
+        inhaledCheck: {
+          formdata: formdata,
+          totalDosageVal: total,
+          hasOtherGC: hasOtherGC,
+        },
+      }));
+
       if (total >= 1) {
-        console.log("Over 1 " + "total dosage: " + total);
-        nav("/sec");
+        nav("/end");
       } else {
-        console.log("Below 1 " + "total dosage: " + total);
-        nav("/routes");
-        markRouteDone("Inhaled");
-      }
-    } else if (step === "usingInhalersWithoutOtherGC") {
-      console.log("without other GC");
-      total = calculateWithOutOtherTreatment(formdata);
-      if (total >= 1) {
-        console.log("Over 1 " + "total dosage: " + +total);
-        nav("/sec");
-      } else {
-        console.log("Below 1 " + "total dosage: " + total);
         nav("/routes");
         markRouteDone("Inhaled");
       }

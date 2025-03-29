@@ -2,11 +2,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronLeft, Ghost } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
+import { useUserAnswers } from "@/components/UserAnswerContext";
 
 function Injection() {
   const injData = criteria.injectionRoute;
@@ -14,6 +15,8 @@ function Injection() {
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("routeCheck");
+
+  const { setAnswers } = useUserAnswers();
 
   const {
     register,
@@ -25,18 +28,38 @@ function Injection() {
   function onSubmit(formdata) {
     console.log(formdata);
     let yesCount = 0;
+    let yesAnswers = [];
     injData.forEach((inj) => {
       const q1Answer = formdata[`inj_${inj.id}_question1`];
       const q2Answer = formdata[`inj_${inj.id}_question2`];
 
-      if (q1Answer || q2Answer === true) {
+      if (q1Answer) {
         yesCount++;
+        yesAnswers.push({
+          injection: inj.glucocorticoid,
+          question: inj.question1,
+        });
+      }
+
+      if (q2Answer) {
+        yesCount++;
+        yesAnswers.push({
+          injection: inj.glucocorticoid,
+          question: inj.question2,
+        });
       }
     });
 
+    setAnswers((prev) => ({
+      ...prev,
+      injectionCheck: {
+        yesAnswers: yesAnswers
+      },
+    }));
+
     if (yesCount >= 1) {
       console.log("1 or more answers have been yes and patient needs sec");
-      nav("/sec");
+      nav("/end");
     } else {
       console.log("No answers answered yes so patient does not need sec");
       nav("/routes");

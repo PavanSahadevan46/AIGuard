@@ -31,7 +31,7 @@ function EndPage() {
                 <div>
                   <p>
                     The patient's total daily dosage:
-                    {answers.continuousCheck.dailyDosageVal}  puts the patient at
+                    {answers.continuousCheck.dailyDosageVal} puts the patient at
                     risk of adrenal insufficiency.
                   </p>
                 </div>
@@ -59,7 +59,7 @@ function EndPage() {
                   </ul>
                 </div>
               )}
-              
+
               {answers.inhaledCheck && (
                 <div>
                   <p>
@@ -67,6 +67,23 @@ function EndPage() {
                     {answers.inhaledCheck.totalDosageVal} puts the patient at
                     risk of adrenal insufficiency.
                   </p>
+                </div>
+              )}
+
+              {answers.topicalCheck && (
+                <div>
+                  <p>
+                    Topical route question: {answers.topicalCheck.question}
+                  </p>
+                  <p>You answered: {answers.topicalCheck.answer}</p>
+                </div>
+              )}
+              {answers.rectalCheck && (
+                <div>
+                  <p>
+                    Rectal route question: {answers.rectalCheck.question}
+                  </p>
+                  <p>You answered: {answers.rectalCheck.answer}</p>
                 </div>
               )}
             </div>

@@ -15,6 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { useUserAnswers } from "@/components/UserAnswerContext";
+
 import {
   Table,
   TableBody,
@@ -33,6 +35,8 @@ function Topical() {
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
+
+  const { setAnswers } = useUserAnswers();
 
   let content;
   let questionTitle = firstQuestion;
@@ -89,9 +93,21 @@ function Topical() {
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          {potencyInfo}  {/* need to see if needed at all */}
+          {/* {potencyInfo}  need to see if needed at all */}
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-            <Button className="btn-primary" onClick={() => nav("/sec")}>
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                setAnswers((prev) => ({
+                  ...prev,
+                  topicalCheck: {
+                    question: questionTitle,
+                    answer: "Yes",
+                  },
+                }));
+                nav("/end");
+              }}
+            >
               Yes
             </Button>
             <Button
@@ -113,7 +129,7 @@ function Topical() {
             <Button
               variant="Ghost"
               onClick={() => {
-                nav("/routes");
+                setStep("initialQuestion");
               }}
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
@@ -125,18 +141,31 @@ function Topical() {
             {questionTitle}
           </h1>
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-            <Button className="btn-primary" onClick={() => nav("/sec")}>
+            <Button
+              className="btn-primary"
+              onClick={() => {
+                setAnswers((prev) => ({
+                  ...prev,
+                  topicalCheck: {
+                    question: questionTitle,
+                    answer: "Yes",
+                  },
+                }));
+                nav("/end");
+              }}
+            >
               Yes
             </Button>
             <Button
               className="btn-secondary"
-              onClick={() => setStep("otherCheck")}
+              onClick={() => setStep("noAdvice")}
             >
               No
             </Button>
           </div>
         </>
       );
+      break;
     case "noAdvice":
       content = (
         <>

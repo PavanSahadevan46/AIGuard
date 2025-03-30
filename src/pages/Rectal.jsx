@@ -5,11 +5,14 @@ import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
+import { useUserAnswers } from "@/components/UserAnswerContext";
 
 function Rectal() {
   const questionData = criteria.Questions.find((q) => q.id === 9);
   const { markRouteDone } = useRouteCompletion();
   const nav = useNavigate();
+  const { setAnswers } = useUserAnswers();
+
   let content;
   let questionTitle = questionData.question;
   let options = questionData.options;
@@ -27,7 +30,6 @@ function Rectal() {
         </Button>
       </div>
       <h1 className="text-2xl font-semibold mb-4 text-left">{questionTitle}</h1>
-      <p>
         <ul className="list-disc list-inside space-y-2 mb-6">
           {options.map((option, index) => (
             <li key={index} className="text-gray-800 p-0.5 text-xl">
@@ -35,9 +37,21 @@ function Rectal() {
             </li>
           ))}
         </ul>
-      </p>
+      
       <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
-        <Button className="btn-primary" onClick={() => nav("/sec")}>
+        <Button
+          className="btn-primary"
+          onClick={() => {
+            setAnswers((prev) => ({
+              ...prev,
+              rectalCheck: {
+                question: questionTitle,
+                answer: "Yes",
+              },
+            }));
+            nav("/end");
+          }}
+        >
           Yes
         </Button>
         <Button

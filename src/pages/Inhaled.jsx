@@ -24,14 +24,12 @@ function Inhaled() {
   const inhaledData = criteria.inhaledRoute;
   const [step, setStep] = useState("routeCheck");
   const { markRouteDone } = useRouteCompletion();
-  const { setAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired ,resetAnswers} = useUserAnswers();
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
-    formState: { errors },
   } = useForm();
 
   const nav = useNavigate();
@@ -51,7 +49,7 @@ function Inhaled() {
     // console.log(withTotal);
     console.log("value from context: " + dailyDosageVal);
 
-    return withTotal;
+    return Math.trunc(withTotal);
   };
 
   const calculateWithOutOtherTreatment = (formdata) => {
@@ -64,7 +62,7 @@ function Inhaled() {
       return acc + value / withOutOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
     // console.log(withoutTotal);
-    return withoutTotal;
+    return Math.trunc(withoutTotal);
   };
 
   const onSubmit = (formdata) => {
@@ -77,7 +75,7 @@ function Inhaled() {
            
       console.log(hasOtherGC ? "with other GC" : "without other GC");
       console.log(`${total >= 1 ? "Over" : "Below"} 1 ,` + "total dosage:" + total);
-      
+      resetAnswers();
       setAnswers(prev => ({
         ...prev,
         inhaledCheck: {
@@ -88,6 +86,7 @@ function Inhaled() {
       }));
 
       if (total >= 1) {
+        setIsSECRequired(true);
         nav("/end");
       } else {
         nav("/routes");

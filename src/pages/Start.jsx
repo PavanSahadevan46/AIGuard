@@ -1,9 +1,9 @@
-import Button from "../components/Button.jsx";
+import { Button } from "@/components/ui/button";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card from "../components/Card.jsx";
 import tempImg from "../assets/temp1.png";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // TODO: Refactor this so user is met with 1 button and a modal pops up asking user to accept warning terms
 function Start() {
@@ -25,11 +25,10 @@ function Start() {
           }
         >
           <div className="mt-6 flex space-x-4 justify-center" >
-            <Button btnText="Yes" onClick={() => navigate("/q1")} />
+            <Button  onClick={() => navigate("/q1")} >Yes</Button>
             <Button
-              btnText="No"
               onClick={() => alert("Please cease use of this application!")}
-            />
+            >No</Button>
           </div>
         </Card>
       </div>

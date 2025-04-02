@@ -7,12 +7,14 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import criteria from "../criteria.json";
+import { useUserAnswers } from "@/components/UserAnswerContext";
 
 function SteroidRoutes() {
   const questionData = criteria.Questions.find((q) => q.id === 2);
   const { hasVisitedRoutePage, setHasVisitedRoutePage, completedRoutes } =
     useRouteCompletion();
   const nav = useNavigate();
+  const { setIsSECRequired } = useUserAnswers();
 
   const [step, setStep] = useState("initialQuestion");
 
@@ -57,7 +59,8 @@ function SteroidRoutes() {
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/nosec");
+                setIsSECRequired(false);
+                nav("/end");
               }}
             >
               No
@@ -86,15 +89,14 @@ function SteroidRoutes() {
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-            <RouteContainer />
-            {completedRoutes.length > 0 && (
-              <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-                <Button 
-                className="btn-secondary">
-                  No further glucocorticoids
-                </Button>
-              </div>
-            )}
+          <RouteContainer />
+          {completedRoutes.length > 0 && (
+            <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+              <Button className="btn-secondary">
+                No further glucocorticoids
+              </Button>
+            </div>
+          )}
         </>
       );
       break;

@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useUserAnswers } from "@/components/UserAnswerContext";
 
 function Nasal() {
   const questionData = criteria.Questions.find((q) => q.id === 6);
@@ -21,6 +22,7 @@ function Nasal() {
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
+  const { setAnswers, setIsSECRequired } = useUserAnswers();
 
   let content;
   let questionTitle = questionData.question;
@@ -106,11 +108,18 @@ function Nasal() {
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/sec");
-                markRouteDone("Nasal");
+                setAnswers((prev) => ({
+                  ...prev,
+                  nasalCheck: {
+                    question: questionTitle,
+                    answer: "Yes",
+                  },
+                }));
+                setIsSECRequired(true);
+                nav("/end");
               }}
             >
-              SEC card
+              To end
             </Button>
           </div>
         </>

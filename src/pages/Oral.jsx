@@ -20,7 +20,7 @@ function Oral() {
   const dexOptions = oralData.find((q) => q.id === 5);
   const { markRouteDone } = useRouteCompletion();
   const { dailyDosageVal, setDailyDosageVal } = useOralDosageVal();
-  const { setAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers} = useUserAnswers();
 
   const [step, setStep] = useState("initialQuestion");
 
@@ -43,8 +43,9 @@ function Oral() {
 
   const onSubmit = (formdata) => {
     if (step === "continuousDosage") {
-      const contTotal = calculateContinuous(formdata);
+      const contTotal = Math.trunc(calculateContinuous(formdata));
       setDailyDosageVal(contTotal);
+      resetAnswers()
       setAnswers(prev => ({
         ...prev,
         continuousCheck: {
@@ -55,6 +56,7 @@ function Oral() {
       console.log(dailyDosageVal);
       if (contTotal >= 1) {
         console.log(contTotal + " over 1");
+        setIsSECRequired(true);
         nav("/end");
       } else {
         console.log(contTotal + " under 1");
@@ -196,6 +198,7 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 console.log("needs sec from intermittent");
+                resetAnswers();
                 setAnswers(prev => ({
                   ...prev,
                   intermittentCheck: {
@@ -203,6 +206,7 @@ function Oral() {
                     answer: 'Yes',
                   },
                 }));
+                setIsSECRequired(true);
                 nav("/end");
 
               }}
@@ -254,6 +258,7 @@ function Oral() {
             <Button
               className="btn-primary"
               onClick={() => {
+                resetAnswers();
                 setAnswers(prev => ({
                   ...prev,
                   intermittentCheck: {
@@ -261,6 +266,7 @@ function Oral() {
                     answer: 'Yes',
                   },
                 }));
+                setIsSECRequired(true);
                 nav("/end");
               }}
             >

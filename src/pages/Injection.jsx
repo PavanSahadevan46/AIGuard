@@ -16,7 +16,7 @@ function Injection() {
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("routeCheck");
 
-  const { setAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
   const {
     register,
@@ -49,16 +49,17 @@ function Injection() {
         });
       }
     });
-
+    resetAnswers();
     setAnswers((prev) => ({
       ...prev,
       injectionCheck: {
-        yesAnswers: yesAnswers
+        yesAnswers: yesAnswers,
       },
     }));
 
     if (yesCount >= 1) {
       console.log("1 or more answers have been yes and patient needs sec");
+      setIsSECRequired(true);
       nav("/end");
     } else {
       console.log("No answers answered yes so patient does not need sec");
@@ -86,6 +87,10 @@ function Injection() {
       <h1 className="text-2xl font-semibold mb-4 text-left">
         Please select all that apply
       </h1>
+      <h2 className="text-xl font-semibold mb-4 text-left">
+        All of the following questions relate to patient currently having
+        glucocorticoids or have done so in the past 12 months
+      </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto p-4 bg-white rounded-md  mt-4"

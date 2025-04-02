@@ -16,6 +16,7 @@ import Topical from "./pages/Topical.jsx";
 import Rectal from "./pages/Rectal.jsx";
 import Eye from "./pages/Eye.jsx";
 import EndPage from "./pages/EndPage.jsx";
+import SickDayRules from "./pages/SickDayRules.jsx";
 import { OralDosageValProvider } from "./components/OralDosageValContext.jsx";
 import { UserAnswersProvider } from "./components/UserAnswerContext.jsx";
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/routes/rectal" element={<Rectal />} />
                 <Route path="/routes/eye" element={<Eye />} />
                 <Route path="/end" element={<EndPage />} />
+                <Route path="/sickdayrules" element={<SickDayRules />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
             </BrowserRouter>

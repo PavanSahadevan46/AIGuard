@@ -11,7 +11,7 @@ function Rectal() {
   const questionData = criteria.Questions.find((q) => q.id === 9);
   const { markRouteDone } = useRouteCompletion();
   const nav = useNavigate();
-  const { setAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired,resetAnswers } = useUserAnswers();
 
   let content;
   let questionTitle = questionData.question;
@@ -42,6 +42,7 @@ function Rectal() {
         <Button
           className="btn-primary"
           onClick={() => {
+            resetAnswers();
             setAnswers((prev) => ({
               ...prev,
               rectalCheck: {
@@ -49,6 +50,7 @@ function Rectal() {
                 answer: "Yes",
               },
             }));
+            setIsSECRequired(true);
             nav("/end");
           }}
         >

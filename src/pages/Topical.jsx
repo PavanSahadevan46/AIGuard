@@ -6,14 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 
 import { useUserAnswers } from "@/components/UserAnswerContext";
 
@@ -36,7 +29,7 @@ function Topical() {
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
 
-  const { setAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired,resetAnswers } = useUserAnswers();
 
   let content;
   let questionTitle = firstQuestion;
@@ -98,6 +91,7 @@ function Topical() {
             <Button
               className="btn-primary"
               onClick={() => {
+                resetAnswers();
                 setAnswers((prev) => ({
                   ...prev,
                   topicalCheck: {
@@ -105,6 +99,7 @@ function Topical() {
                     answer: "Yes",
                   },
                 }));
+                setIsSECRequired(true);
                 nav("/end");
               }}
             >
@@ -144,6 +139,7 @@ function Topical() {
             <Button
               className="btn-primary"
               onClick={() => {
+                resetAnswers(),
                 setAnswers((prev) => ({
                   ...prev,
                   topicalCheck: {
@@ -151,6 +147,7 @@ function Topical() {
                     answer: "Yes",
                   },
                 }));
+                setIsSECRequired(true);
                 nav("/end");
               }}
             >

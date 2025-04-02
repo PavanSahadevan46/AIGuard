@@ -3,9 +3,18 @@ const UserAnswerContext = createContext();
 
 export function UserAnswersProvider({ children }) {
   const [answers, setAnswers] = useState({});
+  const [isSECRequired, setIsSECRequired] = useState(null);
+
+  const resetAnswers = () => {
+    setAnswers({});
+    setIsSECRequired(null);
+  };
+
 
   return (
-    <UserAnswerContext.Provider value={{ answers, setAnswers }}>
+    <UserAnswerContext.Provider
+      value={{ answers, setAnswers, isSECRequired, setIsSECRequired,resetAnswers }}
+    >
       {children}
     </UserAnswerContext.Provider>
   );

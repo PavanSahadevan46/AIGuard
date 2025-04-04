@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUserAnswers } from "@/components/UserAnswerContext";
+import BackButton from "@/components/BackButton";
 function Question1() {
   const nav = useNavigate();
   var questionData = criteria.Questions.find((q) => q.id === 1);
@@ -16,15 +17,11 @@ function Question1() {
     content = (
       <>
         <div className="flex flex-auto items-center">
-          <Button
-            variant="Ghost"
+        <BackButton
             onClick={() => {
               nav("/");
             }}
-          >
-            <ChevronLeft className="w-5 h-5 mr-2" />
-            Go Back
-          </Button>
+          />
         </div>
         <div className="flex flex-col min-h-auto bg-white p-4 rounded-md">
           <h1 className="text-2xl font-semibold mb-4 text-left">

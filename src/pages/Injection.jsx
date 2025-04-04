@@ -8,14 +8,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useUserAnswers } from "@/components/UserAnswerContext";
+import BackButton from "@/components/BackButton";
 
 function Injection() {
   const injData = criteria.injectionRoute;
   const questionData = criteria.Questions.find((q) => q.id === 4);
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
-  const [step, setStep] = useState("routeCheck");
-
   const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
   const {
@@ -71,26 +70,20 @@ function Injection() {
   let content;
   let questionTitle;
 
-  const injectionFormContent = (
+  content = (
     <>
-      <div className="flex flex-auto items-center">
-        <Button
-          variant="Ghost"
-          onClick={() => {
-            setStep("routeCheck");
-          }}
-        >
-          <ChevronLeft className="" />
-          Go Back
-        </Button>
-      </div>
+      <BackButton
+        onClick={() => {
+          nav("/routes");
+        }}
+      />
       <h1 className="text-2xl font-semibold mb-4 text-left">
         Please select all that apply
       </h1>
-      <h2 className="text-xl font-semibold mb-4 text-left">
-        All of the following questions relate to patient currently having
-        glucocorticoids or have done so in the past 12 months
-      </h2>
+      <h3 className="text-lg font-semibold border-l-sapphire border-6 border-transparent mb-4 pl-2 text-left">
+            Please note the following questions relate to the patient currently
+            having glucocorticoids or having done so in the past 12 months.
+          </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto p-4 bg-white rounded-md  mt-4"
@@ -134,57 +127,6 @@ function Injection() {
       </form>
     </>
   );
-
-  switch (step) {
-    case "routeCheck":
-      questionTitle = questionData.question;
-      content = (
-        <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              <ChevronLeft className="" />
-              Go Back
-            </Button>
-          </div>
-          <h1 className="text-2xl font-semibold mb-4 text-left">
-            {questionTitle}
-          </h1>
-          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-            <Button
-              className="btn-primary"
-              onClick={() => {
-                setStep("injectionQuestions");
-              }}
-            >
-              Yes
-            </Button>
-
-            <Button
-              className="btn-secondary"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              No
-            </Button>
-          </div>
-        </>
-      );
-      break;
-
-    case "injectionQuestions":
-      content = injectionFormContent;
-      break;
-
-    default:
-      content = <></>;
-      questionTitle = "";
-  }
 
   return (
     <div className="grid grid-cols-1 bg-white">

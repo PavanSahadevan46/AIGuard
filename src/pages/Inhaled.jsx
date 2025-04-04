@@ -17,20 +17,16 @@ import { Button } from "@/components/ui/button";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
 import { useUserAnswers } from "@/components/UserAnswerContext";
-
+import BackButton from "@/components/BackButton";
 
 function Inhaled() {
   const questionData = criteria.Questions.find((q) => q.id === 5);
   const inhaledData = criteria.inhaledRoute;
-  const [step, setStep] = useState("routeCheck");
+  const [step, setStep] = useState("otherGCCheck");
   const { markRouteDone } = useRouteCompletion();
-  const { setAnswers, setIsSECRequired ,resetAnswers} = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const nav = useNavigate();
 
@@ -69,14 +65,21 @@ function Inhaled() {
     // console.log(formdata);
     let total;
 
-    if (step === "usingInhalersWithOtherGC" || step === "usingInhalersWithoutOtherGC") {
+    if (
+      step === "usingInhalersWithOtherGC" ||
+      step === "usingInhalersWithoutOtherGC"
+    ) {
       const hasOtherGC = step === "usingInhalersWithOtherGC";
-      total = hasOtherGC ? calculateWithOtherTreatment(formdata) : calculateWithOutOtherTreatment(formdata);
-           
+      total = hasOtherGC
+        ? calculateWithOtherTreatment(formdata)
+        : calculateWithOutOtherTreatment(formdata);
+
       console.log(hasOtherGC ? "with other GC" : "without other GC");
-      console.log(`${total >= 1 ? "Over" : "Below"} 1 ,` + "total dosage:" + total);
+      console.log(
+        `${total >= 1 ? "Over" : "Below"} 1 ,` + "total dosage:" + total
+      );
       resetAnswers();
-      setAnswers(prev => ({
+      setAnswers((prev) => ({
         ...prev,
         inhaledCheck: {
           formdata: formdata,
@@ -100,24 +103,19 @@ function Inhaled() {
 
   const formContent = (
     <>
-      <div className="flex flex-auto items-center">
-        <Button
-          variant="Ghost"
-          onClick={() => {
-            setStep("otherGCCheck");
-          }}
-        >
-          <ChevronLeft className="" />
-          Go Back
-        </Button>
-      </div>
-      <h1 className="text-2xl font-semibold mb-4 text-left">
-        Please enter the daily dose below
-      </h1>
-      <div className="mx-auto max-w-4xl px-4 ">
+      <BackButton
+        onClick={() => {
+          setStep("otherGCCheck");
+        }}
+      />
+
+      <div className="mx-auto max-w-4xl mt-3 px-4 ">
+        <h1 className="text-2xl font-semibold text-left">
+          Please enter the daily dose below
+        </h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto p-4 bg-white rounded-md float-left mt-5 w-full "
+          className="max-w-md mx-auto p-4 bg-white rounded-md float-left mt-5 w-full px-0.5"
         >
           <div className="space-y-4">
             {inhaledData.map((inh) => (
@@ -185,57 +183,21 @@ function Inhaled() {
   );
 
   switch (step) {
-    case "routeCheck":
-      questionTitle = questionData.routeCheck;
-      content = (
-        <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
-          <h1 className="text-2xl font-semibold mb-4 text-left">
-            {questionTitle}
-          </h1>
-          <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-            <Button
-              className="btn-primary"
-              onClick={() => setStep("otherGCCheck")}
-            >
-              Yes
-            </Button>
-
-            <Button className="btn-secondary" onClick={() => nav("/routes")}>
-              No
-            </Button>
-          </div>
-        </>
-      );
-      break;
     case "otherGCCheck":
       questionTitle =
         "Are the inhalers being used with any other form of glucocorticoid treatment?";
-
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("routeCheck");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
-          <h1 className="text-xl font-semibold mb-4 text-center">
+          <BackButton
+            onClick={() => {
+              nav("/routes");
+            }}
+          />
+          <h3 className="text-lg font-semibold border-l-sapphire border-6 border-transparent pl-2 mb-4  text-left">
+            Please note the following question relates to the patient currently
+            having glucocorticoids or has done so in the past 12 months
+          </h3>
+          <h1 className="text-xl font-semibold mb-6 text-left">
             {questionTitle}
           </h1>
 

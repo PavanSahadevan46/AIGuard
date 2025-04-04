@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 
-
 import { useUserAnswers } from "@/components/UserAnswerContext";
 
 import {
@@ -18,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import BackButton from "@/components/BackButton";
 
 function Topical() {
   const firstQuestion = criteria.Questions.find((q) => q.id === 7).question;
@@ -29,7 +29,7 @@ function Topical() {
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
 
-  const { setAnswers, setIsSECRequired,resetAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
   let content;
   let questionTitle = firstQuestion;
@@ -72,21 +72,15 @@ function Topical() {
     case "initialQuestion":
       content = (
         <>
-          <div className="flex flex-auto">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              nav("/routes");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
-          {/* {potencyInfo}  need to see if needed at all */}
+          {potencyInfo}
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
@@ -120,18 +114,11 @@ function Topical() {
       questionTitle = secondQuestion;
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("initialQuestion");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
-
+          <BackButton
+            onClick={() => {
+              setStep("initialQuestion");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -140,13 +127,13 @@ function Topical() {
               className="btn-primary"
               onClick={() => {
                 resetAnswers(),
-                setAnswers((prev) => ({
-                  ...prev,
-                  topicalCheck: {
-                    question: questionTitle,
-                    answer: "Yes",
-                  },
-                }));
+                  setAnswers((prev) => ({
+                    ...prev,
+                    topicalCheck: {
+                      question: questionTitle,
+                      answer: "Yes",
+                    },
+                  }));
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -166,17 +153,11 @@ function Topical() {
     case "noAdvice":
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("initialQuestion");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("otherCheck");
+            }}
+          />
           <section>
             <h1 className="text-2xl font-semibold mb-4 text-left">
               Please review the following:

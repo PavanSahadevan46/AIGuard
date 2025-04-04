@@ -6,19 +6,11 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { useUserAnswers } from "@/components/UserAnswerContext";
+import BackButton from "@/components/BackButton";
 
 function Nasal() {
   const questionData = criteria.Questions.find((q) => q.id === 6);
-  const nasalData = criteria.nasalRoute;
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
@@ -31,17 +23,11 @@ function Nasal() {
     case "initialQuestion":
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              nav("/routes");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -66,17 +52,12 @@ function Nasal() {
     case "yesAdvice":
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("initialQuestion");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("initialQuestion");
+            }}
+          />
+
           <section>
             <h1 className="text-2xl font-semibold mb-4 text-left">
               Please review the following :
@@ -128,17 +109,11 @@ function Nasal() {
     case "noAdvice":
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("initialQuestion");
-              }}
-            >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("initialQuestion");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             Please review the following :
           </h1>
@@ -185,20 +160,3 @@ function Nasal() {
 }
 
 export default Nasal;
-
-{
-  /* <Dialog>
-<DialogTrigger asChild>
-  <Button className="btn-primary">Yes</Button>
-</DialogTrigger>
-<DialogContent>
-  <DialogHeader>
-    <DialogTitle>Nasal glucocorticoids</DialogTitle>
-    <DialogDescription>{yesAdvice}</DialogDescription>
-  </DialogHeader>
-  <DialogFooter>
-    <Button className="btn-primary">O</Button>
-  </DialogFooter>
-</DialogContent>
-</Dialog> */
-}

@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import BackButton from "@/components/BackButton";
 import criteria from "../criteria.json";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useOralDosageVal } from "../components/OralDosageValContext";
 import { useUserAnswers } from "@/components/UserAnswerContext";
-
 
 import React from "react";
 
@@ -20,7 +19,7 @@ function Oral() {
   const dexOptions = oralData.find((q) => q.id === 5);
   const { markRouteDone } = useRouteCompletion();
   const { dailyDosageVal, setDailyDosageVal } = useOralDosageVal();
-  const { setAnswers, setIsSECRequired, resetAnswers} = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
   const [step, setStep] = useState("initialQuestion");
 
@@ -45,8 +44,8 @@ function Oral() {
     if (step === "continuousDosage") {
       const contTotal = Math.trunc(calculateContinuous(formdata));
       setDailyDosageVal(contTotal);
-      resetAnswers()
-      setAnswers(prev => ({
+      resetAnswers();
+      setAnswers((prev) => ({
         ...prev,
         continuousCheck: {
           dailyDosageVal: contTotal,
@@ -71,17 +70,11 @@ function Oral() {
 
   const continuousFormContent = (
     <>
-      <div className="flex flex-auto items-center">
-        <Button
-          variant="Ghost"
-          onClick={() => {
-            setStep("continuousCheck");
-          }}
-        >
-          <ChevronLeft className="" />
-          Go Back
-        </Button>
-      </div>
+      <BackButton
+        onClick={() => {
+          setStep("continuousCheck");
+        }}
+      />
       <h1 className="text-2xl font-semibold mb-4 text-left">
         Continuous: Please enter the daily dosage below
       </h1>
@@ -128,17 +121,11 @@ function Oral() {
       questionTitle = questionData.question;
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                nav("/routes");
-              }}
-            >
-              <ChevronLeft />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              nav("/routes");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -170,17 +157,11 @@ function Oral() {
         "Has the patient had 3 or more courses in total of any of the following for at least seven days within the past 12 months?";
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("initialQuestion");
-              }}
-            >
-              <ChevronLeft className="" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("initialQuestion");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -199,16 +180,15 @@ function Oral() {
               onClick={() => {
                 console.log("needs sec from intermittent");
                 resetAnswers();
-                setAnswers(prev => ({
+                setAnswers((prev) => ({
                   ...prev,
                   intermittentCheck: {
                     question: questionTitle,
-                    answer: 'Yes',
+                    answer: "Yes",
                   },
                 }));
                 setIsSECRequired(true);
                 nav("/end");
-
               }}
             >
               Yes
@@ -231,17 +211,11 @@ function Oral() {
         "Has the patient had (or is due to have) intermittent courses of dexamethasone for either of the following?";
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("intermittentCheck");
-              }}
-            >
-              <ChevronLeft className="" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("intermittentCheck");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -259,11 +233,11 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 resetAnswers();
-                setAnswers(prev => ({
+                setAnswers((prev) => ({
                   ...prev,
                   intermittentCheck: {
                     question: questionTitle,
-                    answer: 'Yes',
+                    answer: "Yes",
                   },
                 }));
                 setIsSECRequired(true);
@@ -291,17 +265,11 @@ function Oral() {
         "Has the patient had at least one continuous course (at least 4 weeks) of oral steroids in the past year?";
       content = (
         <>
-          <div className="flex flex-auto items-center">
-            <Button
-              variant="Ghost"
-              onClick={() => {
-                setStep("dexamethasoneCheck");
-              }}
-            >
-              <ChevronLeft className="" />
-              Go Back
-            </Button>
-          </div>
+          <BackButton
+            onClick={() => {
+              setStep("dexamethasoneCheck");
+            }}
+          />
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>

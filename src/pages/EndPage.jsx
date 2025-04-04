@@ -6,12 +6,15 @@ import secBack from "../assets/SEC_Back.png";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
+
 import OralSECEnd from "@/components/OralSECEnd";
 import InjectionSECEnd from "@/components/InjectionSECEnd";
 import InhaledSECEnd from "@/components/InhaledSECEnd";
 import NasalSECEnd from "@/components/NasalSECEnd";
 import TopicalSECEnd from "@/components/TopicalSECEnd";
 import RectalSECEnd from "@/components/RectalSECEnd";
+import BackButton from "@/components/BackButton";
 
 function EndPage() {
   const { answers, isSECRequired } = useUserAnswers();
@@ -22,24 +25,31 @@ function EndPage() {
     case true:
       content = (
         <>
-          <div>
+          <BackButton
+            onClick={() => {
+              nav(-1);
+            }}
+          />
+          <div className="mt-4">
             <h1 className="text-2xl font-semibold mb-4 text-left">
               The patient's results
             </h1>
             <h2 className="text-xl mb-4 text-left">
               This patient has been identified as being at
-              <span className="font-bold"> risk</span> of adrenal insufficiency.
+              <span className="font-bold"> risk</span> of HPA axis suppression.
             </h2>
             <h2 className="text-xl mb-4 text-left">
               A Steroid Emergency Card is
               <span className="font-bold"> highly</span> recommended for this
               patient.
             </h2>
-            <h3 className="text-xl mb-4 text-left">
+            {/* <h3 className="text-xl mb-4 text-left">
               Why this patient is at risk:
-            </h3>
+            </h3> */}
             <div>
-              {answers.question1Check && (
+              {/*Used to output data on why patient is at risk, 
+              requested to be removed but still kept to use for future */}
+              {/* {answers.question1Check && (
                 <div>
                   <p className="text-lg p-0.2 font-semibold ">
                     For the question:{" "}
@@ -54,13 +64,13 @@ function EndPage() {
                     </span>
                   </p>
                 </div>
-              )}
-              <OralSECEnd />
+              )} */}
+              {/* <OralSECEnd />
               <InjectionSECEnd />
               <InhaledSECEnd />
               <NasalSECEnd />
               <TopicalSECEnd />
-              <RectalSECEnd />
+              <RectalSECEnd /> */}
 
               <h3 className="text-xl mb-4 mt-4 text-left">
                 Please also check if{" "}
@@ -89,6 +99,11 @@ function EndPage() {
                   />
                 </div>
               </div>
+              <h3 className="text-lg mb-4 font-bold mt-3 border-l-red-500 border-6 border-transparent pl-2 ">
+                Please note again that this tool is not to be used in real world
+                applications by any means and should not be used to identify
+                real patients at risk of adrenal insufficiency.
+              </h3>
             </div>
             <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
               <Button
@@ -107,24 +122,29 @@ function EndPage() {
     case false:
       content = (
         <>
+          <BackButton
+            onClick={() => {
+              nav(-1);
+            }}
+          />
           <div>
             <h1 className="text-2xl font-semibold mb-4 text-left">
               The patient's results
             </h1>
             <h2 className="text-xl mb-4 text-left">
               This patient is
-              <span className="font-bold"> unlikely</span> at risk of adrenal
-              insufficiency.
+              <span className="font-bold"> unlikely</span> at risk of HPA axis
+              suppression.
             </h2>
             <h2 className="text-xl  mb-4 text-left">
               A Steroid Emergency Card may not be necessary for this patient.
             </h2>
-            <h2>
+            <h2 className="text-xl  mb-4 text-left">
               <span className="font-bold"> However</span> this tool is only a
               guide, please make sure to consult an appropriate healthcare
               professional before making any decisions.
             </h2>
-            <h3 className="text-lg mb-4 font-bold">
+            <h3 className="text-lg mb-4 font-bold border-l-red-500 border-6 border-transparent pl-2">
               Please note again that this tool is not to be used in real world
               applications by any means and should not be used to identify real
               patients at risk of adrenal insufficiency.

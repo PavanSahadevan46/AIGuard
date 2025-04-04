@@ -6,39 +6,34 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useUserAnswers } from "@/components/UserAnswerContext";
+import BackButton from "@/components/BackButton";
 
 function Rectal() {
   const questionData = criteria.Questions.find((q) => q.id === 9);
   const { markRouteDone } = useRouteCompletion();
   const nav = useNavigate();
-  const { setAnswers, setIsSECRequired,resetAnswers } = useUserAnswers();
+  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
 
   let content;
   let questionTitle = questionData.question;
   let options = questionData.options;
   content = (
     <>
-      <div className="flex flex-auto items-center">
-        <Button
-          variant="Ghost"
-          onClick={() => {
-            nav("/routes");
-          }}
-        >
-          <ChevronLeft className="w-5 h-5 mr-2" />
-          Go Back
-        </Button>
-      </div>
+      <BackButton
+        onClick={() => {
+          nav("/routes");
+        }}
+      />
       <h1 className="text-2xl font-semibold mb-4 text-left">{questionTitle}</h1>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          {options.map((option, index) => (
-            <li key={index} className="text-gray-800 p-0.5 text-xl">
-              {option}
-            </li>
-          ))}
-        </ul>
-      
-      <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
+      <ul className="list-disc list-inside space-y-2 mb-6">
+        {options.map((option, index) => (
+          <li key={index} className="text-gray-800 p-0.5 text-xl">
+            {option}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 flex flex-col md:flex-row float-left gap-4 max-w-md w-full mx-auto">
         <Button
           className="btn-primary"
           onClick={() => {

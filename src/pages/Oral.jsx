@@ -97,7 +97,7 @@ function Oral() {
               className="w-full px-5 py-3 border-2 border-gray-200 rounded-lg 
                    focus:outline-none focus:ring-3 focus:ring-blue-400 
                    focus:border-transparent transition-all duration-300 
-                   hover:border-blue-300 text-gray-700 placeholder-gray-500"
+                   hover:border-blue-300 text-gray-700 placeholder-gray-500 placeholder-"
               {...register(`continuous.${oral.id}`, {
                 setValueAs: (value) => (value === "" ? 0 : Number(value)),
               })}
@@ -286,6 +286,7 @@ function Oral() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                markRouteDone("Oral");
                 nav("/routes");
               }}
             >

@@ -11,15 +11,19 @@ import BackButton from "@/components/BackButton";
 
 function SteroidRoutes() {
   const questionData = criteria.Questions.find((q) => q.id === 2);
-  const { hasVisitedRoutePage, setHasVisitedRoutePage, completedRoutes } =
-    useRouteCompletion();
+  const {
+    hasVisitedRoutePage,
+    setHasVisitedRoutePage,
+    completedRoutes,
+    resetRoutes,
+  } = useRouteCompletion();
   const nav = useNavigate();
   const { setIsSECRequired } = useUserAnswers();
 
   const [step, setStep] = useState("initialQuestion");
 
   useEffect(() => {
-    if (hasVisitedRoutePage) {
+    if (hasVisitedRoutePage > 0) {
       setStep("enterRoutes");
     }
   }, [hasVisitedRoutePage]);
@@ -32,7 +36,7 @@ function SteroidRoutes() {
       questionTitle = questionData.question;
       content = (
         <>
-        <BackButton
+          <BackButton
             onClick={() => {
               nav("/q1");
             }}
@@ -77,17 +81,24 @@ function SteroidRoutes() {
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
+          {completedRoutes.length > 0 && (
+            <div className="mt-4">
+              <Button className="btn-secondary !w-40 " onClick={resetRoutes}>
+                Refresh routes
+              </Button>
+            </div>
+          )}
           <RouteContainer />
           {completedRoutes.length > 0 && (
             <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
               <Button
-                className="btn-secondary"
+                className="btn-cta"
                 onClick={() => {
                   setIsSECRequired(false);
                   nav("/end");
                 }}
               >
-                No further glucocorticoids
+                No more routes
               </Button>
             </div>
           )}

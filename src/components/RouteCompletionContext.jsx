@@ -11,13 +11,19 @@ export const RouteCompletionProvider = ({ children }) => {
     }
   };
 
+  const resetRoutes = () =>{
+    setCompletedRoutes([]);
+    setHasVisitedRoutePage(false);
+  }
+
   return (
-    <RouteCompletionContext.Provider 
+    <RouteCompletionContext.Provider  
     value={{ 
         completedRoutes, 
         markRouteDone,
         hasVisitedRoutePage,
-        setHasVisitedRoutePage
+        setHasVisitedRoutePage,
+        resetRoutes
          }}>
       {children}
     </RouteCompletionContext.Provider>

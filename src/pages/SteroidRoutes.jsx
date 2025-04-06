@@ -69,8 +69,6 @@ function SteroidRoutes() {
       break;
 
     case "enterRoutes":
-      questionTitle =
-        "Please enter the glucocorticoids taken in the order of the routes shown";
       content = (
         <>
           <BackButton
@@ -79,7 +77,7 @@ function SteroidRoutes() {
             }}
           />
           <h1 className="text-2xl font-semibold mb-4 text-left">
-            {questionTitle}
+            Please enter the glucocorticoids taken in the <span className="underline">order</span> of the routes shown
           </h1>
           {completedRoutes.length > 0 && (
             <div className="mt-4">

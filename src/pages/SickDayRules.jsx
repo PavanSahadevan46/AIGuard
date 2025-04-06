@@ -6,6 +6,7 @@ import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 // import { useUserAnswers } from "@/components/UserAnswerContext";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function SickDayRules() {
   const sickDayAdvice = criteria.SickDayAdvice.find((q) => q.id === 1);
@@ -21,6 +22,15 @@ function SickDayRules() {
         </h1>
         <div className="space-y-8">
           <section>
+            <h3 className="text-xl mb-8 mt-4 text-left border-l-sapphire border-6 border-transparent pl-2">
+              Sick day rules are available{" "}
+              <Link
+                className="text-blue-700 underline"
+                to="https://www.endocrinology.org/media/4169/ai-and-exogenous-steroids_patient-information-sheet.pdf"
+              >
+                here.
+              </Link>
+            </h3>
             <ul className="list-disc space-y-3 pl-5">
               {sickDayAdvice.options.map((option, index) => (
                 <li key={index} className="text-gray-800 text-lg">
@@ -32,10 +42,10 @@ function SickDayRules() {
         </div>
 
         <section className="mt-7">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">
-                Other oral glucocorticoids
-                <span className="text-red-500 ml-1">*</span>
-              </h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-800">
+            Other oral glucocorticoids
+            <span className="text-red-500 ml-1">*</span>
+          </h2>
           <ul className="space-y-2 list-disc list-inside">
             {SickDayGlucocorticoids.map((option) => (
               <li key={option.id} className="text-gray-800 p-0.5 text-lg">

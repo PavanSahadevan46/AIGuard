@@ -2,9 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "../components/RouteCompletionContext";
 import { useUserAnswers } from "@/components/UserAnswerContext";
@@ -12,17 +10,11 @@ import BackButton from "@/components/BackButton";
 
 function Injection() {
   const injData = criteria.injectionRoute;
-  const questionData = criteria.Questions.find((q) => q.id === 4);
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
-  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
+  const { setIsSECRequired } = useUserAnswers();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   function onSubmit(formdata) {
     console.log(formdata);
@@ -48,13 +40,6 @@ function Injection() {
         });
       }
     });
-    resetAnswers();
-    setAnswers((prev) => ({
-      ...prev,
-      injectionCheck: {
-        yesAnswers: yesAnswers,
-      },
-    }));
 
     if (yesCount >= 1) {
       console.log("1 or more answers have been yes and patient needs sec");
@@ -68,7 +53,6 @@ function Injection() {
   }
 
   let content;
-  let questionTitle;
 
   content = (
     <>
@@ -81,9 +65,9 @@ function Injection() {
         Please select all that apply
       </h1>
       <h3 className="text-lg font-semibold border-l-sapphire border-6 border-transparent mb-4 pl-2 text-left">
-            Please note the following questions relate to the patient currently
-            having glucocorticoids or having done so in the past 12 months.
-          </h3>
+        Please note the following questions relate to the patient currently
+        having glucocorticoids or having done so in the past 12 months.
+      </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto p-4 bg-white rounded-md  mt-4"

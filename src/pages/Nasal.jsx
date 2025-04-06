@@ -1,4 +1,3 @@
-import { ChevronLeft } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
@@ -14,7 +13,7 @@ function Nasal() {
   const nav = useNavigate();
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
-  const { setAnswers, setIsSECRequired } = useUserAnswers();
+  const { setIsSECRequired } = useUserAnswers();
 
   let content;
   let questionTitle = questionData.question;
@@ -89,13 +88,6 @@ function Nasal() {
             <Button
               className="btn-primary"
               onClick={() => {
-                setAnswers((prev) => ({
-                  ...prev,
-                  nasalCheck: {
-                    question: questionTitle,
-                    answer: "Yes",
-                  },
-                }));
                 setIsSECRequired(true);
                 nav("/end");
               }}

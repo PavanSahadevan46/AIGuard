@@ -1,4 +1,3 @@
-import { ChevronLeft } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
@@ -29,7 +28,7 @@ function Topical() {
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
 
-  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
+  const { setIsSECRequired } = useUserAnswers();
 
   let content;
   let questionTitle = firstQuestion;
@@ -41,25 +40,19 @@ function Topical() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Concentration</TableHead>
-              <TableHead>Potency</TableHead>
-              <TableHead>Names</TableHead>
-              <TableHead>Including</TableHead>
+              <TableHead className="whitespace-normal font-bold">Generic Name</TableHead>
+              <TableHead className="whitespace-normal font-bold">Examples of trade names including steroids in combination with other medicines</TableHead>
+              <TableHead className="whitespace-normal font-bold">Potency</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {topicalData.map((route) => (
               <TableRow key={route.id}>
-                <TableCell>{route.name}</TableCell>
-                <TableCell>{route.concentration}</TableCell>
-                <TableCell>{route.potency}</TableCell>
-                <TableCell>
-                  {route.names ? route.names.join(", ") : "N/A"}
+                <TableCell className="whitespace-normal">{route.name}</TableCell>
+                <TableCell className="whitespace-normal">
+                  {route.tradeNames ? route.tradeNames.join(", ") : "N/A"}
                 </TableCell>
-                <TableCell>
-                  {route.including ? route.including.join(", ") : "N/A"}
-                </TableCell>
+                <TableCell className="whitespace-normal">{route.potency}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -85,14 +78,6 @@ function Topical() {
             <Button
               className="btn-primary"
               onClick={() => {
-                resetAnswers();
-                setAnswers((prev) => ({
-                  ...prev,
-                  topicalCheck: {
-                    question: questionTitle,
-                    answer: "Yes",
-                  },
-                }));
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -126,14 +111,6 @@ function Topical() {
             <Button
               className="btn-primary"
               onClick={() => {
-                resetAnswers(),
-                  setAnswers((prev) => ({
-                    ...prev,
-                    topicalCheck: {
-                      question: questionTitle,
-                      answer: "Yes",
-                    },
-                  }));
                 setIsSECRequired(true);
                 nav("/end");
               }}

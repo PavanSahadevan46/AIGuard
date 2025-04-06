@@ -1,4 +1,3 @@
-import { ChevronLeft } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
@@ -12,7 +11,7 @@ function Rectal() {
   const questionData = criteria.Questions.find((q) => q.id === 9);
   const { markRouteDone } = useRouteCompletion();
   const nav = useNavigate();
-  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
+  const {setIsSECRequired} = useUserAnswers();
 
   let content;
   let questionTitle = questionData.question;
@@ -37,14 +36,6 @@ function Rectal() {
         <Button
           className="btn-primary"
           onClick={() => {
-            resetAnswers();
-            setAnswers((prev) => ({
-              ...prev,
-              rectalCheck: {
-                question: questionTitle,
-                answer: "Yes",
-              },
-            }));
             setIsSECRequired(true);
             nav("/end");
           }}

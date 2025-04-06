@@ -20,11 +20,10 @@ import { useUserAnswers } from "@/components/UserAnswerContext";
 import BackButton from "@/components/BackButton";
 
 function Inhaled() {
-  const questionData = criteria.Questions.find((q) => q.id === 5);
   const inhaledData = criteria.inhaledRoute;
   const [step, setStep] = useState("otherGCCheck");
   const { markRouteDone } = useRouteCompletion();
-  const { setAnswers, setIsSECRequired, resetAnswers } = useUserAnswers();
+  const { setIsSECRequired } = useUserAnswers();
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -78,15 +77,6 @@ function Inhaled() {
       console.log(
         `${total >= 1 ? "Over" : "Below"} 1 ,` + "total dosage:" + total
       );
-      resetAnswers();
-      setAnswers((prev) => ({
-        ...prev,
-        inhaledCheck: {
-          formdata: formdata,
-          totalDosageVal: total,
-          hasOtherGC: hasOtherGC,
-        },
-      }));
 
       if (total >= 1) {
         setIsSECRequired(true);

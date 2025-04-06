@@ -242,94 +242,73 @@
   "topicalRoute": [
     {
       "id": 1,
-      "name": "Beclometasone dipropionate",
-      "concentration": "0.025%",
+      "name": "Beclometasone dipropionate 0.025%",
       "potency": "Potent"
     },
     {
       "id": 2,
-      "name": "Betamethasone dipropionate",
-      "concentration": "0.05% and higher",
+      "name": "Betamethasone dipropionate 0.05% and higher",
       "potency": "Potent",
-      "names": ["Dalonev", "Diprosone", "Dovobet", "Enstilar"],
-      "including": ["clotrimazole (Lotriderm)", "salicylic acid (Diprosalic)"]
+      "tradeNames": ["Dalbecal", "Diprosalic", "Diprosone", "Dovobet", "Enstilar", "Lotriderm", "Wynzora"]
     },
     {
       "id": 3,
-      "name": "Betamethasone valerate",
-      "concentration": "0.1% and higher",
+      "name": "Betamethasone valerate 0.1% and higher",
       "potency": "Potent",
-      "names": ["Audovate", "Betacap", "Betesil", "Betnovate", "Bettamousse"],
-      "including": [
-        "clioquinol",
-        "fusidic acid (Fucibet, Xemacort)",
-        "neomycin"
-      ]
+      "tradeNames": ["Betacap", "Betesil", "Betnovate (not Betnovate RD))", "Bettamousse", "Fucibet", "Xemacort"]
     },
     {
       "id": 4,
-      "name": "Clobetasol propionate",
-      "concentration": "0.05% and higher",
+      "name": "Clobetasol propionate 0.05% and higher",
       "potency": "Very potent",
-      "names": ["Clarelux", "ClobaDerm", "Dermovate", "Etrivex"],
-      "including": ["neomycin", "nystatin"]
+      "tradeNames": ["ClobaDerm", "Dermovate", "Etrivex"]
     },
     {
       "id": 5,
-      "name": "Diflucortolone valerate",
-      "concentration": "0.1%",
+      "name": "Diflucortolone valerate 0.1%",
       "potency": "Potent",
-      "names": ["Nerisone"]
+      "tradeNames": ["Nerisone"]
     },
     {
       "id": 6,
-      "name": "Diflucortolone valerate",
-      "concentration": "0.3%",
+      "name": "Diflucortolone valerate 0.3%",
       "potency": "Very Potent",
-      "names": ["Nerisone Forte"]
+      "tradeNames": ["Nerisone Forte"]
     },
     {
       "id": 7,
-      "name": "Fluocinonide",
-      "concentration": "0.05%",
+      "name": "Fluocinonide 0.05%",
       "potency": "Potent",
-      "names": ["Metosyn"]
+      "tradeNames": ["Metosyn"]
     },
     {
       "id": 8,
-      "name": "Fluocinolone acetonide",
-      "concentration": "0.025%",
+      "name": "Fluocinolone acetonide 0.025%",
       "potency": "Potent",
-      "names": ["Synalar"],
-      "including": ["clioquinol (Synalar C)"]
+      "tradeNames": ["Synalar (not Synalar 1:4)"]
     },
     {
       "id": 9,
-      "name": "Fluticasone propionate",
-      "concentration": "0.05%",
-      "potency": "Potent",
-      "names": ["Cutivate"]
+      "name": "Fluticasone propionate 0.05%",
+      "potency": "Potent"
     },
     {
       "id": 10,
-      "name": "Hydrocortisone butyrate",
-      "concentration": "0.1%",
+      "name": "Hydrocortisone butyrate 0.1%",
       "potency": "Potent",
-      "names": ["Locoid"]
+      "tradeNames": ["Locoid"]
     },
     {
       "id": 11,
-      "name": "Mometasone",
-      "concentration": "0.1%",
+      "name": "Mometasone 0.1%",
       "potency": "Potent",
-      "names": ["Elocon"]
+      "tradeNames": ["Elocon"]
     },
     {
       "id": 12,
-      "name": "Triamcinolone acetonide",
-      "concentration": "0.1%",
+      "name": "Triamcinolone acetonide 0.1%",
       "potency": "Potent",
-      "names": ["Aureocurt"]
+      "tradeNames": ["Aureocort"]
     }
   ],
   "topicalRatesOfAbsorption": [

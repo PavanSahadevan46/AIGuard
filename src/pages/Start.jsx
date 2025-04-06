@@ -1,38 +1,187 @@
+/**
+ * Start page component
+ *
+ * This component is the main component users see when first launching the application.
+ * It displays critical information regarding the application and provides context for it's usage.
+ *
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Dependencies & Components :
+ * Button - Shadcn UI component where used, has custom styling
+ *  btn-primary,btn-secondary & btn-cta. These can be found in the index.css file
+ *
+ * Header & Footer - Common components for the application
+ *
+ * React Router Dom (useNavigate) - Client-side routing via React-router-dom
+ *
+ * React Router Dom (Link) - A <a href> wrapper that additionally provides navigation via client-side routing
+ */
 import { Button } from "@/components/ui/button";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Card from "../components/Card.jsx";
-import tempImg from "../assets/temp1.png";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// TODO: Refactor this so user is met with 1 button and a modal pops up asking user to accept warning terms
 function Start() {
-  const navigate = useNavigate();
+  // React router navigation hook
+  const nav = useNavigate();
+
+  // Define main content of page
+  let content;
+  content = (
+    <>
+      <main>
+        {/* Main Title */}
+
+        <h1 className=" text-3xl font-bold text-left mb-8">
+          Identify patients at risk of adrenal insufficiency{" "}
+        </h1>
+
+        {/* Warning message, do not remove as of version 1.0 */}
+
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
+          <h2 className="text-lg font-bold ">
+            This tool is currently in development and should not be used to
+            decide other than for testing purposes.
+          </h2>
+        </div>
+
+        {/* Informational Section */}
+
+        <section className="space-y-8 mb-8">
+          <p className="text-lg text-slate-700 text-left">
+            This tool is designed to support with the decision as to whether
+            patients are at risk of <span className="font-bold">tertiary</span>{" "}
+            adrenal insufficiency (ie sufficient HPA axis suppression from
+            taking exogenous steroids), and if so gives guidance on what actions
+            should be taken, including carrying a{" "}
+            <Link
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              to="https://www.england.nhs.uk/publication/national-patient-safety-alert-steroid-emergency-card-to-support-early-recognition-and-treatment-of-adrenal-crisis-in-adults/"
+            >
+              Steroid Emergency Card
+            </Link>{" "}
+            and whether there is a need to follow{" "}
+            <Link
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              to="https://www.endocrinology.org/media/4169/ai-and-exogenous-steroids_patient-information-sheet.pdf"
+            >
+              Sick Day Rules.
+            </Link>{" "}
+          </p>
+
+          {/* Reference to the supporting research paper */}
+
+          <p className="text-lg text-slate-700 text-left">
+            The tool is based on the paper{" "}
+            <Link
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              to="https://www.endocrinology.org/media/4091/spssfe_supporting_sec_-final_10032021-1.pdf"
+            >
+              Exogenous steroids treatment in adults. Adrenal insufficiency and
+              adrenal crisis-who is at risk and how should they be managed
+              safely.
+            </Link>
+          </p>
+
+          {/* Explanation regarding primary and secondary insufficiency */}
+
+          <p className="text-lg text-slate-700 text-left">
+            It is not necessary to use this tool for{" "}
+            <span className="font-bold">primary</span> or{" "}
+            <span className="font-bold">secondary</span> insufficiency, as all
+            of these patients will need a Steroid Emergency Card and to follow
+            Sick Day Rules.
+          </p>
+
+          {/* Additional guidance in an informational message box */}
+
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
+            <p className="text-lg text-slate-700 text-left">
+              Please note that this a support tool, and any patients taking
+              glucocorticoids presenting with acute illness, trauma or for
+              surgery should be{" "}
+              <span className="italic">considered clinically</span> as to
+              whether they may be at risk of having, or developing, adrenal
+              crisis and appropriate actions taken.
+            </p>
+          </div>
+
+          {/* Note regarding the tool's question flow */}
+
+          <p className="text-lg text-slate-700 text-left">
+            For quickness of use the tool will not ask any further questions
+            once a threshold is reached where a steroid emergency card is
+            recommended. It should be kept in mind that if a patient is taking
+            glucocorticoids that have not yet been entered, their risks will be
+            increased.
+          </p>
+
+          {/* Additional guidance regarding tool's question flow*/}
+
+          <p className="text-lg text-slate-700 text-left">
+            Further guidance on prevention and emergency management can be found
+            in the{" "}
+            <Link
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              to="https://www.endocrinology.org/"
+            >
+              Society for Endocrinology
+            </Link>{" "}
+            website and its{" "}
+            <Link
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              to="https://www.endocrinology.org/clinical-practice/clinical-guidance/society-for-endocrinology-guidance/"
+            >
+              Clinical Guidance.
+            </Link>
+            {/* Information for patients whose outcome is no SEC required  */}
+            <section className="bg-gray-50 p-6 rounded-lg mb-8 mt-8">
+              <h4 className="text-xl font-bold text-slate-800 mb-4">
+                If no SEC is indicated
+              </h4>
+              <p className="text-lg text-slate-700 text-left">
+                It is unlikely that this patient needs a Steroid Emergency Card.
+                Please remember however, that this is a support tool, and health
+                care professionals should ensure that they consider the patient
+                clinically before making a final decision.
+              </p>
+              <p>
+                For more information click{" "}
+                <Link
+                  className="text-blue-600 hover:text-blue-800 underline font-medium"
+                  to="https://www.endocrinology.org/media/4091/spssfe_supporting_sec_-final_10032021-1.pdf"
+                >
+                  here
+                </Link>
+              </p>
+            </section>
+          </p>
+        </section>
+
+        {/* Button to start tool  */}
+        <Button className="btn-cta" onClick={() => nav("/q1")}>
+          Start
+        </Button>
+      </main>
+    </>
+  );
+
+  // Render the page with a standard layout that includes a header and footer
+
   return (
     <>
-      <Header />
-      <div className="flex flex-col min-h-auto bg-white">
-        <Card
-          className="startingCard"
-          img={tempImg}
-          title={"AIGuard"}
-          description={
-            <>
-              Please do not use this application in real world applications.
-              <br />
-              Press Yes if you agree to these terms or No if you do not.
-            </>
-          }
-        >
-          <div className="mt-6 flex space-x-4 justify-center" >
-            <Button  onClick={() => navigate("/q1")} >Yes</Button>
-            <Button
-              onClick={() => alert("Please cease use of this application!")}
-            >No</Button>
-          </div>
-        </Card>
+      <div className="grid grid-cols-1 bg-white">
+        <Header />
+        <div className="flex-1 w-full max-w-3xl mx-auto px-4 py-6">
+          {content}
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

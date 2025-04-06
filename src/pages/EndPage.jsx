@@ -34,55 +34,40 @@ function EndPage() {
             <h1 className="text-2xl font-semibold mb-4 text-left">
               The patient's results
             </h1>
-            <h2 className="text-xl mb-4 text-left">
+            <p className="text-xl mb-4 text-left gap-3 leading-loose border-l-red-500 border-6 border-transparent pl-2 ">
               This patient has been identified as being at
               <span className="font-bold"> risk</span> of HPA axis suppression.
-            </h2>
-            <h2 className="text-xl mb-4 text-left">
-              A Steroid Emergency Card is
+              <br />A Steroid Emergency Card is
               <span className="font-bold"> highly</span> recommended for this
               patient.
-            </h2>
-            {/* <h3 className="text-xl mb-4 text-left">
-              Why this patient is at risk:
-            </h3> */}
+            </p>
             <div>
-              {/*Used to output data on why patient is at risk, 
-              requested to be removed but still kept to use for future */}
-              {/* {answers.question1Check && (
-                <div>
-                  <p className="text-lg p-0.2 font-semibold ">
-                    For the question:{" "}
-                    <span className="italic font-medium">
-                      {answers.question1Check.question}
-                    </span>
-                  </p>
-                  <p className="text-lg p-0.2 font-semibold">
-                    You answered:{" "}
-                    <span className="italic font-medium">
-                      {answers.question1Check.answer}
-                    </span>
-                  </p>
-                </div>
-              )} */}
-              {/* <OralSECEnd />
-              <InjectionSECEnd />
-              <InhaledSECEnd />
-              <NasalSECEnd />
-              <TopicalSECEnd />
-              <RectalSECEnd /> */}
-
-              <h3 className="text-xl mb-4 mt-4 text-left">
+              <h3 className="text-xl mb-4 mt-4 text-left ">
                 Please also check if{" "}
                 <Link className="text-blue-700 underline" to="/sickdayrules">
                   sick day rules
                 </Link>{" "}
                 apply
               </h3>
-              <h3 className="text-xl mb-2 mt-4 text-left">Next steps: </h3>
+              <h3 className="text-xl mb-2 mt-8 font-semibold text-left ">
+                Next steps:{" "}
+              </h3>
               <h3 className="text-xl mb-4 text-left">
                 Please provide the patient with a Steroid Emergency Card.
               </h3>
+              <div>
+                <h3 className="text-xl mb-4 mt-4 text-left">
+                  The endrocrinology steroid emergency card is also available in
+                  a{" "}
+                  <Link
+                    className="text-blue-700 underline"
+                    to="https://www.endocrinology.org/media/3873/steroid-card.pdf"
+                  >
+                    PDF format.
+                  </Link>
+                </h3>
+              </div>
+
               <div className="flex flex-col items-left space-y-4 w-full">
                 <div className="w-full max-w-md">
                   <img

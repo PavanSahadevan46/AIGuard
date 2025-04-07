@@ -23,7 +23,7 @@ function SteroidRoutes() {
   const [step, setStep] = useState("initialQuestion");
 
   useEffect(() => {
-    if (completedRoutes.length > 0) {
+    if (completedRoutes.length > 0 || hasVisitedRoutePage ) {
       setStep("enterRoutes");
     } else {
       setStep("initialQuestion");

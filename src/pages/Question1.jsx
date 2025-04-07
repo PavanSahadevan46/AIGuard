@@ -47,60 +47,70 @@ function Question1() {
   const { setIsSECRequired } = useUserAnswers();
 
   // Define main content and store question title from retrived question data
-  let content;
   let questionTitle = questionData.question;
 
-  {
-    content = (
-      <>
-        {/* Back button that navigates to previous page, in this case the start */}
-        <div className="flex flex-auto items-center">
-          <BackButton
-            onClick={() => {
-              nav("/");
-            }}
-          />
-        </div>
+  let content = (
+    <>
+      {/* Back button that navigates to previous page, in this case the start */}
+      <div className="flex flex-auto items-center">
+        <BackButton
+          onClick={() => {
+            nav("/");
+          }}
+        />
+      </div>
 
-        {/* Main content displaying question and options */}
-        <main className="flex flex-col min-h-auto bg-white p-4 rounded-md">
-          <h1 className="text-2xl font-semibold mb-4 text-left">
-            {questionTitle}
-          </h1>
-          <section>
-            {/* List of options provided from JSON */}
-            <ul className="list-disc list-inside space-y-2 mb-6">
-              {questionData.options.map((option, index) => (
-                <li key={index} className="text-gray-800 p-0.5 text-xl">
-                  {option}
-                </li>
-              ))}
-            </ul>
-          </section>
-        </main>
+      {/* Main content displaying question and options */}
+      <main className="flex flex-col min-h-auto bg-white p-4 rounded-md">
+        <h1 className="text-2xl font-semibold mb-4 text-left">
+          {questionTitle}
+        </h1>
+        <section>
+          {/* List of options provided from JSON */}
+          <span className="text-xl font-semibold">Potent Protease inhibitors: </span> {" "}
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            {questionData.potentProteaseInhibitors.map((option, index) => (
+              <li key={index} className="text-gray-800 p-0.5 text-lg">
+                {option}
+              </li>
+            ))}
+          </ul>
+          <span className="text-xl font-semibold">Antifungals:</span> {" "}
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            {questionData.antiFungals.map((option, index) => (
+              <li key={index} className="text-gray-800 p-0.5 text-lg">
+                {option}
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-800 p-0.5 text-lg"> 
+            <span className="text-xl font-semibold">Antibiotics:</span>{" "}<br />
+            {questionData.antiBiotics}
+          </p>
+        </section>
+      </main>
 
-        {/* Main buttons for user's answer */}
-        <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
-          {/* Yes answer marks SEC required and navigates to end page */}
-          <Button
-            className="btn-primary"
-            onClick={() => {
-              setIsSECRequired(true);
-              nav("/end");
-            }}
-          >
-            Yes
-          </Button>
-          {/* No answer redirects to main routes page */}
-          <Button className="btn-secondary" onClick={() => nav("/routes")}>
-            No
-          </Button>
-        </div>
-      </>
-    );
-  }
+      {/* Main buttons for user's answer */}
+      <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+        {/* Yes answer marks SEC required and navigates to end page */}
+        <Button
+          className="btn-primary"
+          onClick={() => {
+            setIsSECRequired(true);
+            nav("/end");
+          }}
+        >
+          Yes
+        </Button>
+        {/* No answer redirects to main routes page */}
+        <Button className="btn-secondary" onClick={() => nav("/routes")}>
+          No
+        </Button>
+      </div>
+    </>
+  );
 
-   // Render the component with a standard layout including header and footer
+  // Render the component with a standard layout including header and footer
   return (
     <>
       <div className="grid grid-cols-1 bg-white">

@@ -40,19 +40,30 @@ function Topical() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="whitespace-normal font-bold">Generic Name</TableHead>
-              <TableHead className="whitespace-normal font-bold">Examples of trade names including steroids in combination with other medicines</TableHead>
-              <TableHead className="whitespace-normal font-bold">Potency</TableHead>
+              <TableHead className="whitespace-normal font-bold">
+                Generic Name
+              </TableHead>
+              <TableHead className="whitespace-normal font-bold">
+                Examples of trade names including steroids in combination with
+                other medicines
+              </TableHead>
+              <TableHead className="whitespace-normal font-bold">
+                Potency
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {topicalData.map((route) => (
               <TableRow key={route.id}>
-                <TableCell className="whitespace-normal">{route.name}</TableCell>
+                <TableCell className="whitespace-normal">
+                  {route.name}
+                </TableCell>
                 <TableCell className="whitespace-normal">
                   {route.tradeNames ? route.tradeNames.join(", ") : "N/A"}
                 </TableCell>
-                <TableCell className="whitespace-normal">{route.potency}</TableCell>
+                <TableCell className="whitespace-normal">
+                  {route.potency}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -73,6 +84,16 @@ function Topical() {
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            <li className="text-slate-700 p-0.5 text-xl">
+              More than 30g a <span className="underline">month</span> to rectal
+              or vaginal areas, or
+            </li>
+            <li className="text-slate-700 p-0.5 text-xl">
+              More than 200g a <span className="underline">week</span> to any
+              other area
+            </li>
+          </ul>
           {potencyInfo}
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
@@ -136,10 +157,6 @@ function Topical() {
             }}
           />
           <section>
-            <h1 className="text-2xl font-semibold mb-4 text-left">
-              Please review the following:
-            </h1>
-
             <p className="text-gray-800 p-0.5 text-xl">
               It is<span className="font-bold"> unlikely</span> that the patient
               needs an steroid emergency card.

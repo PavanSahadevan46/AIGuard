@@ -2,9 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import criteria from "../criteria.json";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-// import { useUserAnswers } from "@/components/UserAnswerContext";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -14,6 +12,8 @@ function SickDayRules() {
 
   const nav = useNavigate();
   let content;
+  let questionData = criteria.Questions.find((q) => q.id === 1);
+
   content = (
     <>
       <main>
@@ -22,15 +22,17 @@ function SickDayRules() {
         </h1>
         <div className="space-y-8">
           <section>
-            <h3 className="text-xl mb-8 mt-4 text-left border-l-sapphire border-6 border-transparent pl-2">
-              Sick day rules are available{" "}
-              <Link
-                className="text-blue-700 underline"
-                to="https://www.endocrinology.org/media/4169/ai-and-exogenous-steroids_patient-information-sheet.pdf"
-              >
-                here.
-              </Link>
-            </h3>
+            <div className="bg-blue-50 border-l-4 border-sapphire p-4 mb-8">
+              <h3 className="text-xl mb-8 mt-4 text-left pl-2">
+                Sick day rules are available{" "}
+                <Link
+                  className="text-blue-700 underline"
+                  to="https://www.endocrinology.org/media/4169/ai-and-exogenous-steroids_patient-information-sheet.pdf"
+                >
+                  here.
+                </Link>
+              </h3>
+            </div>
             <ul className="list-disc space-y-3 pl-5">
               {sickDayAdvice.options.map((option, index) => (
                 <li key={index} className="text-gray-800 text-lg">
@@ -53,6 +55,34 @@ function SickDayRules() {
               </li>
             ))}
           </ul>
+        </section>
+        <section className="mt-4">
+          <h2 className="text-xl font-semibold mb-3 text-gray-800">
+            CYP3A4 inhibitors
+            <span className="text-red-500 ml-1">*</span>
+          </h2>
+          <span className="text-xl mt-8 font-semibold">
+            Potent Protease inhibitors:{" "}
+          </span>{" "}
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            {questionData.potentProteaseInhibitors.map((option, index) => (
+              <li key={index} className="text-gray-800 p-0.5 text-lg">
+                {option}
+              </li>
+            ))}
+          </ul>
+          <span className="text-xl font-semibold">Antifungals:</span>{" "}
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            {questionData.antiFungals.map((option, index) => (
+              <li key={index} className="text-gray-800 p-0.5 text-lg">
+                {option}
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-800 p-0.5 text-lg">
+            <span className="text-xl font-semibold">Antibiotics:</span> <br />
+            {questionData.antiBiotics}
+          </p>
         </section>
 
         <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">

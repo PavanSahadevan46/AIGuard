@@ -56,7 +56,7 @@ function Inhaled() {
     const withoutTotal = results.reduce((acc, value, i) => {
       return acc + value / withOutOtherTreatmentVal[i] + dailyDosageVal;
     }, 0);
-    // console.log(withoutTotal);
+    console.log("withoutTotal = " + withoutTotal);
     return Math.trunc(withoutTotal);
   };
 
@@ -175,7 +175,7 @@ function Inhaled() {
   switch (step) {
     case "otherGCCheck":
       questionTitle =
-        "Are the inhalers being used with any other form of glucocorticoid treatment?";
+        "Is the patient also using nasal glucocorticoids?";
       content = (
         <>
           <BackButton
@@ -183,10 +183,13 @@ function Inhaled() {
               nav("/routes");
             }}
           />
-          <h3 className="text-lg font-semibold border-l-sapphire border-6 border-transparent pl-2 mb-4  text-left">
-            Please note the following question relates to the patient currently
-            having glucocorticoids or has done so in the past 12 months
-          </h3>
+          <div className="bg-blue-50 border-l-4 border-sapphire p-4 mb-2 mt-5">
+            <h3 className="text-lg font-semibold mb-4 text-left">
+              Please note the following question relates to the patient
+              currently having glucocorticoids or has done so in the past 12
+              months
+            </h3>
+          </div>
           <h1 className="text-xl font-semibold mb-6 text-left">
             {questionTitle}
           </h1>

@@ -31,23 +31,24 @@ function EndPage() {
             }}
           />
           <div className="mt-4">
-            <h1 className="text-2xl font-semibold mb-4 text-left">
-              The patient's results
-            </h1>
-            <p className="text-xl mb-4 text-left gap-3 leading-loose border-l-red-500 border-6 border-transparent pl-2 ">
-              This patient has been identified as being at
-              <span className="font-bold"> risk</span> of HPA axis suppression.
-              <br />A Steroid Emergency Card is
-              <span className="font-bold"> highly</span> recommended for this
-              patient.
-            </p>
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
+              <p className="text-xl mb-4 text-left gap-3 leading-loose">
+                The patient has been identified as being at
+                <span className="font-bold"> risk</span> of HPA axis
+                suppression.
+                <br />A Steroid Emergency Card is recommended for this patient.
+              </p>
+            </div>
             <div>
               <h3 className="text-xl mb-4 mt-4 text-left ">
                 Please also check if{" "}
                 <Link className="text-blue-700 underline" to="/sickdayrules">
                   sick day rules
                 </Link>{" "}
-                apply
+                apply.
+              </h3>
+              <h3 className="text-xl mb-4 mt-4 text-left ">
+              This patient may need steroid cover if admitted to hospital, unwell or invasive procedure.
               </h3>
               <h3 className="text-xl mb-2 mt-8 font-semibold text-left ">
                 Next steps:{" "}
@@ -55,9 +56,9 @@ function EndPage() {
               <h3 className="text-xl mb-4 text-left">
                 Please provide the patient with a Steroid Emergency Card.
               </h3>
-              <div>
+              <div className="mb-2">
                 <h3 className="text-xl mb-4 mt-4 text-left">
-                  The endrocrinology steroid emergency card is also available in
+                The card can be obtained from any pharmacy, and is also available in
                   a{" "}
                   <Link
                     className="text-blue-700 underline"
@@ -84,11 +85,13 @@ function EndPage() {
                   />
                 </div>
               </div>
-              <h3 className="text-lg mb-4 font-bold mt-3 border-l-red-500 border-6 border-transparent pl-2 ">
-                Please note again that this tool is not to be used in real world
-                applications by any means and should not be used to identify
-                real patients at risk of adrenal insufficiency.
-              </h3>
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8 mt-5">
+                <h3 className="text-lg mb-4 font-bold mt-">
+                  Please note again that this tool is not to be used in real
+                  world applications by any means and should not be used to
+                  identify real patients at risk of adrenal insufficiency.
+                </h3>
+              </div>
             </div>
             <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
               <Button
@@ -113,27 +116,25 @@ function EndPage() {
             }}
           />
           <div>
-            <h1 className="text-2xl font-semibold mb-4 text-left">
-              The patient's results
-            </h1>
             <h2 className="text-xl mb-4 text-left">
-              This patient is
+              The patient is
               <span className="font-bold"> unlikely</span> at risk of HPA axis
               suppression.
             </h2>
-            <h2 className="text-xl  mb-4 text-left">
-              A Steroid Emergency Card may not be necessary for this patient.
-            </h2>
-            <h2 className="text-xl  mb-4 text-left">
+            <p className="text-xl  mb-4 text-left">
+              It does <span className="font-bold">not</span> appear that a
+              Steroid Emergency Card is needed for this patient.
               <span className="font-bold"> However</span> this tool is only a
-              guide, please make sure to consult an appropriate healthcare
-              professional before making any decisions.
-            </h2>
-            <h3 className="text-lg mb-4 font-bold border-l-red-500 border-6 border-transparent pl-2">
-              Please note again that this tool is not to be used in real world
-              applications by any means and should not be used to identify real
-              patients at risk of adrenal insufficiency.
-            </h3>
+              guide and the patient should always be considered clinically for
+              any other reasons why a card may be needed.
+            </p>
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
+              <h3 className="text-lg mb-4 font-bold pl-2">
+                Please note again that this tool is not to be used in real world
+                applications by any means and should not be used to identify
+                real patients at risk of adrenal insufficiency.
+              </h3>
+            </div>
           </div>
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button

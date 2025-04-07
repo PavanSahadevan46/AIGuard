@@ -3,15 +3,21 @@
     {
       "id": 1,
       "question": "Has the patient been prescribed any exogenous glucocorticoids at any dose and any of the following?",
-      "options": [
+      "potentProteaseInhibitors": [
         "Atazanavir",
         "Darunavir",
         "Fosamprenavir",
         "Ritonavir (+/- lopinavir)",
         "Saquinavir",
-        "Tipranavir",
-        "Clarithromycin—long term courses only"
-      ]
+        "Tipranavir"
+      ],
+      "antiFungals": [
+        "Itraconazole",
+        "Ketoconazole",
+        "Voroconazole",
+        "Posaconazole"
+      ],
+      "antiBiotics" : "Clarithromycin — long term courses only"
     },
     {
       "id": 2,
@@ -36,15 +42,15 @@
     },
     {
       "id": 7,
-      "question": "Is the patient applying at least 200g a week of potent or very potent topical glucocorticoids?"
+      "question": "Is the patient applying potent or very potent topical glucocorticoids in quantities of: "
     },
     {
       "id": 8,
-      "question": "Is the patient taking significant amounts of other forms of glucocorticoid?"
+      "question": "Is the patient using also taking significant amounts of other forms of glucocorticoid?"
     },
     {
       "id": 9,
-      "question": "Is the patient using any of the following at more than 30g per month?",
+      "question": "Is the patient using either of the following?",
       "options": [
         "Budesonide enema or rectal foam",
         " Prednisolone rectal solution or suppositories"
@@ -129,27 +135,15 @@
   "injectionRoute": [
     {
       "id": 1,
-      "glucocorticoid": "Dexamethasone",
+      "glucocorticoid": "Dexamethasone Injection",
       "question1": "Taken as an antiemetic in oncology regimens, and for 12 months after stopping when future cycles are anticipated?",
       "question2": "Taken as  prolonged courses (>10 days) for the treatment of severe Covid-19?"
     },
     {
       "id": 2,
-      "glucocorticoid": "Hydrocortisone",
+      "glucocorticoids": ["Hydrocortisone","Methylprednisolone","Triamcinolone"],
       "question1": "With any other glucocorticoid by any other route?",
-      "question2": "Hydrocortisone: 3 or more injections within the last 12 months?"
-    },
-    {
-      "id": 3,
-      "glucocorticoid": "Methylprednisolone",
-      "question1": "With any other glucocorticoid by any other route?",
-      "question2": "Methylprednsolone Injection: 3 or more injections within last 12 months?"
-    },
-    {
-      "id": 4,
-      "glucocorticoid": "Triamcinolone",
-      "question1": "With any other glucocorticoid by any other route?",
-      "question2": "Trimacinolone Injection: 3 or more injections within last 12 months?"
+      "question2": "3 or more injections of any within the last 12 months?"
     }
   ],
   "inhaledRoute": [
@@ -249,13 +243,28 @@
       "id": 2,
       "name": "Betamethasone dipropionate 0.05% and higher",
       "potency": "Potent",
-      "tradeNames": ["Dalbecal", "Diprosalic", "Diprosone", "Dovobet", "Enstilar", "Lotriderm", "Wynzora"]
+      "tradeNames": [
+        "Dalbecal",
+        "Diprosalic",
+        "Diprosone",
+        "Dovobet",
+        "Enstilar",
+        "Lotriderm",
+        "Wynzora"
+      ]
     },
     {
       "id": 3,
       "name": "Betamethasone valerate 0.1% and higher",
       "potency": "Potent",
-      "tradeNames": ["Betacap", "Betesil", "Betnovate (not Betnovate RD))", "Bettamousse", "Fucibet", "Xemacort"]
+      "tradeNames": [
+        "Betacap",
+        "Betesil",
+        "Betnovate (not Betnovate RD))",
+        "Bettamousse",
+        "Fucibet",
+        "Xemacort"
+      ]
     },
     {
       "id": 4,
@@ -265,50 +274,32 @@
     },
     {
       "id": 5,
-      "name": "Diflucortolone valerate 0.1%",
-      "potency": "Potent",
-      "tradeNames": ["Nerisone"]
-    },
-    {
-      "id": 6,
-      "name": "Diflucortolone valerate 0.3%",
-      "potency": "Very Potent",
-      "tradeNames": ["Nerisone Forte"]
-    },
-    {
-      "id": 7,
       "name": "Fluocinonide 0.05%",
       "potency": "Potent",
       "tradeNames": ["Metosyn"]
     },
     {
-      "id": 8,
+      "id": 6,
       "name": "Fluocinolone acetonide 0.025%",
       "potency": "Potent",
       "tradeNames": ["Synalar (not Synalar 1:4)"]
     },
     {
-      "id": 9,
+      "id": 7,
       "name": "Fluticasone propionate 0.05%",
       "potency": "Potent"
     },
     {
-      "id": 10,
+      "id": 8,
       "name": "Hydrocortisone butyrate 0.1%",
       "potency": "Potent",
       "tradeNames": ["Locoid"]
     },
     {
-      "id": 11,
+      "id": 9,
       "name": "Mometasone 0.1%",
       "potency": "Potent",
       "tradeNames": ["Elocon"]
-    },
-    {
-      "id": 12,
-      "name": "Triamcinolone acetonide 0.1%",
-      "potency": "Potent",
-      "tradeNames": ["Aureocort"]
     }
   ],
   "topicalRatesOfAbsorption": [
@@ -343,7 +334,7 @@
       "absorptionRate": "30%"
     }
   ],
-  "absorptionAdditionalInfo": "HPA axis suppression and adrenal crisis has also been reported from use of skin-lightening creams containing steroid over large body surface areas",
+  "absorptionAdditionalInfo": "HPA axis suppression and adrenal crisis has also been reported from use of skin-lightening creams containing steroids over large body surface areas",
 
   "SickDayAdvice": [
     {
@@ -352,21 +343,21 @@
       "options": [
         "Patients taking oral prednisolone 5mg or above (or equivalent dose of other oral glucocorticoids *) for more than 4 weeks, and for 12 months after stopping oral steroids ",
         "Patients receiving intra-articular or intramuscular glucocorticoid injections who also use glucocorticoids by another route (eg inhaled steroids, oral steroids etc) ",
-        "Concomitant use of CYP3A4 enzyme inhibitors (see list below) and glucocorticoids (any route of administration except small amounts of topical mild or moderate potency glucocorticoid which should be assessed on a case by case basis) ",
+        "Concomitant use of CYP3A4 enzyme inhibitors * (see list below) and glucocorticoids (any route of administration except small amounts of topical mild or moderate potency glucocorticoid which should be assessed on a case by case basis) ",
         "Patients with respiratory disease such as COPD and asthma on high dose inhaled steroids receiving repeated courses of oral steroids (3 or more courses over the past 6 months)."
       ]
     }
   ],
   "SickDayGlucocorticoids": [
     {
-      "id" : 1,
+      "id": 1,
       "glucocorticoid": "Beclometasone",
       "measurement": "625 microgram per day or more"
     },
     {
       "id": 2,
-      "glucocorticoid":"Betamethasone",
-      "measurement" : "750 microgram per day or more"
+      "glucocorticoid": "Betamethasone",
+      "measurement": "750 microgram per day or more"
     },
     {
       "id": 3,
@@ -374,25 +365,24 @@
       "measurement": "1.5mg per day or more"
     },
     {
-      "id" : 4,
-      "glucocorticoid":"Deflazacort",
+      "id": 4,
+      "glucocorticoid": "Deflazacort",
       "measurement": "6mg per day or more"
     },
     {
       "id": 5,
       "glucocorticoid": "Dexamethasone",
-      "measurement":"500 microgram per day or more"
+      "measurement": "500 microgram per day or more"
     },
     {
-      "id":6,
-      "glucocorticoid":"Hydrocortisone",
-      "measurement":"15mg per day or more"
+      "id": 6,
+      "glucocorticoid": "Hydrocortisone",
+      "measurement": "15mg per day or more"
     },
     {
-      "id":7,
-      "glucocorticoid":"Methylprednisolone",
+      "id": 7,
+      "glucocorticoid": "Methylprednisolone",
       "measurement": "4mg per day or more"
     }
-
   ]
 }

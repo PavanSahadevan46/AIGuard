@@ -31,14 +31,13 @@ function Start() {
   const nav = useNavigate();
 
   // Define main content of page
-  let content;
-  content = (
+  let content = (
     <>
       <main>
         {/* Main Title */}
 
         <h1 className=" text-3xl font-bold text-left mb-8">
-          Identify patients at risk of adrenal insufficiency{" "}
+          Identifying patients at risk of adrenal insufficiency{" "}
         </h1>
 
         {/* Warning message, do not remove as of version 1.0 */}
@@ -56,7 +55,7 @@ function Start() {
           <p className="text-lg text-slate-700 text-left">
             This tool is designed to support with the decision as to whether
             patients are at risk of <span className="font-bold">tertiary</span>{" "}
-            adrenal insufficiency (ie sufficient HPA axis suppression from
+            adrenal insufficiency (ie significant HPA axis suppression from
             taking exogenous steroids), and if so gives guidance on what actions
             should be taken, including carrying a{" "}
             <Link
@@ -119,47 +118,6 @@ function Start() {
             recommended. It should be kept in mind that if a patient is taking
             glucocorticoids that have not yet been entered, their risks will be
             increased.
-          </p>
-
-          {/* Additional guidance regarding tool's question flow*/}
-
-          <p className="text-lg text-slate-700 text-left">
-            Further guidance on prevention and emergency management can be found
-            in the{" "}
-            <Link
-              className="text-blue-600 hover:text-blue-800 underline font-medium"
-              to="https://www.endocrinology.org/"
-            >
-              Society for Endocrinology
-            </Link>{" "}
-            website and its{" "}
-            <Link
-              className="text-blue-600 hover:text-blue-800 underline font-medium"
-              to="https://www.endocrinology.org/clinical-practice/clinical-guidance/society-for-endocrinology-guidance/"
-            >
-              Clinical Guidance.
-            </Link>
-            {/* Information for patients whose outcome is no SEC required  */}
-            <section className="bg-gray-50 p-6 rounded-lg mb-8 mt-8">
-              <h4 className="text-xl font-bold text-slate-800 mb-4">
-                If no SEC is indicated
-              </h4>
-              <p className="text-lg text-slate-700 text-left">
-                It is unlikely that this patient needs a Steroid Emergency Card.
-                Please remember however, that this is a support tool, and health
-                care professionals should ensure that they consider the patient
-                clinically before making a final decision.
-              </p>
-              <p>
-                For more information click{" "}
-                <Link
-                  className="text-blue-600 hover:text-blue-800 underline font-medium"
-                  to="https://www.endocrinology.org/media/4091/spssfe_supporting_sec_-final_10032021-1.pdf"
-                >
-                  here
-                </Link>
-              </p>
-            </section>
           </p>
         </section>
 

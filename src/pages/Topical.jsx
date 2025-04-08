@@ -158,12 +158,12 @@ function Topical() {
           />
           <section>
             <p className="text-gray-800 p-0.5 text-xl">
-              It is<span className="font-bold"> unlikely</span> that the patient
+              It is <strong> unlikely</strong> that the patient
               needs an steroid emergency card.
             </p>
 
             <p className="text-gray-800 p-0.5 text-xl">
-              <span className="font-bold">However</span> do consider that
+            <strong>However</strong> do consider that
               systemic absorption varies depending on the area of application.
             </p>
             <div className="grid grid-cols-2 gap-2 mt-5">
@@ -180,7 +180,7 @@ function Topical() {
               ))}
             </div>
             <p className="text-gray-800 p-0.5 mt-3 text-base">
-              <span className="font-bold">Additionally: </span>
+            <strong>Additionally:</strong>
               {topicalAdditional}
             </p>
           </section>

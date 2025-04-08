@@ -54,7 +54,7 @@ function Start() {
         <section className="space-y-8 mb-8">
           <p className="text-lg text-slate-700 text-left">
             This tool is designed to support with the decision as to whether
-            patients are at risk of <span className="font-bold">tertiary</span>{" "}
+            patients are at risk of <strong>tertiary</strong>{" "}
             adrenal insufficiency (ie significant HPA axis suppression from
             taking exogenous steroids), and if so gives guidance on what actions
             should be taken, including carrying a{" "}
@@ -91,8 +91,8 @@ function Start() {
 
           <p className="text-lg text-slate-700 text-left">
             It is not necessary to use this tool for{" "}
-            <span className="font-bold">primary</span> or{" "}
-            <span className="font-bold">secondary</span> insufficiency, as all
+            <strong>primary</strong> or{" "}
+            <strong>secondary</strong> insufficiency, as all
             of these patients will need a Steroid Emergency Card and to follow
             Sick Day Rules.
           </p>

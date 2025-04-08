@@ -63,14 +63,15 @@ function Nasal() {
             </h1>
 
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
-              <span className="font-bold">
+            <strong>
                 A steroid emergency card may be appropriate
-              </span>
-              , particularly if in combination with other glucocorticoids.
+                and for 12 months after stopping
+              </strong>
+              , particularly if in combination with other glucocorticoids. 
             </p>
 
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
-              <span className="font-bold">Consider</span> whether patient needs
+            <strong>Consider</strong> whether patient needs
               cover with hydrocortisone if admitted to hospital unwell or
               invasive procedure.
             </p>
@@ -111,11 +112,11 @@ function Nasal() {
           </h1>
           <section>
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
-              It is <span className="font-bold">unlikely</span> that a steroid
+              It is <strong>unlikely</strong> that a steroid
               emergency card is needed.
             </p>
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
-              <span className="font-bold">However</span> do consider the risk if
+            <strong>However</strong> do consider the risk if
               in combination with other glucocorticoids.
             </p>
           </section>

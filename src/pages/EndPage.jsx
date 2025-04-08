@@ -6,18 +6,10 @@ import secBack from "../assets/SEC_Back.png";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
-
-import OralSECEnd from "@/components/OralSECEnd";
-import InjectionSECEnd from "@/components/InjectionSECEnd";
-import InhaledSECEnd from "@/components/InhaledSECEnd";
-import NasalSECEnd from "@/components/NasalSECEnd";
-import TopicalSECEnd from "@/components/TopicalSECEnd";
-import RectalSECEnd from "@/components/RectalSECEnd";
 import BackButton from "@/components/BackButton";
 
 function EndPage() {
-  const { answers, isSECRequired } = useUserAnswers();
+  const { isSECRequired } = useUserAnswers();
 
   const nav = useNavigate();
   let content;
@@ -34,9 +26,10 @@ function EndPage() {
             <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
               <p className="text-xl mb-4 text-left gap-3 leading-loose">
                 The patient has been identified as being at
-                <span className="font-bold"> risk</span> of HPA axis
-                suppression.
-                <br />A Steroid Emergency Card is recommended for this patient.
+                <strong> risk</strong> of HPA axis suppression.
+                <br />A Steroid Emergency Card is recommended for this patient{" "}
+                and
+                <strong> for 12 months after stopping.</strong>
               </p>
             </div>
             <div>
@@ -48,7 +41,8 @@ function EndPage() {
                 apply.
               </h3>
               <h3 className="text-xl mb-4 mt-4 text-left ">
-              This patient may need steroid cover if admitted to hospital, unwell or invasive procedure.
+                This patient may need steroid cover if admitted to hospital,
+                unwell or invasive procedure.
               </h3>
               <h3 className="text-xl mb-2 mt-8 font-semibold text-left ">
                 Next steps:{" "}
@@ -58,8 +52,8 @@ function EndPage() {
               </h3>
               <div className="mb-2">
                 <h3 className="text-xl mb-4 mt-4 text-left">
-                The card can be obtained from any pharmacy, and is also available in
-                  a{" "}
+                  The card can be obtained from any pharmacy, and is also
+                  available in a{" "}
                   <Link
                     className="text-blue-700 underline"
                     to="https://www.endocrinology.org/media/3873/steroid-card.pdf"
@@ -118,15 +112,14 @@ function EndPage() {
           <div>
             <h2 className="text-xl mb-4 text-left">
               The patient is
-              <span className="font-bold"> unlikely</span> at risk of HPA axis
-              suppression.
+              <strong>unlikely</strong> at risk of HPA axis suppression.
             </h2>
             <p className="text-xl  mb-4 text-left">
-              It does <span className="font-bold">not</span> appear that a
-              Steroid Emergency Card is needed for this patient.
-              <span className="font-bold"> However</span> this tool is only a
-              guide and the patient should always be considered clinically for
-              any other reasons why a card may be needed.
+              It does <strong>not</strong> appear that a Steroid Emergency Card
+              is needed for this patient.
+              <strong> However</strong> this tool is only a guide and the
+              patient should always be considered clinically for any other
+              reasons why a card may be needed.
             </p>
             <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
               <h3 className="text-lg mb-4 font-bold pl-2">

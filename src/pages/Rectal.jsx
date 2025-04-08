@@ -79,7 +79,8 @@ function Rectal() {
             </p>
             <p className="text-slate-700 p-0.5 text-lg">
               Consider usage of these and any other concomitant steroid use to
-              decide if a Steroid Emergency Card is needed.
+              decide if a Steroid Emergency Card is needed. If needed, the card
+              is required for 12 months after stopping aswell.
             </p>
             <div className="mt-7 flex flex-col md:flex-row float-left gap-4 max-w-md w-full mx-auto">
               <Button

@@ -141,7 +141,7 @@
     },
     {
       "id": 2,
-      "glucocorticoids": ["Hydrocortisone","Methylprednisolone","Triamcinolone"],
+      "glucocorticoids": ["Dexamethasone","Hydrocortisone","Methylprednisolone","Triamcinolone injection"],
       "question1": "With any other glucocorticoid by any other route?",
       "question2": "3 or more injections of any within the last 12 months?"
     }

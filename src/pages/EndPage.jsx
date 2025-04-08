@@ -1,3 +1,45 @@
+/**
+ * End page component
+ *
+ * This component is the endpoint of the application.
+ * It renders different content depending on if the patient needs an SEC or not.
+ *
+ * This component displays critical information regarding the Steroid Emergency Card,
+ * provides links to external information provided by the society of endricrinology.
+ * 
+ * This component has 4 states, SEC required , No SEC Required
+ * or an error state where it shows an error message if navigated to without completing previous questions
+ *
+ * The SEC requirement is set from other routes and can only be accessed from scenarios where the patient needs an SEC.
+ 
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Dependencies & Components :
+ *
+ * Header & Footer - Common components that provide a header and footer for the application.
+ *
+ * criteria - JSON file that contains question data and or other data regarding route information.
+ *
+ * Button - Shadcn UI component.
+ *
+ * React Router Dom -  Client-side routing via React-router-dom.
+ *
+ * State - A built in React object used to contain a stateful value and a function to update it.
+ *
+ * UserAnswerContext - Context handler to keep state for end page active incase of browser or go back button.
+ *
+ * BackButton - Allows navigation to previous page or step with prop handling.
+ *
+ * Route Completion - Context handler to provide information to steroid routes page to show visual changes on which route has been completed
+ *
+ * SECFront & Back - Images for sec card
+ *
+ * React Router Dom(Link) - A <a href=> wrapper that additionally has accomodation for client side routing
+ */
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useUserAnswers } from "@/components/UserAnswerContext";
@@ -9,14 +51,21 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 
 function EndPage() {
+  // Destructure object from userAnswer context to set sec requirement step
   const { isSECRequired } = useUserAnswers();
 
+  // React Router navigation hook
   const nav = useNavigate();
+
+  // Define main content
   let content;
+
+  // Render content based on current step
   switch (isSECRequired) {
     case true:
       content = (
         <>
+          {/* Back button to previous BROWSER page, this is because multiple routes can cause an SEC requirement */}
           <BackButton
             onClick={() => {
               nav(-1);
@@ -34,7 +83,7 @@ function EndPage() {
             </div>
             <div>
               <h3 className="text-xl mb-4 mt-4 text-left ">
-                Please also check if{" "}
+                Please also check if {/* Anchor to sick day rules page */}
                 <Link className="text-blue-700 underline" to="/sickdayrules">
                   sick day rules
                 </Link>{" "}
@@ -91,7 +140,7 @@ function EndPage() {
               <Button
                 className="btn-primary"
                 onClick={() => {
-                  nav("/start");
+                  nav("/start"); // redirect user to main start page
                 }}
               >
                 Start again
@@ -104,6 +153,7 @@ function EndPage() {
     case false:
       content = (
         <>
+          {/* Back button to previous BROWSER page, this is because multiple routes can cause an this state/step */}
           <BackButton
             onClick={() => {
               nav(-1);
@@ -133,7 +183,7 @@ function EndPage() {
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/start");
+                nav("/start"); // redirect user to main start page
               }}
             >
               Start again
@@ -142,6 +192,7 @@ function EndPage() {
         </>
       );
       break;
+    // error case, if user navigates via url they are met with this state and are forced to restart
     case null:
       content = (
         <>
@@ -157,7 +208,7 @@ function EndPage() {
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/start");
+                nav("/start"); // navigate to start
               }}
             >
               Start again
@@ -170,6 +221,7 @@ function EndPage() {
       content = <h1>Unexpected content</h1>;
   }
 
+  // Render the component with a standard layout including header and footer
   return (
     <div className="grid grid-cols-1 bg-white">
       <Header />

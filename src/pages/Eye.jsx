@@ -1,3 +1,33 @@
+/**
+ * Rectal Route component
+ *
+ * This component is used for the eye route of the application.
+ * It simply renders advice based on the Opthalamic route.
+ *
+ * It's unlikely this route will solely warrant an SEC however total exposure should be considered.
+ *
+ * * Note: This component assumes that the appropriate question is in the criteria JSON file.
+ *
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Dependencies & Components :
+ *
+ * Header & Footer - Common components that provide a header and footer for the application.
+ *
+ * criteria - JSON file that contains question data and or other data regarding route information.
+ *
+ * Button - Shadcn UI component.
+ *
+ * React Router Dom -  Client-side routing via React-router-dom.
+ *
+ * BackButton - Allows navigation to previous page or step with prop handling.
+ *
+ * Route Completion - Context handler to provide information to steroid routes page to show visual changes on which route has been completed
+ */
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,12 +36,17 @@ import { useRouteCompletion } from "../components/RouteCompletionContext";
 import BackButton from "@/components/BackButton";
 
 function Eye() {
+  // React Router navigation hook
   const nav = useNavigate();
+
+  // Destructure object from respective context
   const { markRouteDone } = useRouteCompletion();
 
+  // Define main content
   let content;
   content = (
     <>
+      {/* Back button to navigate back to routes page */}
       <BackButton
         onClick={() => {
           nav("/routes");
@@ -33,8 +68,9 @@ function Eye() {
         <Button
           className="btn-secondary"
           onClick={() => {
-            nav("/routes");
+            // if clicked mark route as complete and navigate back to routes
             markRouteDone("Eye");
+            nav("/routes");
           }}
         >
           Back to routes
@@ -43,6 +79,7 @@ function Eye() {
     </>
   );
 
+  // Render the component with a standard layout including header and footer
   return (
     <>
       <div className="grid grid-cols-1 bg-white">

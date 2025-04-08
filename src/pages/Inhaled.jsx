@@ -257,6 +257,7 @@ function Inhaled() {
       questionTitle = "Is the patient also using nasal glucocorticoids?";
       content = (
         <>
+        {/* Back button to go back to previous route */}
           <BackButton
             onClick={() => {
               nav("/routes");
@@ -277,8 +278,8 @@ function Inhaled() {
             <Button
               className="btn-primary"
               onClick={() => {
-                reset();
-                setStep("usingInhalersWithOtherGC");
+                reset(); // reset form's values to avoid pre-populating form incase of browser refresh or navigation
+                setStep("usingInhalersWithOtherGC"); // proceed to the step that says the patient is using inhalers with other glucocorticoid treatment
               }}
             >
               Yes
@@ -286,8 +287,8 @@ function Inhaled() {
             <Button
               className="btn-secondary"
               onClick={() => {
-                reset();
-                setStep("usingInhalersWithoutOtherGC");
+                reset(); // reset form's values to avoid pre-populating form incase of browser refresh or navigation
+                setStep("usingInhalersWithoutOtherGC");// proceed to the step that says the patient is using inhalers WITHOUT other glucocorticoid treatment
               }}
             >
               No

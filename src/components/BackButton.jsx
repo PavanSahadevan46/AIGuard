@@ -1,3 +1,19 @@
+/**
+ * BackButton component
+ * 
+ * A reusable component that is a custom wrapper of a shadcn ui component,
+ * that renders a go  back button where used with a left chevron from lucide react icon.
+ * This component uses preset custom styles via props and provides an onClick handler as a prop.
+ * 
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Button - Shadcn UI component
+ * Lucide - Icon library 
+ */
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 

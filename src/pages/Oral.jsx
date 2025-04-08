@@ -111,14 +111,15 @@ function Oral() {
    *
    */
   const onSubmit = (formdata) => {
-    if (step === "continuousDosage") {
-      
+    if (step === "continuousDosage") {     
       const contTotal = calculateContinuous(formdata);
-      console.log("contTotal"  + `${contTotal}` + "daily:" + `${dailyDosageVal}`)
-      // Redirect user based on total threshold
+      // If total exceeds 1 it means patient is at risk and needs an SEC,
+      //set sec requirement and navigate them to the end
       if (contTotal >= 1) {
         setIsSECRequired(true);
         nav("/end");
+        // otherwise store the dosage value in context to use in inhaled route,
+        // mark route as done and navigate user back to routes page
       } else if (contTotal < 1) {
         setDailyDosageVal(contTotal);
         markRouteDone("Oral");
@@ -196,6 +197,7 @@ function Oral() {
     case "initialQuestion":
       content = (
         <>
+        {/* Navigate button to go back to route page */}
           <BackButton
             onClick={() => {
               nav("/routes");
@@ -210,6 +212,7 @@ function Oral() {
             <Button
               className="btn-primary"
               onClick={() => {
+                // if clicked proceed to intermittent sub route
                 setStep("intermittentCheck");
               }}
             >
@@ -219,7 +222,7 @@ function Oral() {
               className="btn-secondary"
               onClick={() => {
                 reset(); // Reset form to avoid pre-populating form with erroneous data
-                setStep("continuousDosage");
+                setStep("continuousDosage");   // if clicked proceed straight to continuous route
               }}
             >
               No
@@ -234,6 +237,7 @@ function Oral() {
         "Has the patient had 3 or more courses in total of any of the following for at least seven days within the past 12 months?";
       content = (
         <>
+        {/* Navigate button to go back to previous step */}
           <BackButton
             onClick={() => {
               setStep("initialQuestion");
@@ -256,6 +260,8 @@ function Oral() {
             <Button
               className="btn-primary"
               onClick={() => {
+                // If yes is clicked it means the patient is at risk and needs an SEC, 
+                // set state of sec requirement and redirect them to end
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -265,6 +271,7 @@ function Oral() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                // if clicked proceed to dexamethasone check 
                 setStep("dexamethasoneCheck");
               }}
             >
@@ -280,6 +287,7 @@ function Oral() {
         "Has the patient had (or is due to have) intermittent courses of dexamethasone for either of the following?";
       content = (
         <>
+        {/* Back button to previous step */}
           <BackButton
             onClick={() => {
               setStep("intermittentCheck");
@@ -302,6 +310,8 @@ function Oral() {
             <Button
               className="btn-primary"
               onClick={() => {
+                // If clicked means that the patient is at risk and needs an SEC,
+                // set sec requirement and redirect to end
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -311,6 +321,7 @@ function Oral() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                // if clicked proceed to continuous check
                 setStep("continuousCheck");
               }}
             >
@@ -321,11 +332,13 @@ function Oral() {
       );
       break;
 
+    // This step is to check if the patient even needs to enter the continuous route
     case "continuousCheck":
       questionTitle =
         "Has the patient had at least one continuous course (at least 4 weeks) of oral steroids in the past year?";
       content = (
         <>
+        {/* Back button to previous step */}
           <BackButton
             onClick={() => {
               setStep("dexamethasoneCheck");
@@ -339,7 +352,7 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 reset(); // Reset form to avoid pre-populating form with erroneous data
-                setStep("continuousDosage");
+                setStep("continuousDosage"); // proceed to continuous step where user enters daily dosage in form
               }}
             >
               Yes
@@ -347,6 +360,8 @@ function Oral() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                // if clicked user does not need continuous route,
+                // mark route as complete and redirect user to main routes page
                 markRouteDone("Oral");
                 nav("/routes");
               }}
@@ -357,7 +372,7 @@ function Oral() {
         </>
       );
       break;
-
+    
     case "continuousDosage":
       content = continuousFormContent;
       break;

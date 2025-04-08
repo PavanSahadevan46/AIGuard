@@ -1,6 +1,17 @@
+/**
+ * Footer component
+ * 
+ * A reusable footer component that is used throughout the application.
+ * It renders the logo and simple text with copyright of current year.
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
 import logo from "../assets/temp1.png";
 
 function Footer() {
+  // get current year to dynamically update copyright
   const currentYear = new Date().getFullYear();
   
   return (

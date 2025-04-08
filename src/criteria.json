@@ -50,11 +50,7 @@
     },
     {
       "id": 9,
-      "question": "Is the patient using either of the following?",
-      "options": [
-        "Budesonide enema or rectal foam",
-        " Prednisolone rectal solution or suppositories"
-      ]
+      "question": "Is the patient using either of the following?"
     }
   ],
   "routeOptions": [

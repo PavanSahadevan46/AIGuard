@@ -1,3 +1,43 @@
+/**
+ * Topical Route component
+ *
+ * This component is used for the topical route of the application.
+ * It prompts user a question and provides examples of potent steroids and rates of absorption in differing locations.
+ *
+ * If the initial question's answer is yes the patient requires an sec and is redirected,
+ * otherwise if answered no takes user to next question.
+ * If the second question is answered yes the patient requires an sec and is redirected,
+ * otherwise if answered no the user is presented advice and is given the option to go back to routes
+ *
+ *
+ * * Note: This component assumes that the appropriate question is in the criteria JSON file.
+ *
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Dependencies & Components :
+ *
+ * Header & Footer - Common components that provide a header and footer for the application.
+ *
+ * criteria - JSON file that contains question data and or other data regarding route information.
+ *
+ * Button - Shadcn UI component.
+ *
+ * React Router Dom -  Client-side routing via React-router-dom.
+ *
+ * State - A built in React object used to contain a stateful value and a function to update it.
+ *
+ * UserAnswerContext - Context handler to keep state for end page active incase of browser or go back button.
+ *
+ * BackButton - Allows navigation to previous page or step with prop handling.
+ *
+ * Route Completion - Context handler to provide information to steroid routes page to show visual changes on which route has been completed
+ *
+ * Table - A reusable shadn UI component
+ */
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import criteria from "../criteria.json";
@@ -19,20 +59,30 @@ import {
 import BackButton from "@/components/BackButton";
 
 function Topical() {
+  // Retrieve question data from  criteria
+
   const firstQuestion = criteria.Questions.find((q) => q.id === 7).question;
   const secondQuestion = criteria.Questions.find((q) => q.id === 8).question;
+
+  // Retrieve topical data from criteria
   const topicalData = criteria.topicalRoute;
   const topicalRate = criteria.topicalRatesOfAbsorption;
   const topicalAdditional = criteria.absorptionAdditionalInfo;
+
+  // React Router navigation hook
   const nav = useNavigate();
+
+  // Destructure objects from respsective context
   const { markRouteDone } = useRouteCompletion();
   const [step, setStep] = useState("initialQuestion");
 
   const { setIsSECRequired } = useUserAnswers();
 
+  // Define main content
   let content;
   let questionTitle = firstQuestion;
 
+  // Define potency information which uses shadcn table component to render data
   const potencyInfo = (
     <>
       <div className="text-sm text-gray-600 font-bold">
@@ -53,16 +103,19 @@ function Topical() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {topicalData.map((route) => (
-              <TableRow key={route.id}>
+            {/* Iterate over each glucorticoid rendering necessary data in tabular format */}
+            {topicalData.map((glucorticoid) => (
+              <TableRow key={glucorticoid.id}>
                 <TableCell className="whitespace-normal">
-                  {route.name}
+                  {glucorticoid.name}
                 </TableCell>
                 <TableCell className="whitespace-normal">
-                  {route.tradeNames ? route.tradeNames.join(", ") : "N/A"}
+                  {glucorticoid.tradeNames
+                    ? glucorticoid.tradeNames.join(", ")
+                    : "N/A"}
                 </TableCell>
                 <TableCell className="whitespace-normal">
-                  {route.potency}
+                  {glucorticoid.potency}
                 </TableCell>
               </TableRow>
             ))}
@@ -72,10 +125,12 @@ function Topical() {
     </>
   );
 
+  // Render content based on the current step
   switch (step) {
     case "initialQuestion":
       content = (
         <>
+          {/* Back button to go back to routes page */}
           <BackButton
             onClick={() => {
               nav("/routes");
@@ -94,11 +149,13 @@ function Topical() {
               other area
             </li>
           </ul>
-          {potencyInfo}
+          {potencyInfo} {/* Render potency info content*/}
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
               onClick={() => {
+                // If answered yes the patient is at risk and needs an SEC,
+                // set SEC requirement and navigate to end page
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -107,7 +164,7 @@ function Topical() {
             </Button>
             <Button
               className="btn-secondary"
-              onClick={() => setStep("otherCheck")}
+              onClick={() => setStep("otherCheck")} // proceed to next question
             >
               No
             </Button>
@@ -120,6 +177,7 @@ function Topical() {
       questionTitle = secondQuestion;
       content = (
         <>
+          {/* Back button to go back to previous step */}
           <BackButton
             onClick={() => {
               setStep("initialQuestion");
@@ -132,6 +190,8 @@ function Topical() {
             <Button
               className="btn-primary"
               onClick={() => {
+                // If answered yes the patient is at risk and needs an SEC,
+                // set SEC requirement and navigate to end page
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -140,7 +200,7 @@ function Topical() {
             </Button>
             <Button
               className="btn-secondary"
-              onClick={() => setStep("noAdvice")}
+              onClick={() => setStep("noAdvice")} // Proceed to advice if no answered
             >
               No
             </Button>
@@ -151,6 +211,7 @@ function Topical() {
     case "noAdvice":
       content = (
         <>
+          {/* Back button to go back to previous step */}
           <BackButton
             onClick={() => {
               setStep("otherCheck");
@@ -158,15 +219,16 @@ function Topical() {
           />
           <section>
             <p className="text-gray-800 p-0.5 text-xl">
-              It is <strong> unlikely</strong> that the patient
-              needs an steroid emergency card.
+              It is <strong> unlikely</strong> that the patient needs an steroid
+              emergency card.
             </p>
 
             <p className="text-gray-800 p-0.5 text-xl">
-            <strong>However</strong> do consider that
-              systemic absorption varies depending on the area of application.
+              <strong>However</strong> do consider that systemic absorption
+              varies depending on the area of application.
             </p>
             <div className="grid grid-cols-2 gap-2 mt-5">
+              {/* iterate through topical rates of absorption and render them */}
               {topicalRate.map((rate) => (
                 <div
                   key={rate.location}
@@ -180,16 +242,18 @@ function Topical() {
               ))}
             </div>
             <p className="text-gray-800 p-0.5 mt-3 text-base">
-            <strong>Additionally:</strong>
-              {topicalAdditional}
+              <strong>Additionally:</strong>
+              {topicalAdditional} {/** Additional advice for topical route */}
             </p>
           </section>
           <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-4 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
               onClick={() => {
-                nav("/routes");
+                // if clicked patient does not need an SEC solely because of this route,
+                // mark route as done and redirect user to main routes page
                 markRouteDone("Topical");
+                nav("/routes");
               }}
             >
               Back to routes
@@ -203,6 +267,7 @@ function Topical() {
       questionTitle = "";
   }
 
+  // Render the component with a standard layout including header and footer
   return (
     <>
       <div className="grid grid-cols-1 bg-white">

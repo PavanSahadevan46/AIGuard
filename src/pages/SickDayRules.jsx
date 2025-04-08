@@ -1,3 +1,37 @@
+/**
+ * Sick Day rules component
+ *
+ * This component is the sick day rules page of the application.
+ * It renders sick day rules advice and provides links to NHS England sick day rules.
+ *
+ * This component displays critical information regarding sick day rules,
+ * provides links to external information provided by the NHS England.
+ *
+ *
+ *
+ * @author Pavan Sahadevan
+ * @version 1.0
+ * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
+ */
+
+/**
+ * Dependencies & Components :
+ *
+ * Header & Footer - Common components that provide a header and footer for the application.
+ *
+ * criteria - JSON file that contains question data and or other data regarding route information.
+ *
+ * Button - Shadcn UI component.
+ *
+ * React Router Dom -  Client-side routing via React-router-dom.
+ *
+ * State - A built in React object used to contain a stateful value and a function to update it.
+ * 
+ * BackButton - Allows navigation to previous page or step with prop handling.
+ * 
+ * React Router Dom(Link) - A <a href=> wrapper that additionally has accomodation for client side routing
+
+ */
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import criteria from "../criteria.json";
@@ -7,10 +41,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function SickDayRules() {
+  // Retrieve sick day advice from criteria file
   const sickDayAdvice = criteria.SickDayAdvice.find((q) => q.id === 1);
   const SickDayGlucocorticoids = criteria.SickDayGlucocorticoids;
 
+  // React router navigation hook
   const nav = useNavigate();
+
+  // Define main content and retrieve the options from question 1
   let content;
   let questionData = criteria.Questions.find((q) => q.id === 1);
 
@@ -34,6 +72,7 @@ function SickDayRules() {
               </h3>
             </div>
             <ul className="list-disc space-y-3 pl-5">
+              {/* Iterate through and render oral glucocorticoids */}
               {sickDayAdvice.options.map((option, index) => (
                 <li key={index} className="text-gray-800 text-lg">
                   {option}
@@ -49,6 +88,7 @@ function SickDayRules() {
             <span className="text-red-500 ml-1">*</span>
           </h2>
           <ul className="space-y-2 list-disc list-inside">
+            {/* Iterate through CYP3A4 inhibitors and render them  */}
             {SickDayGlucocorticoids.map((option) => (
               <li key={option.id} className="text-gray-800 p-0.5 text-lg">
                 {option.glucocorticoid} {option.measurement}
@@ -86,6 +126,7 @@ function SickDayRules() {
         </section>
 
         <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
+          {/* Navigate to previous BROWSER page */}
           <Button className="btn-primary" onClick={() => nav(-1)}>
             Go back
           </Button>
@@ -93,6 +134,8 @@ function SickDayRules() {
       </main>
     </>
   );
+
+  // Render the component with a standard layout including header and footer
 
   return (
     <div className="grid grid-cols-1 bg-white">

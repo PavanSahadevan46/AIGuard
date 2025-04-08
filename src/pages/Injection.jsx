@@ -70,7 +70,7 @@ function Injection() {
    * @param {Object} formdata - Data outputted by form
    */
   function onSubmit(formdata) {
-    // Initialize variables
+    // variable to keep track of any questions answered yes
     let yesCount = 0;
 
     // Loop through each injection entry from criteria
@@ -85,7 +85,7 @@ function Injection() {
       }
     });
 
-    // If yesCount exceeds 1 set the SEC requirement and redirect user to end page
+    // If any question is marked yes set the SEC requirement and redirect user to end page
     // otherwise mark route as done and redirect to main routes page.
     if (yesCount >= 1) {
       setIsSECRequired(true);

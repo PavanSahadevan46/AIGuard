@@ -4,7 +4,7 @@
  * This component is used for the injection route of the application.
  * It prompts user with series of questions retrived from the criteria JSON file.
  * This component renders a list of glucocorticoids and their respective questions and takes user input via checkboxes.
- * 
+ *
  *
  * If the user answers "yes" to any question ,they are dememed to require
  * an SEC (Steroid Emergency Card) they are redirected to the end.
@@ -16,10 +16,9 @@
  * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
  */
 
-
 /**
  * Dependencies & Components :
- * 
+ *
  * Header & Footer - Common components that provide a header and footer for the application.
  *
  * criteria - JSON file that contains question data and or other data regarding route information.
@@ -35,10 +34,9 @@
  * BackButton - Allows navigation to previous page or step with prop handling.
  *
  * React Hook Form - An external form library that provides out of the box state handling for inputs and sanitization & more.
- * 
+ *
  * Route Completion - Context handler to provide information to steroid routes page to show visual changes on which route has been completed
  */
-
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -82,7 +80,7 @@ function Injection() {
       const q2Answer = formdata[`inj_${inj.id}_question2`];
 
       // If either question is checked, increment yes Count
-      if (q1Answer ||q2Answer ) {
+      if (q1Answer || q2Answer) {
         yesCount++;
       }
     });
@@ -99,8 +97,9 @@ function Injection() {
   }
 
   // Define main content
-   let content = (
+  let content = (
     <>
+      {/* Back button to go back to routes page*/}
       <BackButton
         onClick={() => {
           nav("/routes");
@@ -120,11 +119,13 @@ function Injection() {
         className="mx-auto p-4 bg-white rounded-md  mt-4"
       >
         <div className="space-y-6">
+          {/* Map over injection glucocorticoids and create input fields */}
           {injData.map((inj) => (
             <div key={inj.id} className="pb-4 border-b border-gray-200">
               <div className="mb-3">
                 <h3 className="font-medium text-left rounded text-slate-900 text-xl">
-                {inj.glucocorticoid || (inj.glucocorticoids && inj.glucocorticoids.join(", "))}
+                  {inj.glucocorticoid ||
+                    (inj.glucocorticoids && inj.glucocorticoids.join(", "))}
                 </h3>
               </div>
               <div className="space-y-5 ">
@@ -133,6 +134,8 @@ function Injection() {
                     id={`inj_${inj.id}_question1`}
                     type="checkbox"
                     className="w-[24px] h-[24px] flex-shrink-0"
+                    // ...register is a react-hook-form function,
+                    // provides inbuilt sanitzation
                     {...register(`inj_${inj.id}_question1`)}
                   />
                   <label
@@ -149,9 +152,10 @@ function Injection() {
                     className="w-[24px] h-[24px] flex-shrink-0"
                     {...register(`inj_${inj.id}_question2`)}
                   />
-                  <label 
-                  htmlFor={`inj_${inj.id}_question2`}
-                  className="font-medium p-0.5 text-base leading-loose text-slate-700">
+                  <label
+                    htmlFor={`inj_${inj.id}_question2`}
+                    className="font-medium p-0.5 text-base leading-loose text-slate-700"
+                  >
                     {inj.question2}
                   </label>
                 </div>
@@ -159,6 +163,7 @@ function Injection() {
             </div>
           ))}
         </div>
+        {/* Submit button */}
         <div className="pt-6 text-center">
           <Button className="btn-cta" type="submit">
             Submit
@@ -167,6 +172,8 @@ function Injection() {
       </form>
     </>
   );
+
+  // Render the component with a standard layout including header and footer
 
   return (
     <div className="grid grid-cols-1 bg-white">

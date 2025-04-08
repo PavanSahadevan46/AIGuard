@@ -66,7 +66,7 @@ function Oral() {
 
   // Destructure objects from respective context functions
   const { markRouteDone } = useRouteCompletion();
-  const { setDailyDosageVal } = useOralDosageVal();
+  const { dailyDosageVal, setDailyDosageVal } = useOralDosageVal();
   const { setIsSECRequired } = useUserAnswers();
 
   // State to track the current step
@@ -112,15 +112,15 @@ function Oral() {
    */
   const onSubmit = (formdata) => {
     if (step === "continuousDosage") {
-      // Calculate total and truncate it, this is to avoid weird javascript behavior where it rounds it up
-      const contTotal = Math.trunc(calculateContinuous(formdata));
-      setDailyDosageVal(contTotal);
-
+      
+      const contTotal = calculateContinuous(formdata);
+      console.log("contTotal"  + `${contTotal}` + "daily:" + `${dailyDosageVal}`)
       // Redirect user based on total threshold
       if (contTotal >= 1) {
         setIsSECRequired(true);
         nav("/end");
-      } else if (contTotal < 1){
+      } else if (contTotal < 1) {
+        setDailyDosageVal(contTotal);
         markRouteDone("Oral");
         nav("/routes");
       }
@@ -141,8 +141,9 @@ function Oral() {
         }}
       />
       <h1 className="text-2xl font-semibold mb-4 text-left">
-        Continuous: Please enter the daily dosage below <br/>
-        (If the patient has taken a variable dose, enter the highest dose taken.)
+        Continuous: Please enter the daily dosage below <br />
+        (If the patient has taken a variable dose, enter the highest dose
+        taken.)
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -169,6 +170,9 @@ function Oral() {
                    focus:outline-none focus:ring-3 focus:ring-blue-400 
                    focus:border-transparent transition-all duration-300 
                    hover:border-blue-300 text-gray-700 placeholder-gray-500 placeholder-"
+              
+              // ...register is a react-hook-form function,
+              // provides inbuilt sanitzation 
               {...register(`continuous.${oral.id}`, {
                 setValueAs: (value) => (value === "" ? 0 : Number(value)), // Fallback to 0 if no input is entered
               })}
@@ -198,7 +202,9 @@ function Oral() {
             }}
           />
           <h1 className="text-2xl font-semibold mb-4 text-left">
-            Is the patient taking oral steroids <span className="underline">intermittently</span> or has done so in the last year?
+            Is the patient taking oral steroids{" "}
+            <span className="underline">intermittently</span> or has done so in
+            the last year?
           </h1>
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
@@ -362,7 +368,7 @@ function Oral() {
   }
 
   // Render the component with a standard layout including header and footer
- 
+
   return (
     <>
       <div className="grid grid-cols-1 bg-white">

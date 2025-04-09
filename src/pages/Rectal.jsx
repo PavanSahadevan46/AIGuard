@@ -1,6 +1,8 @@
 /**
  * Rectal Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Rectal page
+ * 
  * This component is used for the rectal route of the application.
  * It prompts user a question and provides advice depending on the answer.
  *
@@ -42,6 +44,7 @@ import { useState } from "react";
 
 function Rectal() {
   // Retrieve question from criteria
+  {/* Spreadsheet location - Rectal A1 */}
   const questionData = criteria.Questions.find((q) => q.id === 9);
 
   // React Router navigation hook
@@ -66,6 +69,7 @@ function Rectal() {
               nav("/routes");
             }}
           />
+          {/* Spreadsheet location - Rectal A1 */}
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -82,6 +86,7 @@ function Rectal() {
             <Button
               className="btn-primary"
               onClick={() => {
+                // Spreadsheet location - Rectal A3 
                 setStep("yesAdvice"); // if clicked proceed to yesAdvice step
               }}
             >
@@ -92,6 +97,7 @@ function Rectal() {
               onClick={() => {
                 // if clicked patient does not need SEC,
                 // mark route as done and redirect user to routes page
+                // Spreadsheet location - Rectal A5
                 markRouteDone("Rectal");
                 nav("/routes");
               }}
@@ -115,6 +121,7 @@ function Rectal() {
             <h1 className="text-2xl font-semibold mb-4 text-left">
               Please review the following:{" "}
             </h1>
+            {/* Spreadsheet location - Rectal A5 */}
             <p className="text-slate-700 p-0.5 text-lg">
               There are some reports of these rectal glucocorticoids causing
               adrenal insufficiency when used for inflammatory bowel disease.

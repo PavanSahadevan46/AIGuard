@@ -1,6 +1,8 @@
 /**
  * Topical Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Topical page
+ * 
  * This component is used for the topical route of the application.
  * It prompts user a question and provides examples of potent steroids and rates of absorption in differing locations.
  *
@@ -60,7 +62,7 @@ import BackButton from "@/components/BackButton";
 
 function Topical() {
   // Retrieve question data from  criteria
-
+  {/* Spreadsheet location - Topical A1 & A5*/}
   const firstQuestion = criteria.Questions.find((q) => q.id === 7).question;
   const secondQuestion = criteria.Questions.find((q) => q.id === 8).question;
 
@@ -104,6 +106,7 @@ function Topical() {
           </TableHeader>
           <TableBody>
             {/* Iterate over each glucorticoid rendering necessary data in tabular format */}
+            {/* Spreadsheet location - Topical A1 (note)*/}
             {topicalData.map((glucorticoid) => (
               <TableRow key={glucorticoid.id}>
                 <TableCell className="whitespace-normal">
@@ -136,6 +139,7 @@ function Topical() {
               nav("/routes");
             }}
           />
+          {/* Spreadsheet location - Topical A1*/}
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -156,6 +160,7 @@ function Topical() {
               onClick={() => {
                 // If answered yes the patient is at risk and needs an SEC,
                 // set SEC requirement and navigate to end page
+                {/* Spreadsheet location - Topical A3*/}
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -164,6 +169,7 @@ function Topical() {
             </Button>
             <Button
               className="btn-secondary"
+              // Spreadsheet location - Topical A5
               onClick={() => setStep("otherCheck")} // proceed to next question
             >
               No
@@ -183,6 +189,7 @@ function Topical() {
               setStep("initialQuestion");
             }}
           />
+          {/* Spreadsheet location - Topical A5 */}
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
@@ -192,6 +199,7 @@ function Topical() {
               onClick={() => {
                 // If answered yes the patient is at risk and needs an SEC,
                 // set SEC requirement and navigate to end page
+                /// Spreadsheet location - Topical A7
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -200,6 +208,7 @@ function Topical() {
             </Button>
             <Button
               className="btn-secondary"
+              // Spreadsheet location - Topical A10
               onClick={() => setStep("noAdvice")} // Proceed to advice if no answered
             >
               No
@@ -218,6 +227,7 @@ function Topical() {
             }}
           />
           <section>
+            {/* Spreadsheet location - Topical A10 */}
             <p className="text-gray-800 p-0.5 text-xl">
               It is <strong> unlikely</strong> that the patient needs an steroid
               emergency card.
@@ -229,6 +239,7 @@ function Topical() {
             </p>
             <div className="grid grid-cols-2 gap-2 mt-5">
               {/* iterate through topical rates of absorption and render them */}
+              {/* Spreadsheet location - Topical A10 (Note) */}
               {topicalRate.map((rate) => (
                 <div
                   key={rate.location}
@@ -242,6 +253,7 @@ function Topical() {
               ))}
             </div>
             <p className="text-gray-800 p-0.5 mt-3 text-base">
+              {/* Spreadsheet location - Topical A10 (Note) */}
               <strong>Additionally:</strong>
               {topicalAdditional} {/** Additional advice for topical route */}
             </p>

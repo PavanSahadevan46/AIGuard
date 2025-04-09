@@ -1,6 +1,8 @@
 /**
  * Nasal Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Nasal page
+
  * This component is used for the nasal route of the application.
  * It prompts user a question and depending on the answer provides respective advice.
  *
@@ -43,6 +45,9 @@ import BackButton from "@/components/BackButton";
 
 function Nasal() {
   // Retrieve question from criteria
+  
+  {/* Spreadsheet location - Nasal A1 */}
+  
   const questionData = criteria.Questions.find((q) => q.id === 6);
 
   // React router navigation hook
@@ -68,18 +73,21 @@ function Nasal() {
               nav("/routes");
             }}
           />
+          {/* Spreadsheet location - Inhaled A1 */}
           <h1 className="text-2xl font-semibold mb-4 text-left">
             {questionTitle}
           </h1>
           <div className="mt-6 flex flex-col md:flex-row float-left gap-7 max-w-md w-full mx-auto">
             <Button
               className="btn-primary"
+              // Spreadsheet location - Inhaled A3
               onClick={() => setStep("yesAdvice")}
             >
               Yes
             </Button>
             <Button
               className="btn-secondary"
+              // Spreadsheet location - Inhaled A5
               onClick={() => setStep("noAdvice")}
             >
               No
@@ -101,6 +109,7 @@ function Nasal() {
             <h1 className="text-2xl font-semibold mb-4 text-left">
               Please review the following :
             </h1>
+            {/* Spreadsheet location - Inhaled A3 */}
 
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
               <strong>
@@ -154,6 +163,7 @@ function Nasal() {
             Please review the following :
           </h1>
           <section>
+            {/* Spreadsheet location - Inhaled A5 */}
             <p className="text-gray-800 p-0.5 mt-3 text-xl">
               It is <strong>unlikely</strong> that a steroid emergency card is
               needed.

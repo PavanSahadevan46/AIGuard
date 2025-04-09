@@ -1,6 +1,8 @@
 /**
  * Inhaled Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Inhaled page
+ * 
  * This component is used for the inhaled route of the application.
  * It prompts user with an initial question to check if they are using another glucocorticoid treatment in conjunction with this route.
  * If yes is answered then a set of calculating values are used to calculate the overall total otherwise if no is answered,
@@ -144,6 +146,7 @@ function Inhaled() {
       const hasOtherGC = step === "usingInhalersWithOtherGC";
 
       if (hasOtherGC) {
+        
         total = calculateWithOtherTreatment(formdata);
       } else {
         total = calculateWithOutOtherTreatment(formdata);
@@ -188,6 +191,7 @@ function Inhaled() {
               <div key={inh.id} className="grid grid-cols-1 gap-3 ">
                 <fieldset className="mb-2">
                   <label className="font-medium text-left rounded text-gray-800 text-xl border-gray-600 border-b-1">
+                    {/* Spreadsheet location - Inhaled A5-13 & A17-25 */}
                     {inh.glucocorticoid}
                   </label>
                 </fieldset>
@@ -254,6 +258,7 @@ function Inhaled() {
   // Render content based on the current step
   switch (step) {
     case "otherGCCheck":
+      {/* Spreadsheet location - Inhaled A1 */}
       questionTitle = "Is the patient also using nasal glucocorticoids?";
       content = (
         <>
@@ -270,6 +275,7 @@ function Inhaled() {
               months
             </h3>
           </div>
+          {/* Spreadsheet location - Inhaled A1 */}
           <h1 className="text-xl font-semibold mb-6 text-left">
             {questionTitle}
           </h1>
@@ -278,6 +284,7 @@ function Inhaled() {
             <Button
               className="btn-primary"
               onClick={() => {
+                {/* Spreadsheet location - Inhaled A16 */}
                 reset(); // reset form's values to avoid pre-populating form incase of browser refresh or navigation
                 setStep("usingInhalersWithOtherGC"); // proceed to the step that says the patient is using inhalers with other glucocorticoid treatment
               }}
@@ -287,6 +294,7 @@ function Inhaled() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                {/* Spreadsheet location - Inhaled A4 */}
                 reset(); // reset form's values to avoid pre-populating form incase of browser refresh or navigation
                 setStep("usingInhalersWithoutOtherGC");// proceed to the step that says the patient is using inhalers WITHOUT other glucocorticoid treatment
               }}

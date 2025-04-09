@@ -52,6 +52,7 @@ import BackButton from "@/components/BackButton";
 
 function SteroidRoutes() {
   // Retrieve question data from criteria file
+  {/* Spreadsheet location - Start B5 */}
   const questionData = criteria.Questions.find((q) => q.id === 2);
 
   // Destructure objects from route completion context,
@@ -100,6 +101,7 @@ function SteroidRoutes() {
               onClick={() => {
                 // Set the step and set the has visited flag to true,
                 // this is used to ensure users do not have to reanswer the question everytime
+                {/* Spreadsheet location - Start D5 */}
                 setStep("enterRoutes");
                 setHasVisitedRoutePage(true);
               }}
@@ -110,6 +112,7 @@ function SteroidRoutes() {
               className="btn-primary"
               onClick={() => {
                 // If clicked, sec is not needed and proceed to end page
+                {/* Spreadsheet location - Start C5 */}
                 setIsSECRequired(false);
                 nav("/end");
               }}

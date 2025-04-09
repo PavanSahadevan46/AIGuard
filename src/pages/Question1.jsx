@@ -1,5 +1,7 @@
 /**
  * First question component
+ * 
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Start page
  *
  * This component is the first question users see after starting the application.
  * It retrives question data from the criteria JSON file, displaying the question with the options,
@@ -41,6 +43,7 @@ function Question1() {
   const nav = useNavigate();
 
   // Retrieve question data for question with id 1 from the criteria JSON
+  // Spreadsheet location - Start B2
   var questionData = criteria.Questions.find((q) => q.id === 1);
 
   // Destructure function from UserAnswerContext to manage state for end page
@@ -67,7 +70,10 @@ function Question1() {
         </h1>
         <section>
           {/* List of options provided from JSON */}
-          <span className="text-xl font-semibold">Potent Protease inhibitors: </span> {" "}
+          {/* Spreadsheet location - Start C2 */}
+          <span className="text-xl font-semibold">
+            Potent Protease inhibitors:{" "}
+          </span>{" "}
           <ul className="list-disc list-inside space-y-2 mb-6">
             {questionData.potentProteaseInhibitors.map((option, index) => (
               <li key={index} className="text-gray-800 p-0.5 text-lg">
@@ -75,7 +81,7 @@ function Question1() {
               </li>
             ))}
           </ul>
-          <span className="text-xl font-semibold">Antifungals:</span> {" "}
+          <span className="text-xl font-semibold">Antifungals:</span>{" "}
           <ul className="list-disc list-inside space-y-2 mb-6">
             {questionData.antiFungals.map((option, index) => (
               <li key={index} className="text-gray-800 p-0.5 text-lg">
@@ -83,8 +89,8 @@ function Question1() {
               </li>
             ))}
           </ul>
-          <p className="text-gray-800 p-0.5 text-lg"> 
-            <span className="text-xl font-semibold">Antibiotics:</span>{" "}<br />
+          <p className="text-gray-800 p-0.5 text-lg">
+            <span className="text-xl font-semibold">Antibiotics:</span> <br />
             {questionData.antiBiotics}
           </p>
         </section>
@@ -96,13 +102,15 @@ function Question1() {
         <Button
           className="btn-primary"
           onClick={() => {
-            setIsSECRequired(true);
-            nav("/end");
+          {/* Spreadsheet location - Start F2 */}
+          setIsSECRequired(true);
+          nav("/end");
           }}
         >
           Yes
         </Button>
         {/* No answer redirects to main routes page */}
+        {/* Spreadsheet location - Start B3 */}
         <Button className="btn-secondary" onClick={() => nav("/routes")}>
           No
         </Button>

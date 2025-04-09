@@ -1,5 +1,7 @@
 /**
  * Start page component
+ * 
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Start page
  *
  * This component is the main component users see when first launching the application.
  * It displays critical information regarding the application and provides context for it's usage.

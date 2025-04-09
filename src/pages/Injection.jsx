@@ -1,5 +1,7 @@
 /**
  * Injection Route component
+ * 
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Injection page
  *
  * This component is used for the injection route of the application.
  * It prompts user with series of questions retrived from the criteria JSON file.
@@ -120,6 +122,7 @@ function Injection() {
       >
         <div className="space-y-6">
           {/* Map over injection glucocorticoids and create input fields */}
+          {/* Spreadsheet location - Injection columns A - D  Rows 1 - 9 */}
           {injData.map((inj) => (
             <div key={inj.id} className="pb-4 border-b border-gray-200">
               <div className="mb-3">

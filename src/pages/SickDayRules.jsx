@@ -1,6 +1,8 @@
 /**
  * Sick Day rules component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Sick Day Rules page
+ *
  * This component is the sick day rules page of the application.
  * It renders sick day rules advice and provides links to NHS England sick day rules.
  *
@@ -55,6 +57,7 @@ function SickDayRules() {
   content = (
     <>
       <main>
+        {/* Spreadsheet location - Sick Day Rules A1 */}
         <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 border-b pb-3">
           {sickDayAdvice.title}
         </h1>
@@ -73,6 +76,7 @@ function SickDayRules() {
             </div>
             <ul className="list-disc space-y-3 pl-5">
               {/* Iterate through and render oral glucocorticoids */}
+              {/* Spreadsheet location - Sick Day Rules A3-6 */}
               {sickDayAdvice.options.map((option, index) => (
                 <li key={index} className="text-gray-800 text-lg">
                   {option}
@@ -88,7 +92,8 @@ function SickDayRules() {
             <span className="text-red-500 ml-1">*</span>
           </h2>
           <ul className="space-y-2 list-disc list-inside">
-            {/* Iterate through CYP3A4 inhibitors and render them  */}
+            {/* Iterate through other oral glucocorticoids and render them  */}
+            {/* Spreadsheet location - Sick Day Rules R3 (Note) */}
             {SickDayGlucocorticoids.map((option) => (
               <li key={option.id} className="text-gray-800 p-0.5 text-lg">
                 {option.glucocorticoid} {option.measurement}
@@ -105,6 +110,8 @@ function SickDayRules() {
             Potent Protease inhibitors:{" "}
           </span>{" "}
           <ul className="list-disc list-inside space-y-2 mb-6">
+            {/* Iterate through CYP3A4 inhibitors and render them  */}
+            {/* Spreadsheet location - Sick Day Rules A5, But uses the same list as Start C2 */}
             {questionData.potentProteaseInhibitors.map((option, index) => (
               <li key={index} className="text-gray-800 p-0.5 text-lg">
                 {option}

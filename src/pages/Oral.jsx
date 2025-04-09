@@ -1,6 +1,8 @@
 /**
  * Oral Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Oral(2) page
+ * 
  * This component is used for the oral route of the application.
  * It prompts user with series of questions retrived from the criteria JSON file.
  * There are two sub routes the user can enter; Intermittent & Continuous.
@@ -59,14 +61,13 @@ function Oral() {
   // React router navigation hook
   const nav = useNavigate();
 
-  // Retrive question and dosage data from criteria JSON file
-  const questionData = criteria.Questions.find((q) => q.id === 3);
+  // Retrive dosage data and dexamethasone options from criteria JSON file
   const oralData = criteria.oralRoute;
   const dexOptions = oralData.find((q) => q.id === 5);
 
   // Destructure objects from respective context functions
   const { markRouteDone } = useRouteCompletion();
-  const { dailyDosageVal, setDailyDosageVal } = useOralDosageVal();
+  const { setDailyDosageVal } = useOralDosageVal();
   const { setIsSECRequired } = useUserAnswers();
 
   // State to track the current step
@@ -133,6 +134,8 @@ function Oral() {
   let questionTitle;
 
   // Conttent for continuous form
+  {/* Spreadsheet location - Oral (2) A19 - A28 */}
+
   const continuousFormContent = (
     <>
       {/* Back button to go back to previous step*/}
@@ -203,6 +206,7 @@ function Oral() {
               nav("/routes");
             }}
           />
+          {/* Spreadsheet location - Oral(2) A1 */}
           <h1 className="text-2xl font-semibold mb-4 text-left">
             Is the patient taking oral steroids{" "}
             <span className="underline">intermittently</span> or has done so in
@@ -213,6 +217,7 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 // if clicked proceed to intermittent sub route
+                {/* Spreadsheet location - Oral(2) E1 */}
                 setStep("intermittentCheck");
               }}
             >
@@ -221,6 +226,7 @@ function Oral() {
             <Button
               className="btn-secondary"
               onClick={() => {
+                {/* Spreadsheet location - Oral(2) E2 */}
                 reset(); // Reset form to avoid pre-populating form with erroneous data
                 setStep("continuousDosage");   // if clicked proceed straight to continuous route
               }}
@@ -233,6 +239,8 @@ function Oral() {
       break;
 
     case "intermittentCheck":
+      {/* Spreadsheet location - Oral(2) A3 - A11 */}
+
       questionTitle =
         "Has the patient had 3 or more courses in total of any of the following for at least seven days within the past 12 months?";
       content = (
@@ -248,6 +256,7 @@ function Oral() {
           </h1>
           <div className="mx-auto p-4 bg-white w-full">
             {/* List out intermittent dosage details for each glucocorticoid */}
+            {/* Spreadsheet location - Oral(2) A4 - A11 , B4 - B11 */}
             <ul className="list-disc list-inside space-y-2 mb-6">
               {oralData.map((oral, index) => (
                 <li key={index} className="text-slate-700 p-0.5 text-xl">
@@ -262,6 +271,7 @@ function Oral() {
               onClick={() => {
                 // If yes is clicked it means the patient is at risk and needs an SEC, 
                 // set state of sec requirement and redirect them to end
+                {/* Spreadsheet location - Oral(2) G3 */}
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -272,6 +282,7 @@ function Oral() {
               className="btn-secondary"
               onClick={() => {
                 // if clicked proceed to dexamethasone check 
+                {/* Spreadsheet location - Oral(2) F1 */}
                 setStep("dexamethasoneCheck");
               }}
             >
@@ -283,6 +294,7 @@ function Oral() {
       break;
 
     case "dexamethasoneCheck":
+      {/* Spreadsheet location - Oral A19 - A30 */}
       questionTitle =
         "Has the patient had (or is due to have) intermittent courses of dexamethasone for either of the following?";
       content = (
@@ -312,6 +324,7 @@ function Oral() {
               onClick={() => {
                 // If clicked means that the patient is at risk and needs an SEC,
                 // set sec requirement and redirect to end
+                {/* Spreadsheet location - Oral(2) G14 - G15 */}
                 setIsSECRequired(true);
                 nav("/end");
               }}
@@ -322,6 +335,7 @@ function Oral() {
               className="btn-secondary"
               onClick={() => {
                 // if clicked proceed to continuous check
+                {/* Spreadsheet location - Oral(2) F14 - F15 */}
                 setStep("continuousCheck");
               }}
             >
@@ -334,6 +348,7 @@ function Oral() {
 
     // This step is to check if the patient even needs to enter the continuous route
     case "continuousCheck":
+      {/* Spreadsheet location - Oral (2) A18*/}
       questionTitle =
         "Has the patient had at least one continuous course (at least 4 weeks) of oral steroids in the past year?";
       content = (
@@ -352,6 +367,7 @@ function Oral() {
               className="btn-primary"
               onClick={() => {
                 reset(); // Reset form to avoid pre-populating form with erroneous data
+                {/* Spreadsheet location - Oral(2) F18 */}
                 setStep("continuousDosage"); // proceed to continuous step where user enters daily dosage in form
               }}
             >
@@ -362,6 +378,7 @@ function Oral() {
               onClick={() => {
                 // if clicked user does not need continuous route,
                 // mark route as complete and redirect user to main routes page
+                {/* Spreadsheet location - Oral(2) G18 */}
                 markRouteDone("Oral");
                 nav("/routes");
               }}
@@ -374,7 +391,8 @@ function Oral() {
       break;
     
     case "continuousDosage":
-      content = continuousFormContent;
+    {/* Spreadsheet location - Oral (2) A19 - A28 */}
+    content = continuousFormContent;
       break;
 
     default:

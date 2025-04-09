@@ -1,6 +1,8 @@
 /**
  * Rectal Route component
  *
+ * This component uses data from the SEC - Is it needed spreadsheet, page :  Opthalmic page
+ * 
  * This component is used for the eye route of the application.
  * It simply renders advice based on the Opthalamic route.
  *
@@ -52,7 +54,7 @@ function Eye() {
           nav("/routes");
         }}
       />
-
+      {/* Spreadsheet location - Opthalmic A1 */}
       <h1 className="text-2xl font-semibold mb-4 text-left">
         Please review the following
       </h1>

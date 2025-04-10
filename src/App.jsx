@@ -6,12 +6,8 @@
  * 
  * Routes are defined using React Router's BrowserRouter, Routes and Route components.
  * 
- * 
- * This component has 4 states, SEC required , No SEC Required
- * or an error state where it shows an error message if navigated to without completing previous questions
- *
- * The SEC requirement is set from other routes and can only be accessed from scenarios where the patient needs an SEC.
- 
+ * Routes are restricted into protected routes to prevent access via url ensuring proper logical flow is met.
+ *  
  * @author Pavan Sahadevan
  * @version 1.0
  * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
@@ -21,7 +17,6 @@
  *  Defined Routes:
  * "/" and "/start": Start page, the landing page of the app.
  * "/q1": Page for the first question.
- * "/q2": Page for the second question (SteroidRoutes component).
  * "/routes": Main SteroidRoutes page, allowing the user to choose a specific route.
  * Additional routes under "/routes/*" for Oral, Injection, Inhaled, Nasal, Topical, Rectal, and Eye routes.
  * "/end": End page for the final output of sec requirement.
@@ -35,7 +30,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Start from "./pages/Start.jsx";
 import Question1 from "./pages/Question1.jsx";
-import Question2 from "./pages/SteroidRoutes.jsx";
 import NoPage from "./pages/NoPage.jsx";
 import SteroidRoutes from "./pages/SteroidRoutes.jsx";
 import Oral from "./pages/Oral.jsx";
@@ -53,6 +47,10 @@ import { OralDosageValProvider } from "./components/OralDosageValContext.jsx";
 import { UserAnswersProvider } from "./components/UserAnswerContext.jsx";
 import { RouteCompletionProvider } from "./components/RouteCompletionContext.jsx";
 
+// Route protection so users aren't able to access routes without visiting start first
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { PermissionProvider } from "./components/PermissionContext.jsx";
+
 function App() {
   return (
     <>
@@ -61,23 +59,30 @@ function App() {
         <UserAnswersProvider>
           <OralDosageValProvider>
             <BrowserRouter>
-              <Routes>
-                <Route index element={<Start />} />
-                <Route path="/start" element={<Start />} />
-                <Route path="/q1" element={<Question1 />} />
-                <Route path="/q2/" element={<Question2 />} />
-                <Route path="/routes" element={<SteroidRoutes />} />
-                <Route path="/routes/oral" element={<Oral />} />
-                <Route path="/routes/injection" element={<Injection />} />
-                <Route path="/routes/inhaled" element={<Inhaled />} />
-                <Route path="/routes/nasal" element={<Nasal />} />
-                <Route path="/routes/topical" element={<Topical />} />
-                <Route path="/routes/rectal" element={<Rectal />} />
-                <Route path="/routes/eye" element={<Eye />} />
-                <Route path="/end" element={<EndPage />} />
-                <Route path="/sickdayrules" element={<SickDayRules />} />
-                <Route path="*" element={<NoPage />} />
-              </Routes>
+              <PermissionProvider>
+                <Routes>
+                  {/* Public routes, can be accessed at any time */}
+                  <Route index element={<Start />} />
+                  <Route path="/start" element={<Start />} />
+                 
+                  {/* Protected routes, cant be accessed until start is visited */}
+                  <Route element={<ProtectedRoute />}>
+                  <Route path="/q1" element={<Question1 />} />
+                    <Route path="/routes" element={<SteroidRoutes />} />
+                    <Route path="/routes/oral" element={<Oral />} />
+                    <Route path="/routes/injection" element={<Injection />} />
+                    <Route path="/routes/inhaled" element={<Inhaled />} />
+                    <Route path="/routes/nasal" element={<Nasal />} />
+                    <Route path="/routes/topical" element={<Topical />} />
+                    <Route path="/routes/rectal" element={<Rectal />} />
+                    <Route path="/routes/eye" element={<Eye />} />
+                    <Route path="/end" element={<EndPage />} />
+                    <Route path="/sickdayrules" element={<SickDayRules />} />
+                  </Route>
+                  {/* Fallback route incase of non existant route */}
+                  <Route path="*" element={<NoPage />} />
+                </Routes>
+              </PermissionProvider>
             </BrowserRouter>
           </OralDosageValProvider>
         </UserAnswersProvider>

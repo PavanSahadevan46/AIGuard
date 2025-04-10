@@ -1,6 +1,6 @@
 /**
  * Start page component
- * 
+ *
  * This component uses data from the SEC - Is it needed spreadsheet, page :  Start page
  *
  * This component is the main component users see when first launching the application.
@@ -21,16 +21,21 @@
  * React Router Dom (useNavigate) - Client-side routing via React-router-dom
  *
  * React Router Dom (Link) - A <a href> wrapper that additionally provides navigation via client-side routing
+ * 
+ * Permission Context - Guard to ensure users cannot access routes from url as this could potentially cause unwanted behavior
  */
 import { Button } from "@/components/ui/button";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { usePermission } from "../components/PermissionContext";
 function Start() {
   // React router navigation hook
   const nav = useNavigate();
+
+  // Hook for allowing user to access the main application
+  const { setIsAllowed } = usePermission();
 
   // Define main content of page
   let content = (
@@ -56,10 +61,10 @@ function Start() {
         <section className="space-y-8 mb-8">
           <p className="text-lg text-slate-700 text-left">
             This tool is designed to support with the decision as to whether
-            patients are at risk of <strong>tertiary</strong>{" "}
-            adrenal insufficiency (ie significant HPA axis suppression from
-            taking exogenous steroids), and if so gives guidance on what actions
-            should be taken, including carrying a{" "}
+            patients are at risk of <strong>tertiary</strong> adrenal
+            insufficiency (ie significant HPA axis suppression from taking
+            exogenous steroids), and if so gives guidance on what actions should
+            be taken, including carrying a{" "}
             <Link
               className="text-blue-600 hover:text-blue-800 underline font-medium"
               to="https://www.england.nhs.uk/publication/national-patient-safety-alert-steroid-emergency-card-to-support-early-recognition-and-treatment-of-adrenal-crisis-in-adults/"
@@ -92,11 +97,9 @@ function Start() {
           {/* Explanation regarding primary and secondary insufficiency */}
 
           <p className="text-lg text-slate-700 text-left">
-            It is not necessary to use this tool for{" "}
-            <strong>primary</strong> or{" "}
-            <strong>secondary</strong> insufficiency, as all
-            of these patients will need a Steroid Emergency Card and to follow
-            Sick Day Rules.
+            It is not necessary to use this tool for <strong>primary</strong> or{" "}
+            <strong>secondary</strong> insufficiency, as all of these patients
+            will need a Steroid Emergency Card and to follow Sick Day Rules.
           </p>
 
           {/* Additional guidance in an informational message box */}
@@ -124,7 +127,14 @@ function Start() {
         </section>
 
         {/* Button to start tool  */}
-        <Button className="btn-cta" onClick={() => nav("/q1")}>
+        <Button
+          className="btn-cta"
+          onClick={() => {
+            // Set allowed to visit page to prevent access to routes from url
+            setIsAllowed(true);
+            nav("/q1");
+          }}
+        >
           Start
         </Button>
       </main>

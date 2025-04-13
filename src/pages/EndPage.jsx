@@ -161,7 +161,7 @@ function EndPage() {
           />
           <div>
             <h2 className="text-xl mb-4 text-left">
-              The patient is
+              The patient is {" "}
               <strong>unlikely</strong> at risk of HPA axis suppression.
             </h2>
             <p className="text-xl  mb-4 text-left">

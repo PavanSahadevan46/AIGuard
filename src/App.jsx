@@ -59,14 +59,14 @@ function App() {
         <UserAnswersProvider>
           <OralDosageValProvider>
             <BrowserRouter>
-              {/* <PermissionProvider> */}
+              <PermissionProvider>
                 <Routes>
                   {/* Public routes, can be accessed at any time */}
                   <Route index element={<Start />} />
                   <Route path="/start" element={<Start />} />
                  
                   {/* Protected routes, cant be accessed until start is visited */}
-                  {/* <Route element={<ProtectedRoute />}> */}
+                  <Route element={<ProtectedRoute />}>
                   <Route path="/q1" element={<Question1 />} />
                     <Route path="/routes" element={<SteroidRoutes />} />
                     <Route path="/routes/oral" element={<Oral />} />
@@ -78,11 +78,11 @@ function App() {
                     <Route path="/routes/eye" element={<Eye />} />
                     <Route path="/end" element={<EndPage />} />
                     <Route path="/sickdayrules" element={<SickDayRules />} />
-                  {/* </Route> */}
+                  </Route>
                   {/* Fallback route incase of non existant route */}
                   <Route path="*" element={<NoPage />} />
                 </Routes>
-              {/* </PermissionProvider> */}
+              </PermissionProvider>
             </BrowserRouter>
           </OralDosageValProvider>
         </UserAnswersProvider>

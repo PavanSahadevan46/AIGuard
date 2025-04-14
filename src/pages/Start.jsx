@@ -35,7 +35,7 @@ function Start() {
   const nav = useNavigate();
 
   // Hook for allowing user to access the main application
-  // const { setIsAllowed } = usePermission();
+  const { setIsAllowed } = usePermission();
 
   // Define main content of page
   let content = (
@@ -131,7 +131,7 @@ function Start() {
           className="btn-cta"
           onClick={() => {
             // Set allowed to visit page to prevent access to routes from url
-            // setIsAllowed(true);
+            setIsAllowed(true);
             nav("/q1");
           }}
         >

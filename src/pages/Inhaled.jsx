@@ -92,7 +92,7 @@ function Inhaled() {
    * Calculation function for taking inhalers WITH other glucocorticoid treatments.
    * This function sums user inputted values and additionally use value from oral route to sum
    * @param {Object} formdata - Data outputted by form
-   * @returns {Number} - Total dosage (truncated to avoid javascript floating errors)
+   * @returns {Number} - Total dosage value
    **/
   const calculateWithOtherTreatment = (formdata) => {
     // Convert results into an array (formdata is an object)

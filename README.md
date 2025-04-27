@@ -32,19 +32,19 @@ This project relies on the following packages (listed in package.json):
 
 Installation
 
-1. Clone the repository
+1. Clone the repository,
 git clone https://github.com/PavanSahadevan46/AIGuard
 
-2. CD into application folder
+2. CD into application folder, 
 AIGuard
 
-3. In terminal run the following command
+3. In terminal run the following command,
 npm install
 
-4. Run the following command
+4. Run the following command,
 npm run dev
 
-5. Navigate to the localhost URL provided in the terminal
+5. Navigate to the localhost URL provided in the terminal,
 
 You should now see a local build running on your browser.
 

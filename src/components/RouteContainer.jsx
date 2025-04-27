@@ -30,13 +30,13 @@ import criteria from "../criteria.json";
 import { useRouteCompletion } from "./RouteCompletionContext";
 import React from "react";
 
-import oralIcon from "../assets/icons/oral_icon.png";
-import injectionIcon from "../assets/icons/injection_icon.png";
-import inhaledIcon from "../assets/icons/inhaled_icon.png";
-import nasalIcon from "../assets/icons/nasal_icon.png";
-import topicalIcon from "../assets/icons/topical_icon.png";
-import rectalIcon from "../assets/icons/rectal_icon.png";
-import eyeIcon from "../assets/icons/eye_icon.png";
+import oralIcon from "@/assets/icons/oral_icon.webp";
+import injectionIcon from "@/assets/icons/injection_icon.webp";
+import inhaledIcon from "@/assets/icons/inhaled_icon.webp";
+import nasalIcon from "@/assets/icons/nasal_icon.webp";
+import topicalIcon from "@/assets/icons/topical_icon.webp";
+import rectalIcon from "@/assets/icons/rectal_icon.webp";
+import eyeIcon from "@/assets/icons/eye_icon.webp";
 
 function RouteContainer() {
   // Retrieve all available routes from criteria file

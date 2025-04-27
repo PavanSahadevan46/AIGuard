@@ -20,7 +20,7 @@
  * Button - Shadcn ui button
  */
 
-import logo from "../assets/temp1.png";
+import logo from "@/assets/temp1.webp";
 import { useNavigate } from "react-router-dom";
 import { useRouteCompletion } from "./RouteCompletionContext";
 import { useEffect, useState } from "react";

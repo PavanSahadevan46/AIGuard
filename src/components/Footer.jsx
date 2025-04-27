@@ -8,7 +8,7 @@
  * Developed as a proof of concept for NHS England and as a final year project for CI601 from the University of Brighton.
  */
 
-import logo from "../assets/temp1.png";
+import logo from "@/assets/temp1.webp";
 
 function Footer() {
   // get current year to dynamically update copyright

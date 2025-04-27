@@ -43,8 +43,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useUserAnswers } from "@/components/UserAnswerContext";
-import secFront from "../assets/SEC_Front.png";
-import secBack from "../assets/SEC_Back.png";
+import secFront from "@/assets/SEC_Front.webp";
+import secBack from "@/assets/SEC_Back.webp";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";

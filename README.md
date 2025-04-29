@@ -22,9 +22,9 @@ AIGuard
 npm install
 
 4. Run the following command,
-npm run dev
+npm run dev (If an error occurs, check you have vite installed)
 
-5. Navigate to the localhost URL provided in the terminal,
+6. Navigate to the localhost URL provided in the terminal,
 
 You should now see a local build running on your browser.
 
